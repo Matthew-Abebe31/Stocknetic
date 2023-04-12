@@ -1,0 +1,61 @@
+a, a:visited, a:hover, a:active {
+    color: inherit;
+}
+
+a#title-link-home {
+    color: white;
+}
+
+a#link-to-registration-form {
+    color: black
+}
+
+.previous-page-from-registration-button {
+    margin-right: 10px;
+}
+
+a#title-link-home,
+a#link-to-registration-form,
+a#registration,
+#link-to-sign-in-form,
+a#previous-page-from-registration-link,
+a#home-page-from-registration-link,
+a#previous-page-from-sign-in-link,
+a#watchlists-page-from-sign-in-link,
+a#sign-out-link {
+    text-decoration: none;
+}
+h1.logo {
+    display: flex;
+}
+
+h2.title {
+    display: inline-block;
+    color: white;
+    margin-left: 20px;
+}
+
+li.nav-list-item {
+    display: inline;
+    margin-left: 80px;
+}
+
+#sign-in-button {
+    height: 20px;
+    width: 75px;
+    margin-right: 10px;
+}
+
+#register-button {
+    height: 20px;
+    width: 75px;
+}
+
+#sign-out-button {
+    position: fixed;
+    display: block;
+    bottom: 10%;
+    right: 10%;
+    height: 20px;
+    width: 75px;
+}
