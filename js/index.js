@@ -192,7 +192,7 @@ function renderSignInForm() {
 
         if (sessionStorage.getItem("id") === null) {
             alert("Welcome to Stocknetic!")
-            window.location.replace(`${root}/watchlists`)
+            window.location.hash = "/watchlists"
             sessionStorage.setItem("id", "user")
             // linkToWatchlistsFromSignIn.setAttribute("href", "#/watchlists")
         } else if (sessionStorage.getItem("id") !== null) {
@@ -234,20 +234,35 @@ function signOut() {
     window.location.hash = "/"
 }
 
-// function renderWatchListsPage() {
+function renderWatchListsPage() {
 
-// }
+    var watchlistsContainerEl = document.createElement("div")
+    watchlistsContainerEl.className = "watchlists-container"
+    var searchStocksLabelEl = document.createElement("label")
+    searchStocksLabelEl.textContent = "Search for stocks."
+    var searchStocksInputEl = document.createElement("input")
+    searchStocksInputEl.setAttribute("placeholder", "Search for Stocks")
+
+    watchlistsContainerEl.appendChild(searchStocksLabelEl)
+    watchlistsContainerEl.appendChild(searchStocksInputEl)
+
+    watchlistsViewEl.appendChild(watchlistsContainerEl)
+
+}
 
 function showWatchlistsPage() {
     // event.preventDefault()
 
+    renderWatchListsPage()
+
     var navItemsContainer = document.querySelector(".nav-items-container")
     
     navItemsContainer.classList.remove("hidden")
-    watchlistsViewEl.classList.remove("hidden")
     homeViewEl.classList.remove("view")
     homeViewEl.classList.add("hidden")
-
+    watchlistsViewEl.classList.remove("hidden")
+    watchlistsViewEl.classList.add("view")
+    
     console.log("watchlists page")
 }
 
