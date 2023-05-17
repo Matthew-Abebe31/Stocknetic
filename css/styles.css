@@ -10,29 +10,68 @@ a#link-to-registration-form {
     color: black
 }
 
-.previous-page-from-registration-button {
-    margin-right: 10px;
+.watchlists-page-from-sign-in-button,
+.register-new-customer-button {
+    margin-left: 5px
 }
 
+.previous-page-from-registration-button,
+.previous-page-from-sign-in-button {
+    margin-right: 5px;
+}
+
+a#watchlists-link,
+a#statistics-link,
+a#news-link,
+a#profile-link,
 a#title-link-home,
 a#link-to-registration-form,
 a#registration,
+a#registration-link,
 #link-to-sign-in-form,
 a#previous-page-from-registration-link,
 a#home-page-from-registration-link,
 a#previous-page-from-sign-in-link,
 a#watchlists-page-from-sign-in-link,
-a#sign-out-link {
+a#sign-out-link,
+#viewWatchlistDetailsLink,
+#createWatchlistsFormLink,
+#cancelCreateWatchlistLink,
+a#createWatchlistLink,
+a#searchStocksPageLink,
+a#seeMatchingStockChartsLink,
+a#returnWatchlistsPageLink,
+a#addStockToWatchlistLink,
+a#seeMatchingStockDetailsLink,
+a#goToPreviousPageFromSummaryLink {
     text-decoration: none;
 }
+
+a#watchlists-link,
+a#statistics-link,
+a#news-link,
+a#profile-link {
+    font-size: larger;
+    color: white;
+}
+
 h1.logo {
     display: flex;
+    background-color: olive;
+    border: 0.5px ridge black;
+    border-radius: 8%;
+    color: black;
+    padding: 10px;
 }
 
 h2.title {
     display: inline-block;
     color: white;
     margin-left: 20px;
+}
+
+h2#matchingStockOverviewHeader {
+    margin-bottom: 25px;
 }
 
 li.nav-list-item {
@@ -43,12 +82,13 @@ li.nav-list-item {
 #sign-in-button {
     height: 20px;
     width: 75px;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 #register-button {
     height: 20px;
     width: 75px;
+    margin-left: 5px;
 }
 
 #sign-out-button {
@@ -58,4 +98,99 @@ li.nav-list-item {
     right: 10%;
     height: 20px;
     width: 75px;
+}
+
+#createWatchlistsButton {
+    margin-left: 20px;
+}
+
+#createWatchlistNameInputLabelEl,
+#createWatchlistDescriptionInputLabelEl {
+    display: block;
+}
+
+#createWatchlistDescriptionInputLabelEl {
+    margin-top: 5px;
+}
+
+/* table#watchlistsTable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+td.watchlistsTableHeaderRowData {
+    background-color: lightsalmon;
+}
+
+td {
+    border: 2px solid black;
+    background-color: white;
+}
+
+td.watchlistsTableButtons {
+    background-color: slategray;
+    border-style: none;
+}
+
+#stock-name {
+    margin-bottom: 2.5px
+}
+
+p#exchange,
+p#currency {
+    margin-top: 0px;
+}
+
+p#currency {
+    margin-left: 10px;
+}
+
+#seeMatchingStockDetailsButton
+{
+    margin-right: 10px;
+}
+
+#matchingStockPriceChange,
+#matchingStockPriceChangePercent {
+    margin-left: 5px;
+}
+
+#stockSymbol {
+    margin-left: 5px;
+}
+
+p#currentPrice {
+    margin-right: 5px;
+}
+
+p#currentPrice,
+h2#quotePrice,
+h4#matchingStockPriceChange,
+h4#matchingStockPriceChangePercent {
+    margin-top: 0px;
+}
+
+h4#matchingStockPriceChange,
+h4#matchingStockPriceChangePercent {
+    margin-bottom: 0px;
+}
+
+
+#searchStocksLabelEl {
+    margin-bottom: 2.5px;
+}
+
+.search-stocks-button-container {
+    margin-top: 10px;
+}
+
+#chart_div {
+    position: fixed;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 500px;
+    width: 500px;
 }

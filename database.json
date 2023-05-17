@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "firstName": "Matthew",
+      "lastName": "Abebe",
+      "address": "6658 W Jamestown Dr McCordsville, IN 46055",
+      "phoneNumber": "13176491331",
+      "emailAddress": "matthewabebe31@gmail.com",
+      "password": "pass",
+      "id": 1
+    },
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "address": "555 Maple St Orlando, FL 2222",
+      "phoneNumber": "1234556789",
+      "emailAddress": "johndoe@mail.com",
+      "password": "pass1",
+      "id": 2
+    }
+  ],
+  "watchlists": [
+    {
+      "userId": 2,
+      "name": "Gainer stocks",
+      "description": "For trend strategy.",
+      "stocks": [],
+      "id": 1
+    },
+    {
+      "userId": 2,
+      "name": "Losing stocks",
+      "description": "For inverse strategy",
+      "stocks": [
+        [
+          "Barnes Group Inc",
+          "B"
+        ]
+      ],
+      "id": 2
+    }
+  ]
+}

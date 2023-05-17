@@ -1,25 +1,37 @@
 html {
     height: 100vh;
     margin: 0;
+    overflow: auto;
 }
 
 body {
     height: 100%;
     margin: 0 auto;
     overflow: auto;
+    background-color: slategray;
+}
+
+.nav-list-item {
+    text-decoration: none;
 }
 
 .page-wrap {
     min-height: 100%;
-    margin-bottom: -50px;
+    margin-bottom: -52px;
 }
 
 .row {
+    display: flex;
+    flex-direction: row wrap;
     width: 100%;
 }
 
 .col-full {
     width: 100%;
+}
+
+.col-half {
+    width: 50%;
 }
 
 .nav-container {
@@ -30,7 +42,8 @@ body {
     top: 0%;
     height: 50px;
     width: 100%;
-    background-color: crimson;
+    border: 1px black ridge;
+    background-color: orangered;
 }
 
 .nav-items-container {
@@ -44,9 +57,11 @@ body {
     flex-flow: column wrap;
     justify-content: center;
     align-content: center;
-    height: 200px;
-    width: 450px;
-    border: 4px solid navy;
+    height: 300px;
+    width: 550px;
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: teal;
     margin: 0 auto;
     top: 50%;
     left: 50%;
@@ -61,7 +76,7 @@ body {
 .auth-buttons-container {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .auth-buttons-container-two {
@@ -72,7 +87,7 @@ body {
 
 .auth-buttons-container-three {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     margin-top: 20px;
 }
 
@@ -83,10 +98,11 @@ body {
     justify-content: center;
     align-content: center;
     height: 500px;
-    width: 450px;
-    border: 3px solid navy;
+    width: 350px;
+    background-color: white;
+    border: 2px solid black;
     margin: 0 auto;
-    top: 55%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -98,32 +114,368 @@ body {
     justify-content: center;
     align-content: center;
     height: 300px;
-    width: 250px;
-    border: 3px solid navy;
+    width: 350px;
+    background-color: white;
+    border: 2px solid black;
     margin: 0 auto;
-    top: 55%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-/* 
-.watchlists-page-container {
-    margin: 0 auto;
-    top: 55%;
+
+.watchlists-header-container {
+    position: fixed;
+    top: 15%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.watchlists-list-container {
+    position: fixed;
+    height: 450px;
+    width: 420px;
+    /* border: 2px solid black; */
+    background-color: white;
+    margin: 0 auto;
+    padding: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+}
+
+.watchlist {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 400px;
+    border: 1px solid black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.watchlist-container {
+    position: fixed;
+    height: 450px;
+    width: 420px;
+    /* border: 2px solid black; */
+    background-color: white;
+    margin: 0 auto;
+    padding: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+}
+
+.watchlist-header-container {
+    display: flex;
+    justify-content: center;
+    height: 20px;
+    width: 100%;
+}
+
+
+/* .watchlist-stocks-list-container {
+    display: block;
+}
+
+.watchlist-item-div {
+    display: block;
 } */
 
-.watchlists-container {
+#addWatchlistId {
+    /* border-right: 5px; */
+    margin-right: 5px;
+}
+
+.watchlist-name-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 200px;
+    margin-left: 5px;
+}
+
+.watchlist-name-label {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.watchlist-button-container {
+    margin-left: 75px;
+}
+
+.watchlist-stock-button-container {
+    display: inline-block;
+}
+
+.view-watchlist-details-button {
+    margin-right: 2.5px;
+}
+
+
+.delete-watchlist-button {
+    margin-left: 2.5px;
+}
+
+.create-watchlists-container {
     position: fixed;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
     align-content: center;
     height: 300px;
-    width: 250px;
-    border: 3px solid navy;
+    width: 350px;
+    border: 2px solid black;
+    background-color: white;
     margin: 0 auto;
-    top: 55%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.create-watchlist-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-watchlists-button-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.search-stocks-page-button-container {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    bottom: 10%;
+}
+
+.search-stocks-container {
+    position: fixed;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+    height: 100px;
+    width: 250px;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.search-stocks-button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.matching-stock-overview-header-container {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.matching-stock-overview-header-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.matching-stock-overview-data-column-one {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.matching-stock-overview-data-column-two {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.matching-stock-container {
+    position: fixed;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+    height: 250px;
+    width: 500px;
+    background-color: greenyellow;
+    border: 2px solid black;
+    border-radius: 8px;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+}
+
+.choose-watchlist-to-add-container {
+    position: fixed;
+    /* display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center; */
+    height: 400px;
+    width: 400px;
+    background-color: greenyellow;
+    border: 2px solid black;
+    margin: 0 auto;
+    padding: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 75%;
+    overflow: auto;
+}
+
+.add-to-watchlist-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+.cancel-choose-watchlist-button {
+    position: sticky;
+    left: 95%;
+    transform: translate(-25%, -25%);
+}
+
+.matching-stock-name-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.matching-stock-exchange-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.matching-stock-quote-price-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 0px
+}
+
+.matching-stock-quote-button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+.matching-stock-overview-container {
+    position: fixed;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: column wrap;
+    height: 550px;
+    width: 500px;
+    background-color: white;
+    margin: 0 auto;
+    padding: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.matching-stock-previous-close-container,
+.matching-stock-open-price-container,
+.matching-stock-current-price-container,
+.matching-stock-high-price-container,
+.matching-stock-low-price-container,
+.matching-stock-daily-price-range-container,
+.matching-stock-weekly-price-range-container,
+.matching-stock-volume-container,
+.matching-stock-average-volume-container,
+.matching-stock-market-capitalization-container,
+.matching-stock-beta-container,
+.matching-stock-pe-ratio-container,
+.matching-stock-eps-container,
+.matching-stock-dividend-yield-container,
+.matching-stock-dividend-per-share-container,
+.matching-stock-return-on-assets-container,
+.matching-stock-return-on-equity-container
+{
+    display: flex;
+    height: 40px;
+    border: 1px solid black;
+    margin-top: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.matching-stock-previous-close-label,
+.matching-stock-open-price-label,
+.matching-stock-current-price-label,
+.matching-stock-high-price-label,
+.matching-stock-low-price-label,
+.matching-stock-daily-price-range-label,
+.matching-stock-weekly-price-range-label,
+.matching-stock-volume-label,
+.matching-stock-average-volume-label,
+.matching-stock-market-capitalization-label,
+.matching-stock-beta-label,
+.matching-stock-pe-ratio-label,
+.matching-stock-eps-label,
+.matching-stock-dividend-yield-label,
+.matching-stock-dividend-per-share-label,
+.matching-stock-return-on-assets-label,
+.matching-stock-return-on-equity-label {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.see-matching-stock-charts-button-container { 
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 90%;
+    margin-top: 45px;
+}
+
+.go-to-previous-page-from-summary-button {
+    margin-right: 10px;
+}
+
+.bullet-point {
+    text-decoration: none;
+}
+
+.return-watchlists-page-button-container {
+    position: fixed;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+    height: 100px;
+    width: 250px;
+    margin: 0 auto;
+    bottom: 5%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -132,7 +484,8 @@ body {
     position: sticky;
     bottom: 0;
     width: 100%;
-    background-color: crimson;
+    border: 1px solid black;
+    background-color: orangered;
 }
 
 .footer-container {
@@ -144,7 +497,7 @@ body {
 }
   
 .view {
-    display: block;
+    display: flex;
 }
 
 .hidden {

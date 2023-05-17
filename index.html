@@ -7,39 +7,44 @@
     <title>Stocknetic</title>
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- <script>
+      google.charts.load('current', {packages: ['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+    </script> -->
   </head>
   <body>  
       
     
-    <header id="header">
-      <div class="row">
-        <div class="col-full">
+          <header id="header">
           <div class="nav-container">
             <h2 class="title"><a id="title-link-home" href="/">Stocknetic</a></h2>
               <div class="nav-items-container hidden">
                 <ul class="nav-list-items">
-                  <li class="nav-list-item"><a href="#/watchlists">Watchlists</a></li>
-                  <li class="nav-list-item"><a href="#/statistics">Statistics</a></li>
-                  <li class="nav-list-item"><a href="#/news">News</a></li>
-                  <li class="nav-list-item"><a href="#/profile">Profile</a></li>
+                  <li class="nav-list-item"><a id="watchlists-link" href="#/watchlists">Watchlists</a></li>
+                  <li class="nav-list-item"><a id="statistics-link" href="#/statistics">Statistics</a></li>
+                  <li class="nav-list-item"><a id="news-link" href="#/news">News</a></li>
+                  <li class="nav-list-item"><a id="profile-link" href="#/profile">Profile</a></li>
                     </ul>
                   </div>
                 </div>
-              </div>
-            </div>
-        </header>
+              </header>
 
       <div class="page-wrap">
 
-      <div class="home-container view" data-view="home">
-        <div class="logo-container">
-          <div class="logo-text-container">
-            <h1 class="logo">Stocknetic</h1>
-          </div>
-          <div class="auth-buttons-container">
-            <button id="sign-in-button">Sign-In</button>
-            <button id="register-button">Register</button>
-            <button id="sign-out-button">Sign-Out</button>
+        <div class="home-container hidden" data-view="home">
+          <div class="row">
+            <div class="col-full">
+             <div class="logo-container">
+              <div class="logo-text-container">
+                <h1 class="logo">Stocknetic</h1>
+              </div>
+              <div class="auth-buttons-container">
+                <button id="sign-in-button">Sign-In</button>
+                <button id="register-button"><a id="registration-link" href="#/registration">Register</a></button>
+                <button id="sign-out-button">Sign-Out</button>
+             </div>
+            </div>
           </div>
         </div>
       </div>
@@ -47,6 +52,13 @@
       <div class="sign-in-page hidden" data-view="sign-in"></div>
       <div class="registration-page-container hidden" data-view="registration"></div>
       <div class="watchlists-page-container hidden" data-view="watchlists"></div>
+      <div class="view-watchilst-page-container hidden" data-view="view-watchlist"></div>
+      <div class="create-watchlists-page-container hidden" data-view="create-watchlists"></div>
+      <div class="search-stocks-page-container hidden" data-view="search-stocks"></div>
+      <div class="matching-stock-page-container hidden" data-view="matching-stock"></div>
+      <div class="matching-stock-charts-page-container hidden" data-view="matching-stock-charts">
+        <div id="chart_div"></div>
+      </div>
       <div class="statistics-page-container hidden" data-view="statistics"></div>
 
     </div>
