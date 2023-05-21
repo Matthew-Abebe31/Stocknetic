@@ -73,6 +73,10 @@ body {
     justify-content: center;
 }
 
+ul {
+    padding-inline-start: 0%;
+}
+
 .auth-buttons-container {
     display: flex;
     justify-content: center;
@@ -133,8 +137,8 @@ body {
 .watchlists-list-container {
     position: fixed;
     height: 450px;
-    width: 420px;
-    /* border: 2px solid black; */
+    width: 550px;
+    border: 2px solid black;
     background-color: white;
     margin: 0 auto;
     padding: 10px;
@@ -144,11 +148,23 @@ body {
     overflow: auto;
 }
 
+@media screen and (max-width: 650px) {
+    .watchlists-list-container {
+        height: 250px;
+        width: 325px;
+    }
+
+    .watchlist-button-container {
+        display: flex;
+        /* width: 50px; */
+    }
+    
+}
+
 .watchlist {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 400px;
+    justify-content: space-between;
+    margin-bottom: 10px;
     border: 1px solid black;
     border-top: none;
     border-left: none;
@@ -159,7 +175,7 @@ body {
     position: fixed;
     height: 450px;
     width: 420px;
-    /* border: 2px solid black; */
+    border: 2px solid black;
     background-color: white;
     margin: 0 auto;
     padding: 10px;
@@ -170,12 +186,36 @@ body {
 }
 
 .watchlist-header-container {
+    position: fixed;
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 20px;
     width: 100%;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
+.watchlist-stock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    border: 1px solid black;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    padding: 5px;
+}
+
+.watchlist-stock-summary-button {
+    margin-right: 5px;
+}
+
+.watchlist-stock-delete-button {
+    margin-left: 5px;
+}
 
 /* .watchlist-stocks-list-container {
     display: block;
@@ -190,21 +230,41 @@ body {
     margin-right: 5px;
 }
 
-.watchlist-name-container {
-    display: flex;
+/* .watchlist-name-container { */
+    /* display: flex;
     justify-content: flex-start;
-    align-items: center;
-    width: 200px;
-    margin-left: 5px;
-}
+    align-items: center; */
+    /* width: 150px; */
+    /* margin-left: 5px; */
+/* } */
+
+#watchlistId {
+    display: inline;
+ }
 
 .watchlist-name-label {
+    display: inline;
     margin-left: 5px;
     margin-right: 5px;
 }
 
+/* .watchlist-description-container { */
+    /* display: flex;
+    justify-content: flex-start;
+    align-items: center; */
+    /* width: 300px; */
+    /* margin-left: 5px; */
+/* } */
+
+.watchlist-description-label {
+    display: inline;
+}
+
+
 .watchlist-button-container {
-    margin-left: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .watchlist-stock-button-container {

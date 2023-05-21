@@ -597,6 +597,7 @@ async function renderWatchListsPage() {
     var watchlistId = document.createElement("p")
     watchlistId.setAttribute("id", "watchlistId")
     watchlistId.textContent = `${watchlists[i].id}.`
+    watchlistId.style.fontWeight = "bold"
     var watchlistNameLabel = document.createElement("p")
     watchlistNameLabel.className = "watchlist-name-label"
     watchlistNameLabel.textContent = "Name:"
@@ -604,6 +605,14 @@ async function renderWatchListsPage() {
     var watchlistName = document.createElement("p")
     watchlistName.textContent = watchlists[i].name
     watchlistNameLabel.style.fontWeight = "bold"
+    var watchlistDescriptionContainer = document.createElement("div")
+    watchlistDescriptionContainer.className = "watchlist-description-container"
+    var watchlistDescriptionLabel = document.createElement("p")
+    watchlistDescriptionLabel.className = "watchlist-description-label"
+    watchlistDescriptionLabel.textContent = "Description:"
+    watchlistDescriptionLabel.style.fontWeight = "bold"
+    var watchlistDescriptionEl = document.createElement("p")
+    watchlistDescriptionEl.textContent = `${watchlists[i].description}`
     var watchlistButtonContainer = document.createElement("div")
     watchlistButtonContainer.className = "watchlist-button-container"
     var viewWatchlistDetailsButton = document.createElement("button")
@@ -631,13 +640,12 @@ async function renderWatchListsPage() {
         for (let i = 0; i < watchlists.length; i++) {
             if (watchlists[i].id === watchlistId) {
 
-                var confirm = window.confirm(`Are you sure you want to delete ${watchlists[i].name}`)
-                if (confirm === true) {
+                // var confirm = window.confirm(`Are you sure you want to delete ${watchlists[i].name}`)
+                // if (confirm === true) {
                     deleteWatchlist(watchlistId)
-                } else {
-                    return
-                }
-
+                // } else {
+                //     return
+                // }
 
                 while (i < watchlists.length) {
                     watchlists[i].id--
@@ -649,7 +657,7 @@ async function renderWatchListsPage() {
             
         }
 
-        let i = 0;
+        // let i = 0;
 
         // updateWatchlistCount()
         console.log("hi")
@@ -661,11 +669,16 @@ async function renderWatchListsPage() {
     watchlistButtonContainer.appendChild(viewWatchlistDetailsButton)
     watchlistButtonContainer.appendChild(deleteWatchlistButton)
 
+    watchlistId.appendChild(watchlistNameLabel)
     watchlistNameContainer.appendChild(watchlistId)
     watchlistNameContainer.appendChild(watchlistNameLabel)
     watchlistNameContainer.appendChild(watchlistName)
 
+    watchlistDescriptionContainer.appendChild(watchlistDescriptionLabel)
+    watchlistDescriptionContainer.appendChild(watchlistDescriptionEl)
+
     watchlist.appendChild(watchlistNameContainer)
+    watchlist.appendChild(watchlistDescriptionContainer)
     watchlist.appendChild(watchlistButtonContainer)
     watchlistsListContainer.appendChild(watchlist)
    }
@@ -730,7 +743,7 @@ async function renderViewWatchlistPage() {
         watchlistContainer.className = "watchlist-container"
         var watchlistHeaderContainer = document.createElement("div")
         watchlistHeaderContainer.className = "watchlist-header-container"
-        var watchlistHeader = document.createElement("h4")
+        var watchlistHeader = document.createElement("h2")
         watchlistHeader.setAttribute("id", "watchlistHeader")
         watchlistHeader.textContent = watchlist.name
         var watchlistStocks = watchlist.stocks
@@ -741,12 +754,19 @@ async function renderViewWatchlistPage() {
         // var watchlistStockSummaryButton = document.createElement("button")
         // watchlistStockSummaryButton.className = "watchlist-stock-summary-button"
 
-
-        for (let i = 0; i < watchlistStocks.length; i++) {
+        for (let i = 0, id = 1; i < watchlistStocks.length; i++, id++) {
             watchlistStocksListContainer.appendChild(watchlistStocksList)
+
+            var stockIdEl = document.createElement("p")
+            stockIdEl.textContent = id;
+            stockIdEl.style.fontWeight = "bold"
+
+            console.log(stockIdEl)
+
             watchlistTicker = watchlistStocks[i][1]
             var watchlistStock = document.createElement("li")
-            watchlistStock.textContent = `${watchlistStocks[i][0]} (${watchlistStocks[i][1]}) ...`
+            watchlistStock.className = "watchlist-stock"
+            watchlistStock.textContent = `${stockIdEl.textContent}. ${watchlistStocks[i][0]} (${watchlistStocks[i][1]})`
 
             var watchlistStockButtonContainer = document.createElement("div")
             watchlistStockButtonContainer.className = "watchlist-stock-button-container"
@@ -757,7 +777,6 @@ async function renderViewWatchlistPage() {
 
             var watchlistStockSummaryLink = document.createElement("a")
             watchlistStockSummaryLink.setAttribute("id", "watchlistStockSummaryLink")
-            // watchlistStockSummaryLink.setAttribute("href", `#/${watchlistStocks[i][1]}/summary`)
 
             watchlistStockSummaryButton.addEventListener("click", function () {
                 window.location.hash = `/${watchlistStocks[i][1]}/summary`
@@ -769,30 +788,22 @@ async function renderViewWatchlistPage() {
 
             watchlistStockDeleteButton.addEventListener("click", function () {
                 var watchlistStocksArr = watchlist.stocks
+                var newWatchlistStockArr;
                 
                 for (let i = 0; i < watchlistStocksArr.length; i++) {
+
                     if (watchlistStocksArr[i][1] === watchlistTicker) {
-
-                       var newWatchlistStockArr =  watchlistStocksArr[i].filter(element => element[1] === watchlistTicker)
-
-                    }
+                       newWatchlistStockArr =  watchlistStocksArr.filter(element => element[1] !== watchlistTicker)
 
                     watchlist.stocks = newWatchlistStockArr
                     var editedWatchlistObj = watchlist
-
+                    console.log(newWatchlistStockArr)
                     console.log(editedWatchlistObj)
 
-                    
-                    var confirm = window.confirm(`Are you sure you want to delete ${watchlistTicker} from ${watchlist.name}`)
-                    if (confirm === true) {
-                        putWatchlist(watchlistId, editedWatchlistObj)
-
-                    } else {
-                        return
+                    putWatchlist(watchlistId, editedWatchlistObj)
                     }
-
-                    window.location.reload() 
                 }
+                window.location.reload() 
 
             })
             
@@ -804,9 +815,9 @@ async function renderViewWatchlistPage() {
         }
 
         watchlistHeaderContainer.appendChild(watchlistHeader)
-        watchlistContainer.appendChild(watchlistHeaderContainer)
         watchlistStocksListContainer.appendChild(watchlistStocksList)
         watchlistContainer.appendChild(watchlistStocksListContainer)
+        viewWatchlistEl.appendChild(watchlistHeaderContainer)
         viewWatchlistEl.appendChild(watchlistContainer)
 
 }
