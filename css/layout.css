@@ -156,7 +156,16 @@ ul {
 
     .watchlist-button-container {
         display: flex;
+        flex-flow: column nowrap;
         /* width: 50px; */
+    }
+
+    .view-watchlist-details-button {
+        margin-bottom: 5px;
+    }
+
+    .delete-watchlist-button {
+        margin-top: 5px;
     }
     
 }

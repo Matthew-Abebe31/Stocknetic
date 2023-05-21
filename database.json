@@ -38,41 +38,6 @@
       "description": "For inverse strategy",
       "stocks": [],
       "id": 2
-    },
-    {
-      "userId": 2,
-      "name": "Gainer stocks",
-      "description": "For trend strategy.",
-      "stocks": [],
-      "id": 3
-    },
-    {
-      "userId": 2,
-      "name": "Gainer stocks",
-      "description": "For trend strategy.",
-      "stocks": [],
-      "id": 4
-    },
-    {
-      "userId": 2,
-      "name": "Gainer stocks",
-      "description": "For trend strategy.",
-      "stocks": [],
-      "id": 5
-    },
-    {
-      "userId": 2,
-      "name": "Gainer stocks",
-      "description": "For trend strategy.",
-      "stocks": [],
-      "id": 6
-    },
-    {
-      "userId": 2,
-      "name": "Gainer stocks",
-      "description": "For trend strategy.",
-      "stocks": [],
-      "id": 7
     }
   ]
 }
