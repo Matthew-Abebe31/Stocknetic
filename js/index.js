@@ -588,6 +588,8 @@ async function renderWatchListsPage() {
    for (let i = 0; i < watchlists.length; i++) {
     var watchlist = document.createElement("div")
     watchlist.className = "watchlist"
+    var watchlistLabelContainer = document.createElement("div")
+    watchlistLabelContainer.className = "watchlist-label-container"
     var watchlistNameContainer = document.createElement("div")
     watchlistNameContainer.className = "watchlist-name-container"
     var watchlistIdLabel = document.createElement("p")
@@ -629,8 +631,10 @@ async function renderWatchListsPage() {
     deleteWatchlistButton.addEventListener("click", async function (event) {
         var currentTarget = event.currentTarget
         var parentElement = currentTarget.parentNode
-        var siblingElement = parentElement.previousElementSibling
-        var watchlistIdElement = siblingElement.firstChild
+        var parentToParentElement = parentElement.parentNode
+        var childElement = parentToParentElement.firstChild
+        console.log(childElement)
+        var watchlistIdElement = childElement.firstChild
         var watchlistIdStr = watchlistIdElement.textContent
         var watchlistId = parseInt(watchlistIdStr)
         var counter = 1;
@@ -638,6 +642,8 @@ async function renderWatchListsPage() {
         var watchlists = await getWatchlists()
 
         for (let i = 0; i < watchlists.length; i++) {
+            console.log(watchlists[i].id)
+            console.log(watchlistId)
             if (watchlists[i].id === watchlistId) {
 
                 // var confirm = window.confirm(`Are you sure you want to delete ${watchlists[i].name}`)
@@ -669,20 +675,27 @@ async function renderWatchListsPage() {
     watchlistButtonContainer.appendChild(viewWatchlistDetailsButton)
     watchlistButtonContainer.appendChild(deleteWatchlistButton)
 
-    watchlistId.appendChild(watchlistNameLabel)
-    watchlistNameContainer.appendChild(watchlistId)
+    // watchlistLabelContainer.appendChild(watchlistNameLabel)
+    // watchlistLabelContainer.appendChild(watchlistDescriptionLabel)
+    // watchlistId.appendChild(watchlistNameLabel)
+    // watchlistNameContainer.appendChild(watchlistId)
     watchlistNameContainer.appendChild(watchlistNameLabel)
     watchlistNameContainer.appendChild(watchlistName)
 
     watchlistDescriptionContainer.appendChild(watchlistDescriptionLabel)
     watchlistDescriptionContainer.appendChild(watchlistDescriptionEl)
 
+    // watchlist.appendChild(watchlistLabelContainer)
+    watchlistName.prepend(watchlistId)
     watchlist.appendChild(watchlistNameContainer)
     watchlist.appendChild(watchlistDescriptionContainer)
     watchlist.appendChild(watchlistButtonContainer)
     watchlistsListContainer.appendChild(watchlist)
    }
 
+   watchlistLabelContainer.appendChild(watchlistNameLabel)
+   watchlistLabelContainer.appendChild(watchlistDescriptionLabel)
+   
    createWatchlistsButton.appendChild(createWatchlistsFormLink)
    searchStocksPageButton.appendChild(searchStocksPageLink)
    
@@ -793,7 +806,7 @@ async function renderViewWatchlistPage() {
                 for (let i = 0; i < watchlistStocksArr.length; i++) {
 
                     if (watchlistStocksArr[i][1] === watchlistTicker) {
-                       newWatchlistStockArr =  watchlistStocksArr.filter(element => element[1] !== watchlistTicker)
+                       newWatchlistStockArr =  watchlistStocksArr.filter(element => element[1] === watchlistTicker)
 
                     watchlist.stocks = newWatchlistStockArr
                     var editedWatchlistObj = watchlist

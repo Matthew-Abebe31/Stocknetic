@@ -149,6 +149,14 @@ ul {
 }
 
 @media screen and (max-width: 650px) {
+    /* .nav-items-container {
+        position: fixed;
+        top: 10%;
+        left: 75%;
+        transform: translate(-50%, -50%);
+    } */
+
+    
     .watchlists-list-container {
         height: 250px;
         width: 325px;
