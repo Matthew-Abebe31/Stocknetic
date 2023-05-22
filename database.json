@@ -42,6 +42,13 @@
       "description": "For inverse strategy",
       "stocks": [],
       "id": 2
+    },
+    {
+      "userId": 2,
+      "name": "Gainer stocks2",
+      "description": "For trend strategy.",
+      "stocks": [],
+      "id": 3
     }
   ]
 }

@@ -148,6 +148,10 @@ ul {
     overflow: auto;
 }
 
+.stock-id-element {
+    display: inline;
+}
+
 @media screen and (max-width: 650px) {
     /* .nav-items-container {
         position: fixed;
@@ -227,11 +231,11 @@ ul {
 }
 
 .watchlist-stock-summary-button {
-    margin-right: 5px;
+    margin-right: 2.5px;
 }
 
 .watchlist-stock-delete-button {
-    margin-left: 5px;
+    margin-left: 2.5px;
 }
 
 /* .watchlist-stocks-list-container {
@@ -275,6 +279,7 @@ ul {
 
 .watchlist-description-label {
     display: inline;
+    margin-left: 175px;
 }
 
 

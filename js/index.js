@@ -679,12 +679,12 @@ async function renderWatchListsPage() {
     // watchlistLabelContainer.appendChild(watchlistDescriptionLabel)
     // watchlistId.appendChild(watchlistNameLabel)
     // watchlistNameContainer.appendChild(watchlistId)
-    watchlistNameContainer.appendChild(watchlistNameLabel)
+    // watchlistNameContainer.appendChild(watchlistNameLabel)
     watchlistNameContainer.appendChild(watchlistName)
 
-    watchlistDescriptionContainer.appendChild(watchlistDescriptionLabel)
     watchlistDescriptionContainer.appendChild(watchlistDescriptionEl)
-
+    
+    // watchlistDescriptionContainer.appendChild(watchlistDescriptionLabel)
     // watchlist.appendChild(watchlistLabelContainer)
     watchlistName.prepend(watchlistId)
     watchlist.appendChild(watchlistNameContainer)
@@ -692,6 +692,8 @@ async function renderWatchListsPage() {
     watchlist.appendChild(watchlistButtonContainer)
     watchlistsListContainer.appendChild(watchlist)
    }
+
+   watchlistsListContainer.prepend(watchlistLabelContainer)
 
    watchlistLabelContainer.appendChild(watchlistNameLabel)
    watchlistLabelContainer.appendChild(watchlistDescriptionLabel)
@@ -771,6 +773,7 @@ async function renderViewWatchlistPage() {
             watchlistStocksListContainer.appendChild(watchlistStocksList)
 
             var stockIdEl = document.createElement("p")
+            stockIdEl.className = "stock-id-element"
             stockIdEl.textContent = id;
             stockIdEl.style.fontWeight = "bold"
 
@@ -779,7 +782,9 @@ async function renderViewWatchlistPage() {
             watchlistTicker = watchlistStocks[i][1]
             var watchlistStock = document.createElement("li")
             watchlistStock.className = "watchlist-stock"
-            watchlistStock.textContent = `${stockIdEl.textContent}. ${watchlistStocks[i][0]} (${watchlistStocks[i][1]})`
+            var watchlistStockName = document.createElement("p")
+            watchlistStockName.className = "watchlist-stock-name"
+            watchlistStockName.textContent = `${watchlistStocks[i][0]} (${watchlistStocks[i][1]})`
 
             var watchlistStockButtonContainer = document.createElement("div")
             watchlistStockButtonContainer.className = "watchlist-stock-button-container"
@@ -823,6 +828,8 @@ async function renderViewWatchlistPage() {
             watchlistStockSummaryButton.appendChild(watchlistStockSummaryLink)
             watchlistStockButtonContainer.appendChild(watchlistStockSummaryButton)
             watchlistStockButtonContainer.appendChild(watchlistStockDeleteButton)
+            watchlistStockName.prepend(stockIdEl)
+            watchlistStock.appendChild(watchlistStockName)
             watchlistStock.appendChild(watchlistStockButtonContainer)
             watchlistStocksList.appendChild(watchlistStock)
         }
