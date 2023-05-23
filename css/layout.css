@@ -68,6 +68,12 @@ body {
     transform: translate(-50%, -50%);
 }
 
+@media screen and (max-width: 650px) {
+    .logo-container {
+        width: 350px;
+    }
+}
+
 .logo-text-container {
     display: flex;
     justify-content: center;
@@ -271,25 +277,29 @@ ul {
     margin-right: 5px;
 }
 
-/* .watchlist-description-container { */
-    /* display: flex;
-    justify-content: flex-start;
-    align-items: center; */
-    /* width: 300px; */
-    /* margin-left: 5px; */
-/* } */
+.watchlist-description-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .watchlist-description-label {
     display: inline;
     margin-left: 175px;
 }
 
+@media screen and (max-width: 650px) {
+    .watchlist-description-label {
+        margin-left: 75px;
+    }
+}
 
 .watchlist-button-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 
 .watchlist-stock-button-container {
     display: inline-block;
@@ -302,6 +312,12 @@ ul {
 
 .delete-watchlist-button {
     margin-left: 2.5px;
+}
+
+@media screen and (max-width: 650px) {
+    .delete-watchlist-button {
+        margin-bottom: 10px;
+    }
 }
 
 .return-watchlists-button-container {
@@ -422,6 +438,12 @@ ul {
     left: 50%;
     transform: translate(-50%, -50%);
     overflow: auto;
+}
+
+@media screen and (max-width: 650px) {
+    .matching-stock-container {
+        width: 350px;
+    }
 }
 
 .choose-watchlist-to-add-container {
