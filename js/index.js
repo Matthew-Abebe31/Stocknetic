@@ -690,15 +690,15 @@ async function renderWatchListsPage() {
     // watchlist.appendChild(watchlistLabelContainer)
     watchlistName.prepend(watchlistId)
     watchlist.appendChild(watchlistNameContainer)
-    watchlist.appendChild(watchlistDescriptionContainer)
+    // watchlist.appendChild(watchlistDescriptionContainer)
     watchlist.appendChild(watchlistButtonContainer)
     watchlistsListContainer.appendChild(watchlist)
    }
 
    watchlistsListContainer.prepend(watchlistLabelContainer)
 
-   watchlistLabelContainer.appendChild(watchlistNameLabel)
-   watchlistLabelContainer.appendChild(watchlistDescriptionLabel)
+//    watchlistLabelContainer.appendChild(watchlistNameLabel)
+//    watchlistLabelContainer.appendChild(watchlistDescriptionLabel)
    
    createWatchlistsButton.appendChild(createWatchlistsFormLink)
    searchStocksPageButton.appendChild(searchStocksPageLink)

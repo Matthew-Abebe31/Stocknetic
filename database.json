@@ -51,6 +51,13 @@
         ]
       ],
       "id": 2
+    },
+    {
+      "userId": 2,
+      "name": "Gainer stocks",
+      "description": "For trend strategy. for trend strategy.",
+      "stocks": [],
+      "id": 3
     }
   ]
 }
