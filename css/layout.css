@@ -252,13 +252,13 @@ ul {
     margin-right: 5px;
 }
 
-/* .watchlist-name-container { */
-    /* display: flex;
+.watchlist-name-container {
+    display: flex;
     justify-content: flex-start;
-    align-items: center; */
-    /* width: 150px; */
-    /* margin-left: 5px; */
-/* } */
+    align-items: center;
+    /* width: 200px; */
+    margin-left: 5px;
+}
 
 #watchlistId {
     margin-right: 5px;
