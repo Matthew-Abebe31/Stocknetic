@@ -765,21 +765,28 @@ async function renderViewWatchlistPage() {
         var watchlistStocksListContainer = document.createElement("div")
         watchlistStocksListContainer.className = "watchlist-stocks-list-container"
         var watchlistStocksList = document.createElement("ul")
-        var watchlistTicker;
-        // var watchlistStockSummaryButton = document.createElement("button")
-        // watchlistStockSummaryButton.className = "watchlist-stock-summary-button"
+        var stockTicker;
+        var returnWatchlistsButtonContainer = document.createElement("div")
+        returnWatchlistsButtonContainer.className = "return-watchlists-button-container"
+        var returnToWatchlistsButton = document.createElement("button")
+        returnToWatchlistsButton.className = "return-to-watchlists-button"
+        returnToWatchlistsButton.textContent = "See Watchlists"
+
+        returnToWatchlistsButton.addEventListener("click", function() {
+            window.location.hash = "/watchlists"
+        })
 
         for (let i = 0, id = 1; i < watchlistStocks.length; i++, id++) {
             watchlistStocksListContainer.appendChild(watchlistStocksList)
 
             var stockIdEl = document.createElement("p")
             stockIdEl.className = "stock-id-element"
-            stockIdEl.textContent = id;
+            stockIdEl.textContent = `${id}.`;
             stockIdEl.style.fontWeight = "bold"
 
             console.log(stockIdEl)
 
-            watchlistTicker = watchlistStocks[i][1]
+            stockTicker = watchlistStocks[i][1]
             var watchlistStock = document.createElement("li")
             watchlistStock.className = "watchlist-stock"
             var watchlistStockName = document.createElement("p")
@@ -804,17 +811,31 @@ async function renderViewWatchlistPage() {
             watchlistStockDeleteButton.className = "watchlist-stock-delete-button"
             watchlistStockDeleteButton.textContent = "Delete"
 
-            watchlistStockDeleteButton.addEventListener("click", function () {
+            watchlistStockDeleteButton.addEventListener("click", function (event) {
+                var targetEl = event.currentTarget
+                var parentEl = targetEl.parentNode
+                var parentToParentEl = parentEl.parentNode
+                var watchlistStockNameEl = parentToParentEl.firstChild
+                var stockNameElement = watchlistStockNameEl.childNodes[1]
+                var stockNameStr = stockNameElement.textContent
+                var stockNameStrArr = stockNameStr.split(" ")
+                var stockSymbol = stockNameStrArr.pop()
+                var stockTicker = stockSymbol.replace(/[()]/g, '')
+                console.log(stockTicker)
+
+
                 var watchlistStocksArr = watchlist.stocks
                 var newWatchlistStockArr;
                 
                 for (let i = 0; i < watchlistStocksArr.length; i++) {
-
-                    if (watchlistStocksArr[i][1] === watchlistTicker) {
-                       newWatchlistStockArr =  watchlistStocksArr.filter(element => element[1] === watchlistTicker)
+                    
+                    if (watchlistStocksArr[i][1] === stockTicker) {
+                        console.log(watchlistStocksArr[i][1], stockTicker)
+                       newWatchlistStockArr =  watchlistStocksArr.filter(element => element[1] !== stockTicker)
 
                     watchlist.stocks = newWatchlistStockArr
                     var editedWatchlistObj = watchlist
+                    console.log(watchlistId)
                     console.log(newWatchlistStockArr)
                     console.log(editedWatchlistObj)
 
@@ -837,8 +858,10 @@ async function renderViewWatchlistPage() {
         watchlistHeaderContainer.appendChild(watchlistHeader)
         watchlistStocksListContainer.appendChild(watchlistStocksList)
         watchlistContainer.appendChild(watchlistStocksListContainer)
+        returnWatchlistsButtonContainer.appendChild(returnToWatchlistsButton)
         viewWatchlistEl.appendChild(watchlistHeaderContainer)
         viewWatchlistEl.appendChild(watchlistContainer)
+        viewWatchlistEl.appendChild(returnWatchlistsButtonContainer)
 
 }
 
@@ -1310,7 +1333,8 @@ async function renderMatchingStockOverview() {
     seeMatchingStockChartsLink.setAttribute("href", `#/${ticker}/charts`)
     seeMatchingStockChartsLink.textContent = "Charts"
     
-    matchingStockOverviewHeaderContainer.appendChild(matchingStockOverviewHeader)
+    // matchingStockOverviewHeaderContainer.appendChild(matchingStockOverviewHeader)
+    matchingStockOverviewContainer.appendChild(matchingStockOverviewHeader)
 
     var matchingStockDataContainerArrOne = [matchingStockPreviousCloseContainer, matchingStockOpenPriceContainer, matchingStockCurrentPriceContainer, matchingStockDailyPriceRangeContainer, matchingStockWeeklyPriceRangeContainer, matchingStockVolumeContainer, matchingStockAverageVolumeContainer]
     var matchingStockDataContainerArrTwo = [matchingStockMarketCapContainer, matchingStockBetaContainer, matchingStockEPSContainer, matchingStockDividendYieldContainer, matchingStockDividendPerShareContainer, matchingStockReturnOnAssetsContainer, matchingStockReturnOnEquityContainer]
@@ -1393,11 +1417,13 @@ async function renderMatchingStockOverview() {
     seeMatchingStockChartsButton.appendChild(seeMatchingStockChartsLink)
     seeMatchingStockChartsButtonContainer.appendChild(seeMatchingStockChartsButton)
     
-    matchingStockOverviewContainer.appendChild(matchingStockOverviewHeaderContainer)
+    // matchingStockOverviewContainer.appendChild(matchingStockOverviewHeaderContainer)
+    // matchingStockOverviewContainer.appendChild(seeMatchingStockChartsButtonContainer)
     matchingStockOverviewContainer.appendChild(matchingStockOverviewDataRow)
-    matchingStockOverviewContainer.appendChild(seeMatchingStockChartsButtonContainer)
 
+    matchingStockOverviewViewEl.appendChild(matchingStockOverviewHeaderContainer)
     matchingStockOverviewViewEl.appendChild(matchingStockOverviewContainer)
+    matchingStockOverviewViewEl.appendChild(seeMatchingStockChartsButtonContainer)
 }
 
 function showMatchingStockOverview() {

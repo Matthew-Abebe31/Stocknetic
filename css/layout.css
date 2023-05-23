@@ -150,6 +150,7 @@ ul {
 
 .stock-id-element {
     display: inline;
+    margin-right: 5px;
 }
 
 @media screen and (max-width: 650px) {
@@ -260,6 +261,7 @@ ul {
 /* } */
 
 #watchlistId {
+    margin-right: 5px;
     display: inline;
  }
 
@@ -300,6 +302,18 @@ ul {
 
 .delete-watchlist-button {
     margin-left: 2.5px;
+}
+
+.return-watchlists-button-container {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 100%;
+    bottom: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .create-watchlists-container {
@@ -362,12 +376,16 @@ ul {
 }
 
 .matching-stock-overview-header-container {
+    position: fixed;
     display: block;
     justify-content: center;
     align-items: center;
     border-top: none;
     border-left: none;
     border-right: none;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .matching-stock-overview-header-label {
@@ -474,8 +492,9 @@ ul {
     justify-content: flex-start;
     align-items: center;
     flex-flow: column wrap;
-    height: 550px;
+    height: 400px;
     width: 500px;
+    border: 2px solid black;
     background-color: white;
     margin: 0 auto;
     padding: 10px;
@@ -533,11 +552,15 @@ ul {
 }
 
 .see-matching-stock-charts-button-container { 
+    position: fixed;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     width: 90%;
     margin-top: 45px;
+    left: 50%;
+    bottom: 10%;
+    transform: translate(-50%, -50%);
 }
 
 .go-to-previous-page-from-summary-button {

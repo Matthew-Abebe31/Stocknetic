@@ -26,12 +26,16 @@
       "description": "For trend strategy.",
       "stocks": [
         [
-          "Visa Inc. Class A",
-          "V"
+          "Agilent Technologies Inc",
+          "A"
         ],
         [
-          "Tesla Inc",
-          "TSLA"
+          "Microsoft Corporation",
+          "MSFT"
+        ],
+        [
+          "Barnes Group Inc",
+          "B"
         ]
       ],
       "id": 1
