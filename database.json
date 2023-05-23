@@ -32,6 +32,10 @@
         [
           "Barnes Group Inc",
           "B"
+        ],
+        [
+          "Tesla Inc",
+          "TSLA"
         ]
       ],
       "id": 1
@@ -40,7 +44,12 @@
       "userId": 2,
       "name": "Losing stocks",
       "description": "For inverse strategy",
-      "stocks": [],
+      "stocks": [
+        [
+          "Visa Inc. Class A",
+          "V"
+        ]
+      ],
       "id": 2
     }
   ]

@@ -21,7 +21,7 @@ a#link-to-registration-form {
 }
 
 a#watchlists-link,
-a#statistics-link,
+a#financials-link,
 a#news-link,
 a#profile-link,
 a#title-link-home,
@@ -48,7 +48,7 @@ a#goToPreviousPageFromSummaryLink {
 }
 
 a#watchlists-link,
-a#statistics-link,
+a#financials-link,
 a#news-link,
 a#profile-link {
     font-size: larger;

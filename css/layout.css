@@ -311,7 +311,7 @@ ul {
     align-items: center;
     height: 20px;
     width: 100%;
-    bottom: 15%;
+    bottom: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -394,6 +394,8 @@ ul {
     align-items: center;
 }
 
+
+
 .matching-stock-overview-data-column-one {
     margin-left: 5px;
     margin-right: 5px;
@@ -437,7 +439,7 @@ ul {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    opacity: 75%;
+    opacity: 95%;
     overflow: auto;
 }
 
@@ -503,6 +505,13 @@ ul {
     transform: translate(-50%, -50%);
 }
 
+@media screen and (max-width: 650px) {
+    .matching-stock-overview-container {
+        width: 325px;
+        overflow: auto;
+    }
+}
+
 .matching-stock-previous-close-container,
 .matching-stock-open-price-container,
 .matching-stock-current-price-container,
@@ -522,6 +531,8 @@ ul {
 .matching-stock-return-on-equity-container
 {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 40px;
     border: 1px solid black;
     margin-top: 5px;
@@ -529,6 +540,28 @@ ul {
     border-left: none;
     border-right: none;
 }
+
+/* @media screen and (max-width: 650px) {
+.matching-stock-previous-close-container,
+.matching-stock-open-price-container,
+.matching-stock-current-price-container,
+.matching-stock-high-price-container,
+.matching-stock-low-price-container,
+.matching-stock-daily-price-range-container,
+.matching-stock-weekly-price-range-container,
+.matching-stock-volume-container,
+.matching-stock-average-volume-container,
+.matching-stock-market-capitalization-container,
+.matching-stock-beta-container,
+.matching-stock-pe-ratio-container,
+.matching-stock-eps-container,
+.matching-stock-dividend-yield-container,
+.matching-stock-dividend-per-share-container,
+.matching-stock-return-on-assets-container,
+.matching-stock-return-on-equity-container {
+    border: none;
+}
+} */
 
 .matching-stock-previous-close-label,
 .matching-stock-open-price-label,

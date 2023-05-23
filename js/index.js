@@ -175,7 +175,9 @@ async function renderMatchingStockQuote() {
 
                         alert(`added ${ticker} to ${editedWatchlistObj.name}`)
 
-                        chooseWatchlistToAddContainer.remove()
+                        // chooseWatchlistToAddContainer.remove()
+
+                        window.location.hash = "/watchlists"
                     }
 
                 }
@@ -1240,7 +1242,7 @@ async function renderMatchingStockOverview() {
     matchingStockAverageVolumeContainer.className = "matching-stock-average-volume-container"
     var matchingStockAverageVolumeLabel = document.createElement("p")
     matchingStockAverageVolumeLabel.className = "matching-stock-average-volume-label"
-    matchingStockAverageVolumeLabel.textContent = "3 Month Avg Volume:"
+    matchingStockAverageVolumeLabel.textContent = "3 Mo. Avg Volume:"
     matchingStockAverageVolumeLabel.style.fontWeight = "bold"
     var matchingStockAverageVolumeEl = document.createElement("p")
     matchingStockAverageVolumeEl.className = "matching-stock-average-volume-element"
@@ -1300,7 +1302,7 @@ async function renderMatchingStockOverview() {
     matchingStockReturnOnAssetsLabel.style.fontWeight = "bold"
     var matchingStockReturnOnAssetsEl = document.createElement("p")
     matchingStockReturnOnAssetsEl.className = "matching-stock-return-on-assets-element"
-    matchingStockReturnOnAssetsEl.textContent = matchingStockBasicFinancials.metric.roaTTM
+    matchingStockReturnOnAssetsEl.textContent = matchingStockBasicFinancials.metric.roaTTM.toFixed(2)
     matchingStockOverviewHeaderLabel.appendChild(matchingStockOverviewHeader)
     matchingStockOverviewHeaderContainer.appendChild(matchingStockOverviewHeaderLabel)
 
@@ -1339,28 +1341,28 @@ async function renderMatchingStockOverview() {
     var matchingStockDataContainerArrOne = [matchingStockPreviousCloseContainer, matchingStockOpenPriceContainer, matchingStockCurrentPriceContainer, matchingStockDailyPriceRangeContainer, matchingStockWeeklyPriceRangeContainer, matchingStockVolumeContainer, matchingStockAverageVolumeContainer]
     var matchingStockDataContainerArrTwo = [matchingStockMarketCapContainer, matchingStockBetaContainer, matchingStockEPSContainer, matchingStockDividendYieldContainer, matchingStockDividendPerShareContainer, matchingStockReturnOnAssetsContainer, matchingStockReturnOnEquityContainer]
     
-    for (let i = 0; i < matchingStockDataContainerArrOne.length; i++) {
+    // for (let i = 0; i < matchingStockDataContainerArrOne.length; i++) {
 
-        let bulletPointContainer = document.createElement("div")
-        var bulletPoint = document.createElement("p")
-        bulletPoint.className = "bullet-point"
-        bulletPoint.textContent = '•'
+    //     let bulletPointContainer = document.createElement("div")
+    //     var bulletPoint = document.createElement("p")
+    //     bulletPoint.className = "bullet-point"
+    //     bulletPoint.textContent = '•'
     
-        bulletPointContainer.appendChild(bulletPoint)
-        matchingStockDataContainerArrOne[i].appendChild(bulletPointContainer)
-    }
+    //     bulletPointContainer.appendChild(bulletPoint)
+    //     matchingStockDataContainerArrOne[i].appendChild(bulletPointContainer)
+    // }
 
-    for (let i = 0; i < matchingStockDataContainerArrTwo.length; i++) {
+    // for (let i = 0; i < matchingStockDataContainerArrTwo.length; i++) {
 
-        let bulletPointContainer = document.createElement("div")
-        var bulletPoint = document.createElement("p")
-        bulletPoint.className = "bullet-point"
-        bulletPoint.textContent = '•'
+    //     let bulletPointContainer = document.createElement("div")
+    //     var bulletPoint = document.createElement("p")
+    //     bulletPoint.className = "bullet-point"
+    //     bulletPoint.textContent = '•'
 
-        bulletPointContainer.appendChild(bulletPoint)
-        matchingStockDataContainerArrTwo[i].appendChild(bulletPointContainer)
+    //     bulletPointContainer.appendChild(bulletPoint)
+    //     matchingStockDataContainerArrTwo[i].appendChild(bulletPointContainer)
 
-    }
+    // }
 
     matchingStockPreviousCloseContainer.appendChild(matchingStockPreviousCloseLabel)
     matchingStockPreviousCloseContainer.appendChild(matchingStockPreviousClose)
