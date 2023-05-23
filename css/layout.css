@@ -213,6 +213,13 @@ ul {
     overflow: auto;
 }
 
+@media screen and (max-width: 650px) {
+    .watchlist-container {
+        height: 250px;
+        width: 325px;
+    }
+}
+
 .watchlist-header-container {
     position: fixed;
     display: flex;
@@ -303,6 +310,15 @@ ul {
 
 .watchlist-stock-button-container {
     display: inline-block;
+}
+
+@media screen and (max-width: 650px) {
+    .watchlist-stock-button-container {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .view-watchlist-details-button {
@@ -487,12 +503,31 @@ ul {
     align-items: center;
 }
 
+@media screen and (max-width: 650px) {
+    .matching-stock-name-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
 .matching-stock-exchange-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     margin-top: 0px;
     margin-bottom: 0px;
+}
+
+@media screen and (max-width: 650px) {
+    .matching-stock-exchange-container {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+    }
+    
 }
 
 .matching-stock-quote-price-container {
@@ -502,12 +537,31 @@ ul {
     margin-top: 0px
 }
 
+@media screen and (max-width: 650px) {
+    .matching-stock-quote-price-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
 .matching-stock-quote-button-container {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-top: 10px;
     margin-left: 50px;
+}
+
+@media screen and (max-width: 650px) {
+    .matching-stock-quote-button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0px;
+    }
+    
 }
 
 .matching-stock-overview-container {
