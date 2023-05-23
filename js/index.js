@@ -116,6 +116,8 @@ async function renderMatchingStockQuote() {
         var chooseWatchlistToAddContainer = document.createElement("div")
         chooseWatchlistToAddContainer.className = "choose-watchlist-to-add-container"
         
+        var cancelChooseWatchlistButtonContainer = document.createElement("div")
+        cancelChooseWatchlistButtonContainer.className = "cancel-choose-watchlist-button-container"
         var cancelChooseWatchlistButton = document.createElement("button")
         cancelChooseWatchlistButton.className = "cancel-choose-watchlist-button"
         var cancelChooseWatchlistLink = document.createElement("a")
@@ -127,10 +129,13 @@ async function renderMatchingStockQuote() {
             var watchlistId = document.createElement("p")
             watchlistId.setAttribute("id", "addWatchlistId")
             watchlistId.textContent = `${watchlists[i].id}.`
+            watchlistId.style.fontWeight = "bold"
             var watchlistName = document.createElement("p")
+            watchlistName.className = "watchlist-name"
             watchlistName.textContent = watchlists[i].name
 
             var addStockToWatchlistBttn = document.createElement("button")
+            addStockToWatchlistBttn.className = "add-stock-to-watchlist-bttn"
             var addStockToWatchlistLnk = document.createElement("a")
             addStockToWatchlistLnk.textContent = "Add"
 
@@ -186,11 +191,12 @@ async function renderMatchingStockQuote() {
             addStockToWatchlistBttn.appendChild(addStockToWatchlistLnk)
             cancelChooseWatchlistButton.appendChild(cancelChooseWatchlistLink)
 
-            addToWatchlistContainer.appendChild(watchlistId)
+            watchlistName.prepend(watchlistId)
             addToWatchlistContainer.appendChild(watchlistName)
             addToWatchlistContainer.appendChild(addStockToWatchlistBttn)
             chooseWatchlistToAddContainer.appendChild(addToWatchlistContainer)
-            chooseWatchlistToAddContainer.appendChild(cancelChooseWatchlistButton)
+            cancelChooseWatchlistButtonContainer.appendChild(cancelChooseWatchlistButton)
+            chooseWatchlistToAddContainer.appendChild(cancelChooseWatchlistButtonContainer)
             searchStocksViewEl.appendChild(chooseWatchlistToAddContainer)
         }
         

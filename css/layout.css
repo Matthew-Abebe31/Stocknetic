@@ -266,7 +266,7 @@ ul {
 } */
 
 #addWatchlistId {
-    /* border-right: 5px; */
+    display: inline;
     margin-right: 5px;
 }
 
@@ -503,7 +503,7 @@ ul {
 
 .add-to-watchlist-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     border: 1px solid black;
     border-left: none;
@@ -511,10 +511,14 @@ ul {
     border-top: none;
 }
 
-.cancel-choose-watchlist-button {
-    position: sticky;
-    left: 95%;
-    transform: translate(-25%, -25%);
+.add-stock-to-watchlist-bttn {
+    margin-right: 5px;
+}
+
+.cancel-choose-watchlist-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
 }
 
 .matching-stock-name-container {
