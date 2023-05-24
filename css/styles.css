@@ -1,3 +1,52 @@
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #101010;
+}
+
+
+@media screen and (max-width: 754px) {
+    .nav-list-items {
+        display: none;
+    }
+
+    .nav-list-items-two {
+        position: fixed;
+        display: flex;
+        justify-content: flex-start;
+        flex-flow: column nowrap;
+        width: 250px;
+        top: 5%;
+        left: 75%;
+    }
+    
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+@media screen and (min-width: 755px) {
+    .hamburger {
+        display: none;
+    }
+}
 a, a:visited, a:hover, a:active {
     color: inherit;
 }

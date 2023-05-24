@@ -1552,6 +1552,8 @@ function showProfilePage() {
 function displayNavItems(){
     
     var navItemsContainer = document.querySelector(".nav-items-container")
+    var hamburgerMenu = document.querySelector(".hamburger")
+    var navListItemsTwo = document.querySelector(".nav-list-items-two")
     
     if (sessionStorage.getItem("id") === null) {
     navItemsContainer.classList.add("hidden")
@@ -1559,9 +1561,42 @@ function displayNavItems(){
         navItemsContainer.classList.remove("hidden")
         navItemsContainer.classList.add("view")
     }
+
+    hamburgerMenu.addEventListener("click", function () {
+        navListItemsTwo.classList.toggle("hidden")
+        // navListItemsTwo.style.position = "fixed"
+        // navListItemsTwo.style.display = "flex"
+        // navListItemsTwo.style.flexFlow = "column nowrap"
+        // navListItemsTwo.style.justifyContent = "flex-start"
+        // navListItemsTwo.style.width = "250px"
+        // navListItemsTwo.style.top = "5%"
+        // navListItemsTwo.style.left = "75%"
+    })
+
+    hamburgerMenu.appendChild(navListItemsTwo)
+
 }
 
 displayNavItems()
+
+// function toggleNavBar () {
+//     var navListItems = document.querySelector(".nav-list-items")
+//     var hamburgerMenu = document.querySelector(".hamburger")
+//     var clientWidth = document.body.clientWidth;
+
+//     console.log(clientWidth)
+
+//     if (clientWidth <= 650) {
+//         navListItems.classList.add("hidden")
+//         hamburgerMenu.classList.remove("hidden")
+//     } else if (clientWidth > 650) {
+//         hamburgerMenu.classList.add("hidden")
+//         navListItems.classList.remove("hidden")
+//     }
+
+// }
+
+// toggleNavBar()
 
 function hideScrollBar() {
     var pageWrapper = document.querySelector(".page-wrap")
