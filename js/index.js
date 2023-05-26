@@ -690,7 +690,7 @@ async function renderWatchListsPage() {
     deleteWatchlistButton.className = "delete-watchlist-button"
     var deleteWatchlistLink = document.createElement("a")
     deleteWatchlistLink.textContent = "Delete"
-
+    
     deleteWatchlistButton.addEventListener("click", async function (event) {
         console.log("hi")
         var currentTarget = event.currentTarget
@@ -702,6 +702,7 @@ async function renderWatchListsPage() {
         var watchlistIdStr = watchlistIdElement.textContent
         var watchlistId = parseInt(watchlistIdStr)
         var counter = 1;
+
 
         var watchlists = await getWatchlists()
 

@@ -273,10 +273,15 @@ h4#matchingStockPriceChangePercent {
 
 #chart_div {
     position: fixed;
-    margin: 0 auto;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 500px;
-    width: 500px;
 }
+
+#chart_div > div > div > div > svg > :nth-child(3) {
+   display: none;
+}
+
+/* svg {
+    width: 325px;
+}  */
