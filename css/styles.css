@@ -17,13 +17,19 @@
     .nav-list-items-two {
         position: fixed;
         display: flex;
-        justify-content: flex-start;
-        flex-flow: column nowrap;
-        width: 250px;
-        top: 5%;
-        left: 75%;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column wrap;
+        background-color: yellow;
+        border: 2px solid black;
+        border-top: none;
+        width: 150px;
+        left: 90%;
+        transform: translate(-50%, -50%);
+        padding-top: 10px;
+        z-index: 10;
     }
-    
+
     .hamburger {
         display: block;
         cursor: pointer;
@@ -43,6 +49,9 @@
 }
 
 @media screen and (min-width: 755px) {
+    .nav-list-items-two {
+        display: none;
+    }
     .hamburger {
         display: none;
     }
@@ -104,6 +113,20 @@ a#profile-link {
     color: white;
 }
 
+@media screen and (max-width: 750px) {
+    a#watchlists-link,
+    a#financials-link,
+    a#news-link,
+    a#profile-link {
+    display: flex;
+    justify-content: center;
+    color: black;
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 2px;
+    }
+}
+
 h1.logo {
     display: flex;
     background-color: yellow;
@@ -126,6 +149,20 @@ h2#matchingStockOverviewHeader {
 li.nav-list-item {
     display: inline;
     margin-left: 80px;
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 750px) {
+    li.nav-list-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 2px solid white;
+    border-left: none;
+    border-right: none;
+    margin-left: 0px;
+    }
 }
 
 #sign-in-button {

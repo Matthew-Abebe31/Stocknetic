@@ -24,6 +24,61 @@ var registrationView = registrationViewEl.getAttribute("data-view")
 var signInViewEl = document.querySelector('[data-view="sign-in"]')
 var signInView = signInViewEl.getAttribute("data-view")
 
+function displayNavItems(){
+    var navContainer = document.querySelector(".nav-container")
+    var navContainerHeight = navContainer.clientHeight + 78;
+    var navContainerHeightTwo = navContainer.clientHeight + 90;
+    var navContainerHeightStr = navContainerHeight.toString()
+    var navContainerHeightTwoStr = navContainerHeightTwo.toString()
+    var navItemsContainer = document.querySelector(".nav-items-container")
+    var hamburgerMenu = document.querySelector(".hamburger")
+    var navListItems = document.querySelector(".nav-list-items")
+    var navListItemsTwo = document.querySelector(".nav-list-items-two")
+    var navListItemsTwoHeight = navListItemsTwo.clientHeight
+    var navListItemsTwoHeightStr = navListItemsTwoHeight.toString()
+    var watchlistsHeaderContainer = document.querySelector(".watchlists-header-container")
+    var watchlistsListContainer = document.querySelector(".watchlists-list-container")
+    var finalHeight = navContainerHeight + navListItemsTwoHeight
+    
+    if (sessionStorage.getItem("id") === null) {
+    navItemsContainer.classList.add("hidden")
+    } else if (sessionStorage.getItem("id") !== null) {
+        navItemsContainer.classList.remove("hidden")
+        navItemsContainer.classList.add("view")
+    }
+
+    
+    hamburgerMenu.addEventListener("click", function () {
+        console.log(navListItemsTwoHeight)
+        navListItemsTwo.classList.toggle("hidden")
+
+        navListItemsTwo.style.top = `${navContainerHeightStr}px`
+        
+        if (navListItemsTwo.classList.contains("hidden") !== true) {
+            console.log("true")
+            // watchlistsHeaderContainer.classList.add("hidden")
+        } else {
+            console.log("false")
+            // watchlistsHeaderContainer.classList.remove("hidden")
+        }
+
+        // var watchlistsListContainer = document.querySelector(".watchlists-list-container")
+
+        // if (navListItemsTwo.classList.contains("hidden") !== true) {
+        //     navListItemsTwo.style.top = `${navContainerHeightStr}px`
+        //     watchlistsListContainer.style.top = "55%"
+        // } else if (navListItemsTwo.classList.contains("hidden") === true) {
+        //     navListItemsTwo.style.top = `${navContainerHeightStr}px`
+        //     watchlistsListContainer.style.top = "50%"
+        // }
+    })
+
+    navItemsContainer.insertAdjacentElement("afterend", navListItemsTwo)
+
+}
+
+displayNavItems()
+
 function showHomePage() {
 
     homeViewEl.classList.remove("hidden")
@@ -1549,35 +1604,7 @@ function showProfilePage() {
     
 }
 
-function displayNavItems(){
-    
-    var navItemsContainer = document.querySelector(".nav-items-container")
-    var hamburgerMenu = document.querySelector(".hamburger")
-    var navListItemsTwo = document.querySelector(".nav-list-items-two")
-    
-    if (sessionStorage.getItem("id") === null) {
-    navItemsContainer.classList.add("hidden")
-    } else if (sessionStorage.getItem("id") !== null) {
-        navItemsContainer.classList.remove("hidden")
-        navItemsContainer.classList.add("view")
-    }
 
-    hamburgerMenu.addEventListener("click", function () {
-        navListItemsTwo.classList.toggle("hidden")
-        // navListItemsTwo.style.position = "fixed"
-        // navListItemsTwo.style.display = "flex"
-        // navListItemsTwo.style.flexFlow = "column nowrap"
-        // navListItemsTwo.style.justifyContent = "flex-start"
-        // navListItemsTwo.style.width = "250px"
-        // navListItemsTwo.style.top = "5%"
-        // navListItemsTwo.style.left = "75%"
-    })
-
-    hamburgerMenu.appendChild(navListItemsTwo)
-
-}
-
-displayNavItems()
 
 // function toggleNavBar () {
 //     var navListItems = document.querySelector(".nav-list-items")

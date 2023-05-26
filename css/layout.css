@@ -47,7 +47,7 @@ body {
 }
 
 .nav-items-container {
-    display: inline-block;
+    display: flex;
     margin-right: 40px;
 }
 
@@ -68,7 +68,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .logo-container {
         width: 350px;
     }
@@ -152,6 +152,7 @@ ul {
     left: 50%;
     transform: translate(-50%, -50%);
     overflow: auto;
+    z-index: -10;
 }
 
 .stock-id-element {
@@ -159,7 +160,7 @@ ul {
     margin-right: 5px;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     /* .nav-items-container {
         position: fixed;
         top: 10%;
@@ -212,7 +213,7 @@ ul {
     overflow: auto;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .watchlist-container {
         height: 250px;
         width: 325px;
@@ -251,7 +252,7 @@ ul {
     margin-left: 2.5px;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .watchlist-stock-delete-button {
         margin-top: 5px;
     }
@@ -300,7 +301,7 @@ ul {
     margin-left: 175px;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .watchlist-description-label {
         margin-left: 75px;
     }
@@ -312,7 +313,7 @@ ul {
     align-items: center;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .watchlist-button-container {
         display: flex;
         flex-flow: column nowrap;
@@ -326,7 +327,7 @@ ul {
     display: inline-block;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .watchlist-stock-button-container {
         display: flex;
         flex-flow: column nowrap;
@@ -344,7 +345,7 @@ ul {
     margin-left: 2.5px;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .delete-watchlist-button {
         margin-bottom: 10px;
     }
@@ -470,7 +471,7 @@ ul {
     overflow: auto;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .matching-stock-container {
         width: 350px;
     }
@@ -495,7 +496,7 @@ ul {
     overflow: auto;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .choose-watchlist-to-add-container {
         width: 325px;
     }
@@ -527,7 +528,7 @@ ul {
     align-items: center;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .matching-stock-name-container {
         display: flex;
         justify-content: center;
@@ -544,7 +545,7 @@ ul {
     margin-bottom: 0px;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .matching-stock-exchange-container {
         display: flex;
         flex-flow: column nowrap;
@@ -561,7 +562,7 @@ ul {
     margin-top: 0px
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .matching-stock-quote-price-container {
         display: flex;
         justify-content: center;
@@ -578,7 +579,7 @@ ul {
     margin-left: 50px;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .matching-stock-quote-button-container {
         display: flex;
         justify-content: center;
@@ -605,7 +606,7 @@ ul {
     transform: translate(-50%, -50%);
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .matching-stock-overview-container {
         height: 400px;
         width: 325px;
@@ -642,7 +643,7 @@ ul {
     border-right: none;
 }
 
-/* @media screen and (max-width: 650px) {
+/* @media screen and (max-width: 750px) {
 .matching-stock-previous-close-container,
 .matching-stock-open-price-container,
 .matching-stock-current-price-container,
