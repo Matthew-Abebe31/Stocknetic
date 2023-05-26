@@ -160,6 +160,11 @@ ul {
     margin-right: 5px;
 }
 
+.view-watchlist-details-button,
+.delete-watchlist-button {
+    width: 75px;
+}
+
 @media screen and (max-width: 750px) {
     /* .nav-items-container {
         position: fixed;
@@ -180,10 +185,14 @@ ul {
     } */
 
     .view-watchlist-details-button {
+        width: 75px;
+        margin-right: 0px;
         margin-bottom: 5px;
     }
 
     .delete-watchlist-button {
+        width: 75px;
+        margin-left: 0px !important;
         margin-top: 5px;
     }
     

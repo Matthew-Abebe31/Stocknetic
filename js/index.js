@@ -692,6 +692,7 @@ async function renderWatchListsPage() {
     deleteWatchlistLink.textContent = "Delete"
 
     deleteWatchlistButton.addEventListener("click", async function (event) {
+        console.log("hi")
         var currentTarget = event.currentTarget
         var parentElement = currentTarget.parentNode
         var parentToParentElement = parentElement.parentNode
