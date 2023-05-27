@@ -62,15 +62,16 @@ function displayNavItems(){
             // watchlistsHeaderContainer.classList.remove("hidden")
         }
 
-        // var watchlistsListContainer = document.querySelector(".watchlists-list-container")
+        var watchlistsListContainer = document.querySelector(".watchlists-list-container")
 
-        // if (navListItemsTwo.classList.contains("hidden") !== true) {
-        //     navListItemsTwo.style.top = `${navContainerHeightStr}px`
-        //     watchlistsListContainer.style.top = "55%"
-        // } else if (navListItemsTwo.classList.contains("hidden") === true) {
-        //     navListItemsTwo.style.top = `${navContainerHeightStr}px`
-        //     watchlistsListContainer.style.top = "50%"
-        // }
+        console.log(watchlistsListContainer)
+        if (navListItemsTwo.classList.contains("hidden") !== true) {
+            // navListItemsTwo.style.top = `${navContainerHeightStr}px`
+            watchlistsListContainer.style.zIndex = "-1"
+        } else if (navListItemsTwo.classList.contains("hidden") === true) {
+            // navListItemsTwo.style.top = `${navContainerHeightStr}px`
+            watchlistsListContainer.style.zIndex = "1"
+        }
     })
 
     navItemsContainer.insertAdjacentElement("afterend", navListItemsTwo)
@@ -690,6 +691,10 @@ async function renderWatchListsPage() {
     deleteWatchlistButton.className = "delete-watchlist-button"
     var deleteWatchlistLink = document.createElement("a")
     deleteWatchlistLink.textContent = "Delete"
+
+    viewWatchlistDetailsButton.addEventListener("click", function () {
+        console.log("hi")
+    })
     
     deleteWatchlistButton.addEventListener("click", async function (event) {
         console.log("hi")
@@ -1544,7 +1549,29 @@ async function renderMatchingStockCharts() {
           });
 
            console.log(stockData)
+
+           
+           var screenWidth;
+           var chartDiv = document.getElementById("chart_div")
+
+           window.addEventListener("resize", function () {
+               screenWidth = document.body.clientWidth
+               
+               if (screenWidth < 750) {
+                   chartDiv.classList.remove("large")
+                   chartDiv.classList.add("small")
+                //    console.log(chartDiv.className)
+               } else if (screenWidth >= 750) {
+                   chartDiv.classList.remove("small")
+                   chartDiv.classList.add("large")
+                //    console.log(chartDiv.className)
+               }
+
+               
+            //    window.addEventListener("load", createChart())
+           })
             
+        function createChart() {
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'X');
             data.addColumn('number', 'Stock Price');
@@ -1552,19 +1579,33 @@ async function renderMatchingStockCharts() {
 
             data.addRows(stockData);
       
-            var options = {
-              hAxis: {
-                title: 'Date'
-              },
-              vAxis: {
-                title: 'Stock Price'
-              }
-            };
-      
+            // var options = {
+            // 'title': "Stock Price",
+            // };
+
+            if (chartDiv.classList.contains("small") === true) {
+                // console.log("shrink")
+                var options = {
+                    'title': "Stock Price",
+                    height: "250",
+                    width: "250"
+                    }
+            } else if (chartDiv.classList.contains("small") !== true) {
+                // console.log("grow")
+                var options = {
+                    'title': "Stock Price",
+                    height: "500",
+                    width: "500"
+                    }
+            }
+
             var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
       
             chart.draw(data, options);
         }
+
+        createChart()
+    }
 }
 
 function showMatchingStockChartsPage () {

@@ -278,10 +278,20 @@ h4#matchingStockPriceChangePercent {
     transform: translate(-50%, -50%);
 }
 
-#chart_div > div > div > div > svg > :nth-child(3) {
+#chart_div > div > div > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chart_div > div > div > div > svg > :nth-child(4) {
    display: none;
 }
 
-/* svg {
-    width: 325px;
-}  */
+
+@media screen and (max-width: 750px) {
+    svg > :nth-child(3) {
+        height: 200px;
+        width: 325px;
+    }   
+}
