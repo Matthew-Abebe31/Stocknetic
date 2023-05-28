@@ -62,20 +62,52 @@ function displayNavItems(){
             // watchlistsHeaderContainer.classList.remove("hidden")
         }
 
+        var screenWidth = document.body.clientWidth;
+        var logoContainer = document.querySelector(".logo-container")
+        var signInContainer = document.querySelector(".sign-in-container")
         var watchlistsListContainer = document.querySelector(".watchlists-list-container")
+        var watchlistContainer = document.querySelector(".watchlist-container")
+        var createWatchlistsContainer = document.querySelector(".create-watchlists-container")
+        var matchingStockContainer = document.querySelector(".matching-stock-container")
 
-        console.log(watchlistsListContainer)
         if (navListItemsTwo.classList.contains("hidden") !== true) {
-            // navListItemsTwo.style.top = `${navContainerHeightStr}px`
-            watchlistsListContainer.style.zIndex = "-1"
+            logoContainer.style.zIndex = "-1"
         } else if (navListItemsTwo.classList.contains("hidden") === true) {
-            // navListItemsTwo.style.top = `${navContainerHeightStr}px`
+            logoContainer.style.zIndex = "1"
+        }
+
+        if (navListItemsTwo.classList.contains("hidden") !== true && signInContainer !== null) {
+            signInContainer.style.zIndex = "-1"
+        } else if (navListItemsTwo.classList.contains("hidden") == true && signInContainer !== null) {
+            signInContainer.style.zIndex = "1"
+        }
+        
+        if (navListItemsTwo.classList.contains("hidden") !== true && watchlistsListContainer !== null) {
+            watchlistsListContainer.style.zIndex = "-1"
+        } else if (navListItemsTwo.classList.contains("hidden") == true && watchlistsListContainer !== null) {
             watchlistsListContainer.style.zIndex = "1"
+        }
+        
+        if (navListItemsTwo.classList.contains("hidden") !== true && watchlistContainer !== null) {
+            watchlistContainer.style.zIndex = "-1"
+        } else if (navListItemsTwo.classList.contains("hidden") === true && watchlistContainer !== null) {
+            watchlistContainer.style.zIndex = "1"
+        }
+
+        if (navListItemsTwo.classList.contains("hidden") !== true && createWatchlistsContainer !== null) {
+            createWatchlistsContainer.style.zIndex = "-1"
+        } else if (navListItemsTwo.classList.contains("hidden") === true && createWatchlistsContainer !== null) {
+            createWatchlistsContainer.style.zIndex = "1"
+        }
+        
+        if (navListItemsTwo.classList.contains("hidden") !== true && matchingStockContainer !== null) {
+            matchingStockContainer.style.zIndex = "-1"
+        } else if (navListItemsTwo.classList.contains("hidden") === true && matchingStockContainer !== null) {
+            matchingStockContainer.style.zIndex = "1"
         }
     })
 
     navItemsContainer.insertAdjacentElement("afterend", navListItemsTwo)
-
 }
 
 displayNavItems()
@@ -228,9 +260,13 @@ async function renderMatchingStockQuote() {
                 for (let j = 0; j < watchlists.length; j++) {
 
                     if (watchlists[j].id === selectedWatchlistIdNum) {
+                        console.log(watchlists[j].id)
+                        console.log(selectedWatchlistIdNum)
+                        // var watchlistToEditObj = watchlists[j]
                         watchlists[j].stocks.push([matchingStockOverview.Name, ticker])
-                        var editedWatchlistObj = watchlists[j]
-                        console.log(editedWatchlistObj)
+                        console.log(watchlists[j].stocks)
+                        var editedWatchlistObj = watchlists[j];
+                        console.log(editedWatchlistObj.stocks)
 
                         putWatchlist(selectedWatchlistId, editedWatchlistObj)
 

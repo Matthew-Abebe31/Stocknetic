@@ -24,24 +24,14 @@
       "userId": 2,
       "name": "Gainer stocks",
       "description": "For trend strategy.",
-      "stocks": [
-        [
-          "Agilent Technologies Inc",
-          "A"
-        ]
-      ],
+      "stocks": [],
       "id": 1
     },
     {
       "userId": 2,
       "name": "Losing stocks",
       "description": "For inverse strategy",
-      "stocks": [
-        [
-          "Visa Inc. Class A",
-          "V"
-        ]
-      ],
+      "stocks": [],
       "id": 2
     },
     {
@@ -71,27 +61,6 @@
       "description": "For trend strategy.",
       "stocks": [],
       "id": 6
-    },
-    {
-      "userId": 2,
-      "name": "Losing stocks2",
-      "description": "For inverse strategy",
-      "stocks": [],
-      "id": 7
-    },
-    {
-      "userId": 2,
-      "name": "Losing stocks3",
-      "description": "For inverse strategy",
-      "stocks": [],
-      "id": 8
-    },
-    {
-      "userId": 2,
-      "name": "Losing stocks4",
-      "description": "For inverse strategy",
-      "stocks": [],
-      "id": 9
     }
   ]
 }
