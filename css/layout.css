@@ -43,7 +43,7 @@ body {
     height: 50px;
     width: 100%;
     border: 1px black ridge;
-    background-color: orangered;
+    background-color: olive;
 }
 
 .nav-items-container {
@@ -61,7 +61,7 @@ body {
     width: 550px;
     border: 2px solid black;
     border-radius: 8px;
-    background-color: yellowgreen;
+    background-color: powderblue;
     margin: 0 auto;
     top: 50%;
     left: 50%;
@@ -226,7 +226,7 @@ ul {
 
 @media screen and (max-width: 750px) {
     .watchlist-container {
-        height: 250px;
+        height: 400px;
         width: 325px;
     }
 }
@@ -507,6 +507,7 @@ ul {
     transform: translate(-50%, -50%);
     opacity: 95%;
     overflow: auto;
+    z-index: 10;
 }
 
 @media screen and (max-width: 750px) {
@@ -739,7 +740,7 @@ ul {
     bottom: 0;
     width: 100%;
     border: 1px solid black;
-    background-color: orangered;
+    background-color: olive;
 }
 
 .footer-container {

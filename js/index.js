@@ -69,6 +69,9 @@ function displayNavItems(){
         var watchlistContainer = document.querySelector(".watchlist-container")
         var createWatchlistsContainer = document.querySelector(".create-watchlists-container")
         var matchingStockContainer = document.querySelector(".matching-stock-container")
+        var matchingStockOverviewContainer = document.querySelector(".matching-stock-overview-container")
+        var chooseWatchlistToAddContainer = document.querySelector(".choose-watchlist-to-add-container")
+        var chartDiv = document.getElementById("chart_div")
 
         if (navListItemsTwo.classList.contains("hidden") !== true) {
             logoContainer.style.zIndex = "-1"
@@ -105,7 +108,33 @@ function displayNavItems(){
         } else if (navListItemsTwo.classList.contains("hidden") === true && matchingStockContainer !== null) {
             matchingStockContainer.style.zIndex = "1"
         }
+
+        if (navListItemsTwo.classList.contains("hidden") !== true && matchingStockOverviewContainer !== null) {
+            matchingStockOverviewContainer.style.zIndex = "-1"
+        } else if (navListItemsTwo.classList.contains("hidden") === true && matchingStockOverviewContainer !== null) {
+            matchingStockOverviewContainer.style.zIndex = "1"
+        }
+
+        if (navListItemsTwo.classList.contains("hidden") !== true && chartDiv !== null) {
+            chartDiv.style.zIndex = "-1"
+        } else if (navListItemsTwo.classList.contains("hidden") === true && chartDiv !== null) {
+            chartDiv.style.zIndex = "1"
+        }
+        
+        if (navListItemsTwo.classList.contains("hidden") !== true && chooseWatchlistToAddContainer !== null) {
+            navListItemsTwo.style.pointerEvents = "none"
+        } else if (navListItemsTwo.classList.contains("hidden") === true && chooseWatchlistToAddContainer == null || chooseWatchlistToAddContainer === undefined) {
+            navListItemsTwo.style.pointerEvents = "auto"
+        }
     })
+
+        var screenWidth;
+
+        window.addEventListener("resize", function () {
+            screenWidth = document.body.clientWidth
+            
+        //    window.addEventListener("load", createChart())
+        })
 
     navItemsContainer.insertAdjacentElement("afterend", navListItemsTwo)
 }
@@ -1418,7 +1447,7 @@ async function renderMatchingStockOverview() {
     matchingStockReturnOnEquityLabel.style.fontWeight = "bold"
     var matchingStockReturnOnEquityEl = document.createElement("p")
     matchingStockReturnOnEquityEl.className = "matching-stock-return-on-equity-element"
-    matchingStockReturnOnEquityEl.textContent = matchingStockBasicFinancials.metric.roeTTM
+    matchingStockReturnOnEquityEl.textContent = matchingStockBasicFinancials.metric.roeTTM.toFixed(2)
 
     var seeMatchingStockChartsButtonContainer = document.createElement("div")
     seeMatchingStockChartsButtonContainer.className = "see-matching-stock-charts-button-container"
@@ -1558,16 +1587,17 @@ async function renderMatchingStockCharts() {
     var ticker = pathArr[4]
 
     console.log("render charts")
-    console.log(ticker)
-
+    
     google.charts.load('current', {packages: ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
 
     async function drawChart() {
         var matchingStockPricingDataResult = await getMatchingStockPricingData(ticker)
+        var matchingStockOverviewDataResult = await getMatchingStockOverviewData(ticker)
         var matchingStockDailyPriceData = matchingStockPricingDataResult["Time Series (Daily)"]
     
         console.log(matchingStockPricingDataResult)
+        console.log(matchingStockOverviewDataResult)
     
         var closePrices = []
         var closeDates = []
@@ -1586,27 +1616,8 @@ async function renderMatchingStockCharts() {
 
            console.log(stockData)
 
-           
-           var screenWidth;
-           var chartDiv = document.getElementById("chart_div")
+        // var chartDiv = document.querySelector("chart_div")
 
-           window.addEventListener("resize", function () {
-               screenWidth = document.body.clientWidth
-               
-               if (screenWidth < 750) {
-                   chartDiv.classList.remove("large")
-                   chartDiv.classList.add("small")
-                //    console.log(chartDiv.className)
-               } else if (screenWidth >= 750) {
-                   chartDiv.classList.remove("small")
-                   chartDiv.classList.add("large")
-                //    console.log(chartDiv.className)
-               }
-
-               
-            //    window.addEventListener("load", createChart())
-           })
-            
         function createChart() {
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'X');
@@ -1615,29 +1626,32 @@ async function renderMatchingStockCharts() {
 
             data.addRows(stockData);
       
-            // var options = {
-            // 'title': "Stock Price",
-            // };
-
-            if (chartDiv.classList.contains("small") === true) {
-                // console.log("shrink")
-                var options = {
-                    'title': "Stock Price",
-                    height: "250",
-                    width: "250"
-                    }
-            } else if (chartDiv.classList.contains("small") !== true) {
-                // console.log("grow")
-                var options = {
-                    'title': "Stock Price",
-                    height: "500",
-                    width: "500"
-                    }
-            }
-
+            var options = {
+            'title': `${matchingStockOverviewDataResult.Name} (${ticker}) Price`
+            // 'height': "350px",
+            // 'width': "350px"
+            };
+         
             var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
       
             chart.draw(data, options);
+
+            
+        var chartDiv = document.getElementById("chart_div")
+        console.log(chartDiv)
+        var chartDivFirstChildEl = chartDiv.childNodes[0]
+        var firstChildElOfChartDivFirstChildEl = chartDivFirstChildEl.childNodes[0]
+        var nextFirstChild = firstChildElOfChartDivFirstChildEl.childNodes[0]
+        var svg = nextFirstChild.childNodes[0]
+        var svgThirdIndexChild = svg.childNodes[4]
+        var chartElement =svgThirdIndexChild.childNodes[3]
+        var chartLabelElements = chartElement.childNodes
+
+        // for (let i = 0; i < 8; i++) {
+        //     chartLabelElements[i].style.color = "black"
+        // }
+        // var chartLabelsElementsArray = Object.values(chartLabelElements)
+
         }
 
         createChart()

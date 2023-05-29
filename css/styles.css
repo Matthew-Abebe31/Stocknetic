@@ -1,3 +1,17 @@
+#text {
+    color: black;
+    fill: black;
+}
+
+/* #text[Attributes Style] {
+    text-anchor: end;
+    font-family: Arial;
+    font-size: 11;
+    stroke: none;
+    stroke-width: 0;
+    fill: rgb(68, 68, 68);
+} */
+
 .bar {
     display: block;
     width: 25px;
@@ -20,9 +34,8 @@
         justify-content: center;
         align-items: center;
         flex-flow: column wrap;
-        background-color: yellow;
+        background-color: olivedrab;
         border: 2px solid black;
-        border-top: none;
         width: 150px;
         left: 90%;
         transform: translate(-50%, -50%);
@@ -113,23 +126,39 @@ a#profile-link {
     color: white;
 }
 
+a#watchlists-link:hover,
+a#financials-link:hover,
+a#news-link:hover,
+a#profile-link:hover {
+    color: cyan;
+}
+
 @media screen and (max-width: 750px) {
     a#watchlists-link,
     a#financials-link,
     a#news-link,
     a#profile-link {
-    display: flex;
-    justify-content: center;
-    color: black;
-    font-weight: bold;
-    width: 100%;
-    margin-bottom: 2px;
+        display: flex;
+        justify-content: center;
+        color: white;
+        width: 100%;
+        text-decoration: underline;
+        text-decoration-color: black;
+        text-underline-offset: 4px;
+        margin-bottom: 2px;
+    }  
+
+    a#watchlists-link:active,
+    a#financials-link:active,
+    a#news-link:active,
+    a#profile-link:active {
+        background-color: cyan;
     }
 }
 
 h1.logo {
     display: flex;
-    background-color: yellow;
+    background-color: olivedrab;
     border: 0.5px ridge black;
     border-radius: 8%;
     color: black;
@@ -150,6 +179,7 @@ li.nav-list-item {
     display: inline;
     margin-left: 80px;
     margin-bottom: 15px;
+    padding-bottom: 4px;
 }
 
 @media screen and (max-width: 750px) {
@@ -158,9 +188,6 @@ li.nav-list-item {
     justify-content: center;
     align-items: center;
     width: 100%;
-    border: 2px solid white;
-    border-left: none;
-    border-right: none;
     margin-left: 0px;
     }
 }
@@ -273,8 +300,14 @@ h4#matchingStockPriceChangePercent {
 
 #chart_div {
     position: fixed;
+    height: 350px;
+    width: 350px;
+    background-color: cyan;
+    border: 2px solid black;
+    border-radius: 10px;
     top: 50%;
     left: 50%;
+    padding: 5px;
     transform: translate(-50%, -50%);
 }
 
@@ -288,10 +321,23 @@ h4#matchingStockPriceChangePercent {
    display: none;
 }
 
+/* @media screen and (max-width: 750px) {
+    .small {
+        height: 250px;
+        width: 250px;
+    }
+}
+
+@media screen and (min-width: 751px) {
+    .large {
+        height: 500px;
+        width: 500px;
+    }
+} */
 
 @media screen and (max-width: 750px) {
     svg > :nth-child(3) {
         height: 200px;
-        width: 325px;
+        /* width: 325px; */
     }   
 }
