@@ -53,20 +53,14 @@ function displayNavItems(){
         navListItemsTwo.classList.toggle("hidden")
 
         navListItemsTwo.style.top = `${navContainerHeightStr}px`
-        
-        if (navListItemsTwo.classList.contains("hidden") !== true) {
-            console.log("true")
-            // watchlistsHeaderContainer.classList.add("hidden")
-        } else {
-            console.log("false")
-            // watchlistsHeaderContainer.classList.remove("hidden")
-        }
 
         var screenWidth = document.body.clientWidth;
         var logoContainer = document.querySelector(".logo-container")
         var signInContainer = document.querySelector(".sign-in-container")
         var watchlistsListContainer = document.querySelector(".watchlists-list-container")
+        var watchlistsHeaderContainer = document.querySelector(".watchlists-header-container")
         var watchlistContainer = document.querySelector(".watchlist-container")
+        var watchlistHeaderContainer = document.querySelector(".watchlist-header-container")
         var createWatchlistsContainer = document.querySelector(".create-watchlists-container")
         var matchingStockContainer = document.querySelector(".matching-stock-container")
         var matchingStockOverviewContainer = document.querySelector(".matching-stock-overview-container")
@@ -87,14 +81,18 @@ function displayNavItems(){
         
         if (navListItemsTwo.classList.contains("hidden") !== true && watchlistsListContainer !== null) {
             watchlistsListContainer.style.zIndex = "-1"
+            watchlistsHeaderContainer.style.zIndex = "-1"
         } else if (navListItemsTwo.classList.contains("hidden") == true && watchlistsListContainer !== null) {
             watchlistsListContainer.style.zIndex = "1"
+            watchlistsHeaderContainer.style.zIndex = "1"
         }
         
         if (navListItemsTwo.classList.contains("hidden") !== true && watchlistContainer !== null) {
             watchlistContainer.style.zIndex = "-1"
+            watchlistHeaderContainer.style.zIndex = "-1"
         } else if (navListItemsTwo.classList.contains("hidden") === true && watchlistContainer !== null) {
             watchlistContainer.style.zIndex = "1"
+            watchlistHeaderContainer.style.zIndex = "1"
         }
 
         if (navListItemsTwo.classList.contains("hidden") !== true && createWatchlistsContainer !== null) {
@@ -158,18 +156,21 @@ function showHomePage() {
 async function renderMatchingStockQuote() {
     var pathArr = window.location.href.split('/')
     var ticker = pathArr[5]
-    console.log(pathArr)
-    console.log(ticker)
+    // console.log(pathArr)
+    // console.log(ticker)
     
     var matchingStockTickerData = await getMatchingStockTickerData(ticker)
     var matchingStockProfileData = await getMatchingStockProfileData(ticker)
     var matchingStockQuoteDataTwo = await getMatchingStockQuoteDataTwo(ticker)
     var matchingStockBasicFinancials = await getMatchingStockBasicFinancialData(ticker)
+    var watchlists = await getWatchlists()
+    var matchingStockOverview = await getMatchingStockOverviewData(ticker)
 
-    console.log(matchingStockQuoteDataTwo)
-    console.log(matchingStockBasicFinancials)
-    console.log(matchingStockProfileData)
-    console.log(matchingStockTickerData)
+    // console.log(matchingStockQuoteDataTwo)
+    // console.log(matchingStockBasicFinancials)
+    // console.log(matchingStockProfileData)
+    // console.log(matchingStockTickerData)
+    console.log(watchlists)
     
     var matchingStockContainer = document.createElement("div")
     matchingStockContainer.className = "matching-stock-container"
@@ -225,9 +226,7 @@ async function renderMatchingStockQuote() {
     seeMatchingStockDetailsLink.setAttribute("href", `#/${matchingStockProfileData.ticker}/summary`)
     seeMatchingStockDetailsLink.textContent = "Summary"
 
-    addStockToWatchlistButton.addEventListener("click", async function () {
-        var watchlists = await getWatchlists()
-
+    addStockToWatchlistButton.addEventListener("click", function () {
         console.log(watchlists)
 
         var chooseWatchlistToAddContainer = document.createElement("div")
@@ -260,7 +259,7 @@ async function renderMatchingStockQuote() {
                 chooseWatchlistToAddContainer.remove()
             })
 
-            addStockToWatchlistBttn.addEventListener("click", async function (event) {
+            addStockToWatchlistBttn.addEventListener("click", function (event) {
                 var currentElement = event.currentTarget
                 var parentNode = currentElement.parentNode
                 let selectedWatchlistId = parentNode.firstChild.textContent
@@ -269,6 +268,7 @@ async function renderMatchingStockQuote() {
                 console.log(selectedWatchlistIdNum)
                 console.log("added stock to watchlist")
 
+                console.log(watchlists)
                 for (let i = 0; i < watchlists.length; i++) {
                     var stocksArr = watchlists[i].stocks
                     console.log(stocksArr)
@@ -282,28 +282,26 @@ async function renderMatchingStockQuote() {
                         }
                     }
                 }
-
-                var matchingStockOverview = await getMatchingStockOverviewData(ticker)
                 console.log(matchingStockOverview)
 
                 for (let j = 0; j < watchlists.length; j++) {
 
                     if (watchlists[j].id === selectedWatchlistIdNum) {
                         console.log(watchlists[j].id)
-                        console.log(selectedWatchlistIdNum)
                         // var watchlistToEditObj = watchlists[j]
                         watchlists[j].stocks.push([matchingStockOverview.Name, ticker])
                         console.log(watchlists[j].stocks)
                         var editedWatchlistObj = watchlists[j];
-                        console.log(editedWatchlistObj.stocks)
+                        console.log(selectedWatchlistIdNum)
+                        console.log(editedWatchlistObj)
 
-                        putWatchlist(selectedWatchlistId, editedWatchlistObj)
+                        putWatchlist(selectedWatchlistIdNum, editedWatchlistObj)
 
                         alert(`added ${ticker} to ${editedWatchlistObj.name}`)
 
-                        // chooseWatchlistToAddContainer.remove()
+                        chooseWatchlistToAddContainer.remove()
 
-                        window.location.hash = "/watchlists"
+                        // window.location.hash = "/watchlists"
                     }
 
                 }
@@ -762,7 +760,6 @@ async function renderWatchListsPage() {
     })
     
     deleteWatchlistButton.addEventListener("click", async function (event) {
-        console.log("hi")
         var currentTarget = event.currentTarget
         var parentElement = currentTarget.parentNode
         var parentToParentElement = parentElement.parentNode
@@ -1586,18 +1583,32 @@ async function renderMatchingStockCharts() {
     var pathArr = window.location.href.split('/')
     var ticker = pathArr[4]
 
-    console.log("render charts")
+    var renderMatchingStockChartsPageContainer = document.querySelector(".matching-stock-charts-page-container")
+    var changeChartsButtonContainer = document.createElement("div")
+    changeChartsButtonContainer.className = "change-charts-button-container"
+    var dailyChartButton = document.createElement("button")
+    dailyChartButton.className = "daily-chart-button"
+    dailyChartButton.textContent = "Daily"
+    var weeklyChartButton = document.createElement("button")
+    weeklyChartButton.className = "weekly-chart-button"
+    weeklyChartButton.textContent = "Weekly"
+    var monthlyChartButton = document.createElement("button")
+    monthlyChartButton.className = "monthly-chart-button"
+    monthlyChartButton.textContent = "Monthly"
+    var previousFromChartsButton = document.createElement("button")
+    previousFromChartsButton.className = "previous-from-charts-button"
+    previousFromChartsButton.textContent = "Previous"
     
     google.charts.load('current', {packages: ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
 
     async function drawChart() {
         var matchingStockPricingDataResult = await getMatchingStockPricingData(ticker)
-        var matchingStockOverviewDataResult = await getMatchingStockOverviewData(ticker)
         var matchingStockDailyPriceData = matchingStockPricingDataResult["Time Series (Daily)"]
+        var matchingStockProfileDataResult = await getMatchingStockProfileData(ticker)
     
         console.log(matchingStockPricingDataResult)
-        console.log(matchingStockOverviewDataResult)
+        console.log(matchingStockProfileDataResult)
     
         var closePrices = []
         var closeDates = []
@@ -1627,7 +1638,7 @@ async function renderMatchingStockCharts() {
             data.addRows(stockData);
       
             var options = {
-            'title': `${matchingStockOverviewDataResult.Name} (${ticker}) Price`
+            'title': `${matchingStockProfileDataResult.name} (${ticker}) Price`
             // 'height': "350px",
             // 'width': "350px"
             };
@@ -1655,7 +1666,17 @@ async function renderMatchingStockCharts() {
         }
 
         createChart()
+
+        previousFromChartsButton.addEventListener("click", function () {
+            history.back()
+        })
     }
+
+    changeChartsButtonContainer.appendChild(dailyChartButton)
+    changeChartsButtonContainer.appendChild(weeklyChartButton)
+    changeChartsButtonContainer.appendChild(monthlyChartButton)
+    renderMatchingStockChartsPageContainer.appendChild(changeChartsButtonContainer)
+    renderMatchingStockChartsPageContainer.appendChild(previousFromChartsButton)
 }
 
 function showMatchingStockChartsPage () {

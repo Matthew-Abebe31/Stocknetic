@@ -112,6 +112,7 @@ ul {
     width: 350px;
     background-color: white;
     border: 2px solid black;
+    border-radius: 10px;
     margin: 0 auto;
     top: 50%;
     left: 50%;
@@ -214,8 +215,9 @@ ul {
     position: fixed;
     height: 450px;
     width: 420px;
-    border: 2px solid black;
     background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
     margin: 0 auto;
     padding: 10px;
     top: 50%;
@@ -453,8 +455,6 @@ ul {
     align-items: center;
 }
 
-
-
 .matching-stock-overview-data-column-one {
     margin-left: 5px;
     margin-right: 5px;
@@ -487,6 +487,31 @@ ul {
     .matching-stock-container {
         width: 350px;
     }
+}
+
+.change-charts-button-container {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 350px;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.daily-chart-button,
+.weekly-chart-button,
+.monthly-chart-button {
+    width: 75px;
+}
+
+.previous-from-charts-button {
+    position: fixed;
+    width: 75px;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .choose-watchlist-to-add-container {

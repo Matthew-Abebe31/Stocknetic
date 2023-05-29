@@ -39,6 +39,11 @@ async function getMatchingStockDailyPriceData(ticker) {
     return await res.json()
 }
 
+// async function getMatchingStockDailyPrice(ticker) {
+//     const res = await fetch(`https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/2023-01-09/2023-01-25?adjusted=true&sort=asc&limit=120&apiKey=BOfLlBXGLnTWqzN5rrpthhw5UwD7KJQ_`)
+//     return await res.json()
+// }
+
 async function getMatchingStockPricingData(ticker) {
     const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}&apikey=dMVPYPPFWDTRLQU0S`)
     return await res.json()
@@ -104,6 +109,7 @@ async function postWatchlist(newWatchlistObj) {
 }
 
 async function putWatchlist(id, editedWatchlistObj) {
+console.log("hello put function")
     const res = await fetch(`${remoteURL}/watchlists/${id}`, {
         method: "PUT",
         headers: {
@@ -111,7 +117,7 @@ async function putWatchlist(id, editedWatchlistObj) {
         },
         body: JSON.stringify(editedWatchlistObj)
     })
-
+console.log(res)
     return res.json()
 }
 
@@ -133,7 +139,6 @@ async function deleteWatchlist(id) {
         headers: {
             "Content-type": "application/json"
         },
-        // body: JSON.stringify(editedWatchlistObj)
     })
 
     return res.json()

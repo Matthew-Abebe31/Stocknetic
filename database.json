@@ -24,43 +24,27 @@
       "userId": 2,
       "name": "Gainer stocks",
       "description": "For trend strategy.",
-      "stocks": [],
+      "stocks": [
+        [
+          "Tesla Inc",
+          "TSLA"
+        ]
+      ],
       "id": 1
-    },
-    {
-      "userId": 2,
-      "name": "Losing stocks",
-      "description": "For inverse strategy",
-      "stocks": [],
-      "id": 2
-    },
-    {
-      "userId": 2,
-      "name": "Gainer stocks",
-      "description": "For trend strategy. for trend strategy.",
-      "stocks": [],
-      "id": 3
     },
     {
       "userId": 2,
       "name": "Gainer stocks2",
       "description": "For trend strategy.",
       "stocks": [],
+      "id": 2
+    },
+    {
+      "userId": 2,
+      "name": "Losing stocks2",
+      "description": "For inverse strategy",
+      "stocks": [],
       "id": 4
-    },
-    {
-      "userId": 2,
-      "name": "Gainer stocks3",
-      "description": "For trend strategy.",
-      "stocks": [],
-      "id": 5
-    },
-    {
-      "userId": 2,
-      "name": "Gainer stocks4",
-      "description": "For trend strategy.",
-      "stocks": [],
-      "id": 6
     }
   ]
 }

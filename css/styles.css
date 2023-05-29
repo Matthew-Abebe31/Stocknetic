@@ -37,7 +37,7 @@
         background-color: olivedrab;
         border: 2px solid black;
         width: 150px;
-        left: 90%;
+        left: 82%;
         transform: translate(-50%, -50%);
         padding-top: 10px;
         z-index: 10;
@@ -139,21 +139,19 @@ a#profile-link:hover {
     a#news-link,
     a#profile-link {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         color: white;
         width: 100%;
-        text-decoration: underline;
-        text-decoration-color: black;
-        text-underline-offset: 4px;
+        margin-left: 10px;
         margin-bottom: 2px;
     }  
 
-    a#watchlists-link:active,
+    /* a#watchlists-link:active,
     a#financials-link:active,
     a#news-link:active,
     a#profile-link:active {
         background-color: cyan;
-    }
+    } */
 }
 
 h1.logo {
