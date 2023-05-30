@@ -288,7 +288,6 @@ async function renderMatchingStockQuote() {
 
                     if (watchlists[j].id === selectedWatchlistIdNum) {
                         console.log(watchlists[j].id)
-                        // var watchlistToEditObj = watchlists[j]
                         watchlists[j].stocks.push([matchingStockOverview.Name, ticker])
                         console.log(watchlists[j].stocks)
                         var editedWatchlistObj = watchlists[j];
@@ -317,9 +316,7 @@ async function renderMatchingStockQuote() {
             cancelChooseWatchlistButtonContainer.appendChild(cancelChooseWatchlistButton)
             chooseWatchlistToAddContainer.appendChild(cancelChooseWatchlistButtonContainer)
             searchStocksViewEl.appendChild(chooseWatchlistToAddContainer)
-        }
-        
-        
+        }  
     })
 
     if (matchingStockPriceChangeData > 0) {
@@ -424,7 +421,7 @@ function renderRegistrationForm() {
     registerNewCustomerButton.className = "register-new-user-button"
 
     registerNewCustomerButton.addEventListener("click", async function(event) {
-event.preventDefault()
+    event.preventDefault()
 
         var users = await getAllUsers()
         var firstNameRegistrationInput = registrationFirstNameInput.value;
@@ -456,7 +453,7 @@ event.preventDefault()
         console.log(newUserObj)
 
         var existingUser = false
-    var duplicateUser;
+        var duplicateUser;
     
     for (let i = 0; i < users.length; i++) {
 
@@ -479,7 +476,6 @@ event.preventDefault()
     window.location.hash = "/"
         
     })
-
 
     registrationContainer.appendChild(registrationHeader)
 
@@ -520,12 +516,6 @@ event.preventDefault()
 
     console.log("see registration page")
 }
-
-// var registerButton = document.getElementById("register-button")
-// registerButton.addEventListener("click", function () {
-    
-//     showRegistrationPage()
-// })
 
 function showRegistrationPage() {
 
@@ -722,7 +712,6 @@ async function renderWatchListsPage() {
     watchlistNameContainer.className = "watchlist-name-container"
     var watchlistIdLabel = document.createElement("p")
     watchlistIdLabel.className = "watchlist-id-label"
-    // watchlistIdLabel.textContent = "Id."
     watchlistIdLabel.style.fontWeight = "bold"
     var watchlistId = document.createElement("p")
     var watchlistIdValue = i + 1;
@@ -1230,8 +1219,6 @@ function showSearchStocksPage() {
     signInViewEl.classList.add("hidden")
     searchStocksViewEl.classList.remove("hidden")
     searchStocksViewEl.classList.add("view")
-
-    // window.location.hash = "/searchStocks"
 }
 
 async function renderMatchingStockOverview() {
@@ -1445,29 +1432,6 @@ async function renderMatchingStockOverview() {
 
     var matchingStockDataContainerArrOne = [matchingStockPreviousCloseContainer, matchingStockOpenPriceContainer, matchingStockCurrentPriceContainer, matchingStockDailyPriceRangeContainer, matchingStockWeeklyPriceRangeContainer, matchingStockVolumeContainer, matchingStockAverageVolumeContainer]
     var matchingStockDataContainerArrTwo = [matchingStockMarketCapContainer, matchingStockBetaContainer, matchingStockEPSContainer, matchingStockDividendYieldContainer, matchingStockDividendPerShareContainer, matchingStockReturnOnAssetsContainer, matchingStockReturnOnEquityContainer]
-    
-    // for (let i = 0; i < matchingStockDataContainerArrOne.length; i++) {
-
-    //     let bulletPointContainer = document.createElement("div")
-    //     var bulletPoint = document.createElement("p")
-    //     bulletPoint.className = "bullet-point"
-    //     bulletPoint.textContent = '•'
-    
-    //     bulletPointContainer.appendChild(bulletPoint)
-    //     matchingStockDataContainerArrOne[i].appendChild(bulletPointContainer)
-    // }
-
-    // for (let i = 0; i < matchingStockDataContainerArrTwo.length; i++) {
-
-    //     let bulletPointContainer = document.createElement("div")
-    //     var bulletPoint = document.createElement("p")
-    //     bulletPoint.className = "bullet-point"
-    //     bulletPoint.textContent = '•'
-
-    //     bulletPointContainer.appendChild(bulletPoint)
-    //     matchingStockDataContainerArrTwo[i].appendChild(bulletPointContainer)
-
-    // }
 
     matchingStockPreviousCloseContainer.appendChild(matchingStockPreviousCloseLabel)
     matchingStockPreviousCloseContainer.appendChild(matchingStockPreviousClose)
@@ -1547,11 +1511,6 @@ function showMatchingStockOverview() {
     searchStocksViewEl.classList.add("hidden")
     matchingStockOverviewViewEl.classList.remove("hidden")
     matchingStockOverviewViewEl.classList.add("view")
-
-    console.log("show matching stock summary")
-
-    // window.location.hash = `/summary/${ticker}`
-
 }
 
 async function renderMatchingStockCharts() {
@@ -1595,14 +1554,11 @@ async function renderMatchingStockCharts() {
             closeDates.push(key);
           }
         
-
           let stockData = closeDates.map((date, index) => {
             return [date, closePrices[index]];
           });
 
            console.log(stockData)
-
-        // var chartDiv = document.querySelector("chart_div")
 
         function createChart() {
             var data = new google.visualization.DataTable();
@@ -1614,8 +1570,6 @@ async function renderMatchingStockCharts() {
       
             var options = {
             'title': `${matchingStockProfileDataResult.name} (${ticker}) Price`
-            // 'height': "350px",
-            // 'width': "350px"
             };
          
             var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
@@ -1632,11 +1586,6 @@ async function renderMatchingStockCharts() {
         var svgThirdIndexChild = svg.childNodes[4]
         var chartElement =svgThirdIndexChild.childNodes[3]
         var chartLabelElements = chartElement.childNodes
-
-        // for (let i = 0; i < 8; i++) {
-        //     chartLabelElements[i].style.color = "black"
-        // }
-        // var chartLabelsElementsArray = Object.values(chartLabelElements)
 
         }
 
@@ -1693,26 +1642,6 @@ function showProfilePage() {
     
 }
 
-
-
-// function toggleNavBar () {
-//     var navListItems = document.querySelector(".nav-list-items")
-//     var hamburgerMenu = document.querySelector(".hamburger")
-//     var clientWidth = document.body.clientWidth;
-
-//     console.log(clientWidth)
-
-//     if (clientWidth <= 650) {
-//         navListItems.classList.add("hidden")
-//         hamburgerMenu.classList.remove("hidden")
-//     } else if (clientWidth > 650) {
-//         hamburgerMenu.classList.add("hidden")
-//         navListItems.classList.remove("hidden")
-//     }
-
-// }
-
-// toggleNavBar()
 
 function hideScrollBar() {
     var pageWrapper = document.querySelector(".page-wrap")
