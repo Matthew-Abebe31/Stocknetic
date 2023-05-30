@@ -258,10 +258,12 @@ ul {
 }
 
 .watchlist-stock-summary-button {
+    width: 75px;
     margin-right: 2.5px;
 }
 
 .watchlist-stock-delete-button {
+    width: 75px;
     margin-left: 2.5px;
 }
 

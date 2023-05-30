@@ -713,6 +713,7 @@ async function renderWatchListsPage() {
    console.log(watchlists)
 
    for (let i = 0; i < watchlists.length; i++) {
+
     var watchlist = document.createElement("div")
     watchlist.className = "watchlist"
     var watchlistLabelContainer = document.createElement("div")
@@ -724,8 +725,9 @@ async function renderWatchListsPage() {
     // watchlistIdLabel.textContent = "Id."
     watchlistIdLabel.style.fontWeight = "bold"
     var watchlistId = document.createElement("p")
+    var watchlistIdValue = i + 1;
     watchlistId.setAttribute("id", "watchlistId")
-    watchlistId.textContent = `${watchlists[i].id}.`
+    watchlistId.textContent = `${watchlistIdValue}.`
     watchlistId.style.fontWeight = "bold"
     var watchlistNameLabel = document.createElement("p")
     watchlistNameLabel.className = "watchlist-name-label"
@@ -784,22 +786,11 @@ async function renderWatchListsPage() {
                 // } else {
                 //     return
                 // }
-
-                while (i < watchlists.length) {
-                    watchlists[i].id--
-                    i++
-                }
                 
                 window.location.reload()
             }
             
         }
-
-        // let i = 0;
-
-        // updateWatchlistCount()
-        console.log("hi")
-
     })
 
     viewWatchlistDetailsButton.appendChild(viewWatchlistDetailsLink)
@@ -825,10 +816,9 @@ async function renderWatchListsPage() {
     watchlistsListContainer.appendChild(watchlist)
    }
 
-   watchlistsListContainer.prepend(watchlistLabelContainer)
-
-//    watchlistLabelContainer.appendChild(watchlistNameLabel)
-//    watchlistLabelContainer.appendChild(watchlistDescriptionLabel)
+   if (watchlists.length > 0) {
+       watchlistsListContainer.prepend(watchlistLabelContainer)
+   }
    
    createWatchlistsButton.appendChild(createWatchlistsFormLink)
    searchStocksPageButton.appendChild(searchStocksPageLink)
@@ -841,20 +831,6 @@ async function renderWatchListsPage() {
    watchlistsViewEl.appendChild(searchStocksPageButtonContainer)
 
 }
-
-// async function updateWatchlistCount() {
-//     var watchlists = await getWatchlists()
-//     var counter = 1;
-
-//     for (let i = 0; i < watchlists.length; i++) {
-//         var watchlistId = watchlists[i].id
-//         var editedWatchlistObj = watchlists[i]
-//         editedWatchlistObj.id = counter++
-
-//         patchWatchlist(watchlistId, editedWatchlistObj)
-
-//     }
-// }
 
 function showWatchlistsPage() {
 
