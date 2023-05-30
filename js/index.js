@@ -677,8 +677,8 @@ var signOutButton = document.querySelector("#sign-out-button");
 signOutButton.addEventListener("click", signOut)
 
 function signOut() {
+    alert("You have signed out.")
     sessionStorage.clear()
-
     window.location.hash = "/"
 }
 
@@ -780,16 +780,15 @@ async function renderWatchListsPage() {
             console.log(watchlistId)
             if (watchlists[i].id === watchlistId) {
 
-                // var confirm = window.confirm(`Are you sure you want to delete ${watchlists[i].name}`)
-                // if (confirm === true) {
+                var confirm = window.confirm(`Are you sure you want to delete ${watchlists[i].name}`)
+                if (confirm === true) {
                     deleteWatchlist(watchlistId)
-                // } else {
-                //     return
-                // }
+                } else {
+                    return
+                }
                 
                 window.location.reload()
-            }
-            
+            } 
         }
     })
 
