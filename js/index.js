@@ -702,109 +702,119 @@ async function renderWatchListsPage() {
    var watchlists = await getWatchlists()
    console.log(watchlists)
 
+   var sessionStorageId = sessionStorage.getItem("id")
+   var sessionStorageIdNum = parseInt(sessionStorageId)
+   var userWatchlistsArr = [];
+
    for (let i = 0; i < watchlists.length; i++) {
 
-    var watchlist = document.createElement("div")
-    watchlist.className = "watchlist"
-    var watchlistLabelContainer = document.createElement("div")
-    watchlistLabelContainer.className = "watchlist-label-container"
-    var watchlistNameContainer = document.createElement("div")
-    watchlistNameContainer.className = "watchlist-name-container"
-    var watchlistIdLabel = document.createElement("p")
-    watchlistIdLabel.className = "watchlist-id-label"
-    watchlistIdLabel.style.fontWeight = "bold"
-    var watchlistId = document.createElement("p")
-    var watchlistIdValue = i + 1;
-    watchlistId.setAttribute("id", "watchlistId")
-    watchlistId.textContent = `${watchlistIdValue}.`
-    watchlistId.style.fontWeight = "bold"
-    var watchlistNameLabel = document.createElement("p")
-    watchlistNameLabel.className = "watchlist-name-label"
-    watchlistNameLabel.textContent = "Name:"
-    watchlistNameLabel.style.fontWeight = "bold"
-    var watchlistName = document.createElement("p")
-    watchlistName.textContent = watchlists[i].name
-    watchlistNameLabel.style.fontWeight = "bold"
-    var watchlistDescriptionContainer = document.createElement("div")
-    watchlistDescriptionContainer.className = "watchlist-description-container"
-    var watchlistDescriptionLabel = document.createElement("p")
-    watchlistDescriptionLabel.className = "watchlist-description-label"
-    watchlistDescriptionLabel.textContent = "Description:"
-    watchlistDescriptionLabel.style.fontWeight = "bold"
-    var watchlistDescriptionEl = document.createElement("p")
-    watchlistDescriptionEl.textContent = `${watchlists[i].description}`
-    var watchlistButtonContainer = document.createElement("div")
-    watchlistButtonContainer.className = "watchlist-button-container"
-    var viewWatchlistDetailsButton = document.createElement("button")
-    viewWatchlistDetailsButton.className = "view-watchlist-details-button"
-    var viewWatchlistDetailsLink = document.createElement("a")
-    viewWatchlistDetailsLink.setAttribute("id", "viewWatchlistDetailsLink")
-    viewWatchlistDetailsLink.setAttribute("href", `#/watchlist/${watchlists[i].id}`)
-    viewWatchlistDetailsLink.textContent = "View"
-    var deleteWatchlistButton = document.createElement("button")
-    deleteWatchlistButton.className = "delete-watchlist-button"
-    var deleteWatchlistLink = document.createElement("a")
-    deleteWatchlistLink.textContent = "Delete"
+    if (watchlists[i].userId === sessionStorageIdNum) {
 
-    viewWatchlistDetailsButton.addEventListener("click", function () {
-        console.log("hi")
-    })
+        watchlists[i].push(userWatchlistsArr)
+
+        var watchlist = document.createElement("div")
+        watchlist.className = "watchlist"
+        var watchlistLabelContainer = document.createElement("div")
+        watchlistLabelContainer.className = "watchlist-label-container"
+        var watchlistNameContainer = document.createElement("div")
+        watchlistNameContainer.className = "watchlist-name-container"
+        var watchlistIdLabel = document.createElement("p")
+        watchlistIdLabel.className = "watchlist-id-label"
+        watchlistIdLabel.style.fontWeight = "bold"
+        var watchlistId = document.createElement("p")
+        var watchlistIdValue = i + 1;
+        watchlistId.setAttribute("id", "watchlistId")
+        watchlistId.textContent = `${watchlistIdValue}.`
+        watchlistId.style.fontWeight = "bold"
+        var watchlistNameLabel = document.createElement("p")
+        watchlistNameLabel.className = "watchlist-name-label"
+        watchlistNameLabel.textContent = "Name:"
+        watchlistNameLabel.style.fontWeight = "bold"
+        var watchlistName = document.createElement("p")
+        watchlistName.textContent = watchlists[i].name
+        watchlistNameLabel.style.fontWeight = "bold"
+        var watchlistDescriptionContainer = document.createElement("div")
+        watchlistDescriptionContainer.className = "watchlist-description-container"
+        var watchlistDescriptionLabel = document.createElement("p")
+        watchlistDescriptionLabel.className = "watchlist-description-label"
+        watchlistDescriptionLabel.textContent = "Description:"
+        watchlistDescriptionLabel.style.fontWeight = "bold"
+        var watchlistDescriptionEl = document.createElement("p")
+        watchlistDescriptionEl.textContent = `${watchlists[i].description}`
+        var watchlistButtonContainer = document.createElement("div")
+        watchlistButtonContainer.className = "watchlist-button-container"
+        var viewWatchlistDetailsButton = document.createElement("button")
+        viewWatchlistDetailsButton.className = "view-watchlist-details-button"
+        var viewWatchlistDetailsLink = document.createElement("a")
+        viewWatchlistDetailsLink.setAttribute("id", "viewWatchlistDetailsLink")
+        viewWatchlistDetailsLink.setAttribute("href", `#/watchlist/${watchlists[i].id}`)
+        viewWatchlistDetailsLink.textContent = "View"
+        var deleteWatchlistButton = document.createElement("button")
+        deleteWatchlistButton.className = "delete-watchlist-button"
+        var deleteWatchlistLink = document.createElement("a")
+        deleteWatchlistLink.textContent = "Delete"
     
-    deleteWatchlistButton.addEventListener("click", async function (event) {
-        var currentTarget = event.currentTarget
-        var parentElement = currentTarget.parentNode
-        var parentToParentElement = parentElement.parentNode
-        var childElement = parentToParentElement.firstChild
-        console.log(childElement)
-        var watchlistIdElement = childElement.firstChild
-        var watchlistIdStr = watchlistIdElement.textContent
-        var watchlistId = parseInt(watchlistIdStr)
-        var counter = 1;
-
-
-        var watchlists = await getWatchlists()
-
-        for (let i = 0; i < watchlists.length; i++) {
-            console.log(watchlists[i].id)
-            console.log(watchlistId)
-            if (watchlists[i].id === watchlistId) {
-
-                var confirm = window.confirm(`Are you sure you want to delete ${watchlists[i].name}`)
-                if (confirm === true) {
-                    deleteWatchlist(watchlistId)
-                } else {
-                    return
-                }
-                
-                window.location.reload()
-            } 
-        }
-    })
-
-    viewWatchlistDetailsButton.appendChild(viewWatchlistDetailsLink)
-    deleteWatchlistButton.appendChild(deleteWatchlistLink)
-    watchlistButtonContainer.appendChild(viewWatchlistDetailsButton)
-    watchlistButtonContainer.appendChild(deleteWatchlistButton)
-
-    // watchlistLabelContainer.appendChild(watchlistNameLabel)
-    // watchlistLabelContainer.appendChild(watchlistDescriptionLabel)
-    // watchlistId.appendChild(watchlistNameLabel)
-    // watchlistNameContainer.appendChild(watchlistId)
-    // watchlistNameContainer.appendChild(watchlistNameLabel)
-    watchlistNameContainer.appendChild(watchlistName)
-
-    watchlistDescriptionContainer.appendChild(watchlistDescriptionEl)
+        viewWatchlistDetailsButton.addEventListener("click", function () {
+            console.log("hi")
+        })
+        
+        deleteWatchlistButton.addEventListener("click", async function (event) {
+            var currentTarget = event.currentTarget
+            var parentElement = currentTarget.parentNode
+            var parentToParentElement = parentElement.parentNode
+            var childElement = parentToParentElement.firstChild
+            console.log(childElement)
+            var watchlistIdElement = childElement.firstChild
+            var watchlistIdStr = watchlistIdElement.textContent
+            var watchlistId = parseInt(watchlistIdStr)
+            var counter = 1;
     
-    // watchlistDescriptionContainer.appendChild(watchlistDescriptionLabel)
-    // watchlist.appendChild(watchlistLabelContainer)
-    watchlistName.prepend(watchlistId)
-    watchlist.appendChild(watchlistNameContainer)
-    // watchlist.appendChild(watchlistDescriptionContainer)
-    watchlist.appendChild(watchlistButtonContainer)
-    watchlistsListContainer.appendChild(watchlist)
+    
+            var watchlists = await getWatchlists()
+    
+            for (let i = 0; i < watchlists.length; i++) {
+                console.log(watchlists[i].id)
+                console.log(watchlistId)
+                if (watchlists[i].id === watchlistId) {
+    
+                    var confirm = window.confirm(`Are you sure you want to delete ${watchlists[i].name}`)
+                    if (confirm === true) {
+                        deleteWatchlist(watchlistId)
+                    } else {
+                        return
+                    }
+                    
+                    window.location.reload()
+                } 
+            }
+        })
+    
+        viewWatchlistDetailsButton.appendChild(viewWatchlistDetailsLink)
+        deleteWatchlistButton.appendChild(deleteWatchlistLink)
+        watchlistButtonContainer.appendChild(viewWatchlistDetailsButton)
+        watchlistButtonContainer.appendChild(deleteWatchlistButton)
+    
+        // watchlistLabelContainer.appendChild(watchlistNameLabel)
+        // watchlistLabelContainer.appendChild(watchlistDescriptionLabel)
+        // watchlistId.appendChild(watchlistNameLabel)
+        // watchlistNameContainer.appendChild(watchlistId)
+        // watchlistNameContainer.appendChild(watchlistNameLabel)
+        watchlistNameContainer.appendChild(watchlistName)
+    
+        watchlistDescriptionContainer.appendChild(watchlistDescriptionEl)
+        
+        // watchlistDescriptionContainer.appendChild(watchlistDescriptionLabel)
+        // watchlist.appendChild(watchlistLabelContainer)
+        watchlistName.prepend(watchlistId)
+        watchlist.appendChild(watchlistNameContainer)
+        // watchlist.appendChild(watchlistDescriptionContainer)
+        watchlist.appendChild(watchlistButtonContainer)
+        watchlistsListContainer.appendChild(watchlist)
+    }
+
    }
 
-   if (watchlists.length > 0) {
+   if (userWatchlistsArr.length > 0) {
        watchlistsListContainer.prepend(watchlistLabelContainer)
    }
    

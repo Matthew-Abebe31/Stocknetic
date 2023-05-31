@@ -1,5 +1,7 @@
 const remoteURL = "http://localhost:3000"
 
+var sessionStorageId = sessionStorage.getItem("id")
+
 async function getAllUsers() {
     const res = await fetch(`${remoteURL}/users`)
     return await res.json()
