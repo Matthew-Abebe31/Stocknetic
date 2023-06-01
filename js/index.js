@@ -243,7 +243,7 @@ async function renderMatchingStockQuote() {
 
         console.log(watchlists)
 
-        for (let i = 0; i <= watchlists.length; i++) {
+        for (let i = 0; i < watchlists.length; i++) {
 
             console.log(watchlists[i])
             

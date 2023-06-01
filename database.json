@@ -21,10 +21,15 @@
   ],
   "watchlists": [
     {
-      "userId": 2,
+      "userId": 1,
       "name": "Losing stocks",
       "description": "For inverse strategy",
-      "stocks": [],
+      "stocks": [
+        [
+          "Visa Inc. Class A",
+          "V"
+        ]
+      ],
       "id": 2
     },
     {
