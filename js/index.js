@@ -819,7 +819,7 @@ async function renderWatchListsPage() {
         watchlistsListContainer.appendChild(watchlist)
     }
 
-   if (userWatchlistsArr.length > 0) {
+   if (watchlists.length > 0) {
        watchlistsListContainer.prepend(watchlistLabelContainer)
    }
    
