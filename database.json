@@ -24,14 +24,24 @@
       "userId": 2,
       "name": "Gainer stocks",
       "description": "For trend strategy.",
-      "stocks": [],
+      "stocks": [
+        [
+          "Visa Inc. Class A",
+          "V"
+        ]
+      ],
       "id": 1
     },
     {
       "userId": 2,
       "name": "Losing stocks",
-      "description": "For inverse strategy",
-      "stocks": [],
+      "description": "",
+      "stocks": [
+        [
+          null,
+          "SNY"
+        ]
+      ],
       "id": 2
     }
   ]

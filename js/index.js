@@ -260,7 +260,7 @@ async function renderMatchingStockQuote() {
             watchlistId.style.fontWeight = "bold"
             var watchlistName = document.createElement("p")
             watchlistName.className = "watchlist-name"
-            watchlistName.textContent = watchlists[i].name
+            watchlistName.textContent = `${watchlists[i].name}`
 
             var addStockToWatchlistBttn = document.createElement("button")
             addStockToWatchlistBttn.className = "add-stock-to-watchlist-bttn"
@@ -309,8 +309,7 @@ async function renderMatchingStockQuote() {
                     console.log(stocksArr)
 
                     for (let m = 0; m < stocksArr.length; m++) {
-                        console.log(stocksArr[m])
-                        if (stocksArr[m] === ticker) {
+                        if (stocksArr[m][1] === ticker) {
                             alert("This stock is already added to the watchlist.")
                             
                             return
@@ -318,13 +317,14 @@ async function renderMatchingStockQuote() {
                     }
                 }
                 console.log(matchingStockOverview)
-
+                var stockName = matchingStockOverview.Name
                 console.log(watchlists)
                 for (let j = 0; j < watchlists.length; j++) {
 
                     if (watchlists[j].id === selectedWatchlistId) {
                         console.log(watchlists[j].id)
-                        watchlists[j].stocks.push([matchingStockOverview.Name, ticker])
+                        
+                        watchlists[j].stocks.push([stockName, ticker])
                         console.log(watchlists[j].stocks)
                         var editedWatchlistObj = watchlists[j];
                         console.log(selectedWatchlistId)
@@ -888,6 +888,8 @@ async function renderViewWatchlistPage() {
 
         for (let i = 0, id = 1; i < watchlistStocks.length; i++, id++) {
             watchlistStocksListContainer.appendChild(watchlistStocksList)
+
+            console.log(watchlistStocks[i])
 
             var stockIdEl = document.createElement("p")
             stockIdEl.className = "stock-id-element"
