@@ -1,6 +1,7 @@
 const remoteURL = "http://localhost:3000"
 
 var sessionStorageId = sessionStorage.getItem("id")
+var sessionStorageIdNum = parseInt(sessionStorageId)
 
 async function getAllUsers() {
     const res = await fetch(`${remoteURL}/users`)
@@ -81,6 +82,23 @@ async function getWatchlists() {
     return res.json()
 }
 
+async function getUserWatchlists() {
+    var watchlists = await getWatchlists();
+    var userWatchlistsArr = [];
+
+    for (let i = 0; i < watchlists.length; i++) {
+
+        if (watchlists[i].userId === sessionStorageIdNum) {
+            userWatchlistsArr.push(watchlists[i])
+        }
+    }
+    
+    // console.log(userWatchlistsArr)
+    return userWatchlistsArr
+}
+
+getUserWatchlists()
+
 async function getWatchlist(watchlistId) {
     const res = await fetch(`${remoteURL}/watchlists/${watchlistId}`)
     return res.json()
@@ -147,4 +165,4 @@ async function deleteWatchlist(id) {
 }
 
 
-export { getAllUsers, getUser, getMatchingStockTickerData, getMatchingStockOverviewData, getMatchingStockQuoteData, getMatchingStockEarningsData, getMatchingStockDailyPriceData, getMatchingStockPricingData, getMatchingStockPriceCandles, getMatchingStockBasicFinancialData, getMatchingStockQuoteDataTwo, getMatchingStockProfileData, getMatchingStockEPSCalendarData, getMatchingStockCurrentVolume, getWatchlists, getWatchlist, postNewUser, postWatchlist, putWatchlist, patchWatchlist, deleteWatchlist }
+export { getAllUsers, getUser, getMatchingStockTickerData, getMatchingStockOverviewData, getMatchingStockQuoteData, getMatchingStockEarningsData, getMatchingStockDailyPriceData, getMatchingStockPricingData, getMatchingStockPriceCandles, getMatchingStockBasicFinancialData, getMatchingStockQuoteDataTwo, getMatchingStockProfileData, getMatchingStockEPSCalendarData, getMatchingStockCurrentVolume, getWatchlists, getWatchlist, getUserWatchlists, postNewUser, postWatchlist, putWatchlist, patchWatchlist, deleteWatchlist }

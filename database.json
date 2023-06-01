@@ -22,26 +22,24 @@
   "watchlists": [
     {
       "userId": 2,
-      "name": "Gainer stocks",
-      "description": "For trend strategy.",
-      "stocks": [
-        [
-          "The Boeing Company",
-          "BA"
-        ],
-        [
-          "Apple Inc",
-          "AAPL"
-        ]
-      ],
-      "id": 1
-    },
-    {
-      "userId": 2,
       "name": "Losing stocks",
       "description": "For inverse strategy",
       "stocks": [],
       "id": 2
+    },
+    {
+      "userId": 1,
+      "name": "Gainer stocks",
+      "description": "For trend strategy.",
+      "stocks": [],
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "name": "Losing stocks",
+      "description": "For inverse strategy",
+      "stocks": [],
+      "id": 4
     }
   ]
 }

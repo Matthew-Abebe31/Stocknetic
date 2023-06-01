@@ -1,4 +1,4 @@
-import { getAllUsers, getUser, getMatchingStockTickerData, getMatchingStockOverviewData, getMatchingStockQuoteData, getMatchingStockEarningsData, getMatchingStockDailyPriceData, getMatchingStockPricingData, getMatchingStockPriceCandles, getMatchingStockBasicFinancialData, getMatchingStockQuoteDataTwo, getMatchingStockProfileData, getMatchingStockEPSCalendarData, getMatchingStockCurrentVolume, getWatchlists, getWatchlist, postWatchlist, putWatchlist, patchWatchlist, deleteWatchlist, postNewUser} from "../js/data.js"
+import { getAllUsers, getUser, getMatchingStockTickerData, getMatchingStockOverviewData, getMatchingStockQuoteData, getMatchingStockEarningsData, getMatchingStockDailyPriceData, getMatchingStockPricingData, getMatchingStockPriceCandles, getMatchingStockBasicFinancialData, getMatchingStockQuoteDataTwo, getMatchingStockProfileData, getMatchingStockEPSCalendarData, getMatchingStockCurrentVolume, getWatchlists, getUserWatchlists, getWatchlist, postWatchlist, putWatchlist, patchWatchlist, deleteWatchlist, postNewUser} from "../js/data.js"
 
 var root = window.location.protocol + '//' + window.location.host + '/';
 var currentURL = window.location.href
@@ -156,6 +156,8 @@ function showHomePage() {
 async function renderMatchingStockQuote() {
     var pathArr = window.location.href.split('/')
     var ticker = pathArr[5]
+    var sessionStorageId = sessionStorage.getItem("id")
+    var sessionStorageIdNum = parseInt(sessionStorageId)
     // console.log(pathArr)
     // console.log(ticker)
     
@@ -163,7 +165,7 @@ async function renderMatchingStockQuote() {
     var matchingStockProfileData = await getMatchingStockProfileData(ticker)
     var matchingStockQuoteDataTwo = await getMatchingStockQuoteDataTwo(ticker)
     var matchingStockBasicFinancials = await getMatchingStockBasicFinancialData(ticker)
-    var watchlists = await getWatchlists()
+    var watchlists = await getUserWatchlists();
     var matchingStockOverview = await getMatchingStockOverviewData(ticker)
 
     // console.log(matchingStockQuoteDataTwo)
@@ -226,8 +228,8 @@ async function renderMatchingStockQuote() {
     seeMatchingStockDetailsLink.setAttribute("href", `#/${matchingStockProfileData.ticker}/summary`)
     seeMatchingStockDetailsLink.textContent = "Summary"
 
-    addStockToWatchlistButton.addEventListener("click", function () {
-        console.log(watchlists)
+    addStockToWatchlistButton.addEventListener("click", async function () {
+        var watchlists = await getUserWatchlists()
 
         var chooseWatchlistToAddContainer = document.createElement("div")
         chooseWatchlistToAddContainer.className = "choose-watchlist-to-add-container"
@@ -239,12 +241,22 @@ async function renderMatchingStockQuote() {
         var cancelChooseWatchlistLink = document.createElement("a")
         cancelChooseWatchlistLink.textContent = "Cancel"
 
-        for (let i = 0; i < watchlists.length; i++) {
+        console.log(watchlists)
+
+        for (let i = 0; i <= watchlists.length; i++) {
+
+            console.log(watchlists[i])
+            
+            if (watchlists.length === 0) {
+                alert("No watchlists found!")
+                return
+            }
+
             var addToWatchlistContainer = document.createElement("div")
             addToWatchlistContainer.className = "add-to-watchlist-container"
             var watchlistId = document.createElement("p")
             watchlistId.setAttribute("id", "addWatchlistId")
-            watchlistId.textContent = `${watchlists[i].id}.`
+            // watchlistId.textContent = `${watchlists[i].id}.`
             watchlistId.style.fontWeight = "bold"
             var watchlistName = document.createElement("p")
             watchlistName.className = "watchlist-name"
@@ -260,15 +272,32 @@ async function renderMatchingStockQuote() {
             })
 
             addStockToWatchlistBttn.addEventListener("click", function (event) {
-                var currentElement = event.currentTarget
-                var parentNode = currentElement.parentNode
-                let selectedWatchlistId = parentNode.firstChild.textContent
-                selectedWatchlistId = selectedWatchlistId.substring(0, selectedWatchlistId.length-1);
-                var selectedWatchlistIdNum = parseInt(selectedWatchlistId)
-                console.log(selectedWatchlistIdNum)
                 console.log("added stock to watchlist")
+                var currentElement = event.currentTarget
+                var watchlistNameElements = document.querySelectorAll(".watchlist-name")
+                var watchlistNameElementsArr = Array.from(watchlistNameElements)
+                var parentElement = currentElement.parentNode
+                var watchlistName = parentElement.firstChild
+                var watchlistNameText = watchlistName.textContent
+                var selectedWatchlistIdElement = window.getComputedStyle(watchlistName, ':before')
+                let selectedWatchlistId;
+                // var selectedWatchlistIdStr = selectedWatchlistIdElement.getPropertyValue(counter())
 
-                console.log(watchlists)
+
+                console.log(watchlistNameElementsArr)
+                // selectedWatchlistIdNum = selectedWatchlistIdStr.substring(0, selectedWatchlistIdStr.length-1);
+                // var selectedWatchlistIdNum = parseInt(selectedWatchlistIdStr)
+                // var watId = watchlistNameElementsArr.indexOf(watchlistNameText)
+                // console.log(watId)
+
+                for (let i = 0; i < watchlistNameElementsArr.length; i++) {
+                    if (watchlistNameElements[i].textContent === watchlistName.textContent) {
+                        var elementIndex = watchlistNameElementsArr.indexOf(watchlistName)
+                        selectedWatchlistId = elementIndex + 1;
+                        console.log(selectedWatchlistId)
+                    }
+                }
+
                 for (let i = 0; i < watchlists.length; i++) {
                     var stocksArr = watchlists[i].stocks
                     console.log(stocksArr)
@@ -277,24 +306,25 @@ async function renderMatchingStockQuote() {
                         console.log(stocksArr[m])
                         if (stocksArr[m] === ticker) {
                             alert("This stock is already added to the watchlist.")
-
+                            
                             return
                         }
                     }
                 }
                 console.log(matchingStockOverview)
 
+                console.log(watchlists)
                 for (let j = 0; j < watchlists.length; j++) {
 
-                    if (watchlists[j].id === selectedWatchlistIdNum) {
+                    if ((j + 1 ) === selectedWatchlistId) {
                         console.log(watchlists[j].id)
                         watchlists[j].stocks.push([matchingStockOverview.Name, ticker])
                         console.log(watchlists[j].stocks)
                         var editedWatchlistObj = watchlists[j];
-                        console.log(selectedWatchlistIdNum)
+                        console.log(selectedWatchlistId)
                         console.log(editedWatchlistObj)
 
-                        putWatchlist(selectedWatchlistIdNum, editedWatchlistObj)
+                        putWatchlist(selectedWatchlistId, editedWatchlistObj)
 
                         alert(`added ${ticker} to ${editedWatchlistObj.name}`)
 
@@ -309,7 +339,7 @@ async function renderMatchingStockQuote() {
             addStockToWatchlistBttn.appendChild(addStockToWatchlistLnk)
             cancelChooseWatchlistButton.appendChild(cancelChooseWatchlistLink)
 
-            watchlistName.prepend(watchlistId)
+            // watchlistName.prepend(watchlistId)
             addToWatchlistContainer.appendChild(watchlistName)
             addToWatchlistContainer.appendChild(addStockToWatchlistBttn)
             chooseWatchlistToAddContainer.appendChild(addToWatchlistContainer)
@@ -623,11 +653,6 @@ async function handleClickSignInUser(event) {
     var signInContainer = signInForm.childNodes[0]
     var signInEmailInput = signInContainer.childNodes[2].value
     var signInPasswordInput = signInContainer.childNodes[4].value
-    console.log(signInEmailInput)
-    console.log(signInPasswordInput)
-    // var signInForm = document.querySelector("#sign-in-form")
-    // var emailAddressSignInInput = signInForm.elements[0].value
-    // var passwordSignInInput = signInForm.elements[1].value
 
     var users = await getAllUsers()
     console.log(users)
@@ -654,7 +679,6 @@ async function handleClickSignInUser(event) {
         if(existingUser === true && user.password === signInPasswordInput) {
             getUser(user.id)
             sessionStorage.setItem("id", user.id)
-            // registerButton.classList.add("hidden")
             alert(`Welcome back, ${user.firstName}.`)
             window.location.hash = "/watchlists"
         } 
@@ -698,19 +722,13 @@ async function renderWatchListsPage() {
    searchStocksPageLink.textContent = "Search for stocks"
 
    watchlistsHeaderContainer.appendChild(watchlistsHeader)
-   
-   var watchlists = await getWatchlists()
+
+   var userWatchlistsArr = [];
+   var watchlists = await getUserWatchlists()
    console.log(watchlists)
 
-   var sessionStorageId = sessionStorage.getItem("id")
-   var sessionStorageIdNum = parseInt(sessionStorageId)
-   var userWatchlistsArr = [];
-
    for (let i = 0; i < watchlists.length; i++) {
-
-    if (watchlists[i].userId === sessionStorageIdNum) {
-
-        watchlists[i].push(userWatchlistsArr)
+    console.log(watchlists[i])
 
         var watchlist = document.createElement("div")
         watchlist.className = "watchlist"
@@ -753,10 +771,6 @@ async function renderWatchListsPage() {
         deleteWatchlistButton.className = "delete-watchlist-button"
         var deleteWatchlistLink = document.createElement("a")
         deleteWatchlistLink.textContent = "Delete"
-    
-        viewWatchlistDetailsButton.addEventListener("click", function () {
-            console.log("hi")
-        })
         
         deleteWatchlistButton.addEventListener("click", async function (event) {
             var currentTarget = event.currentTarget
@@ -767,13 +781,11 @@ async function renderWatchListsPage() {
             var watchlistIdElement = childElement.firstChild
             var watchlistIdStr = watchlistIdElement.textContent
             var watchlistId = parseInt(watchlistIdStr)
-            var counter = 1;
-    
-    
-            var watchlists = await getWatchlists()
+
+            var watchlists = await getUserWatchlists()
     
             for (let i = 0; i < watchlists.length; i++) {
-                console.log(watchlists[i].id)
+                console.log(watchlists[i])
                 console.log(watchlistId)
                 if (watchlists[i].id === watchlistId) {
     
@@ -793,26 +805,13 @@ async function renderWatchListsPage() {
         deleteWatchlistButton.appendChild(deleteWatchlistLink)
         watchlistButtonContainer.appendChild(viewWatchlistDetailsButton)
         watchlistButtonContainer.appendChild(deleteWatchlistButton)
-    
-        // watchlistLabelContainer.appendChild(watchlistNameLabel)
-        // watchlistLabelContainer.appendChild(watchlistDescriptionLabel)
-        // watchlistId.appendChild(watchlistNameLabel)
-        // watchlistNameContainer.appendChild(watchlistId)
-        // watchlistNameContainer.appendChild(watchlistNameLabel)
         watchlistNameContainer.appendChild(watchlistName)
-    
         watchlistDescriptionContainer.appendChild(watchlistDescriptionEl)
-        
-        // watchlistDescriptionContainer.appendChild(watchlistDescriptionLabel)
-        // watchlist.appendChild(watchlistLabelContainer)
         watchlistName.prepend(watchlistId)
         watchlist.appendChild(watchlistNameContainer)
-        // watchlist.appendChild(watchlistDescriptionContainer)
         watchlist.appendChild(watchlistButtonContainer)
         watchlistsListContainer.appendChild(watchlist)
     }
-
-   }
 
    if (userWatchlistsArr.length > 0) {
        watchlistsListContainer.prepend(watchlistLabelContainer)
@@ -827,7 +826,6 @@ async function renderWatchListsPage() {
    watchlistsViewEl.appendChild(watchlistsHeaderContainer)
    watchlistsViewEl.appendChild(watchlistsListContainer)
    watchlistsViewEl.appendChild(searchStocksPageButtonContainer)
-
 }
 
 function showWatchlistsPage() {
@@ -1066,7 +1064,6 @@ function showCreateWatchlistsPage() {
     createWatchlistsViewEl.classList.add("view")
 
     // window.location.hash = "#/createWatchlists"
-
 }
 
 function createWatchlist() {
