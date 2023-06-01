@@ -86,6 +86,8 @@ async function getUserWatchlists() {
     var watchlists = await getWatchlists();
     var userWatchlistsArr = [];
 
+    console.log(watchlists)
+
     for (let i = 0; i < watchlists.length; i++) {
 
         if (watchlists[i].userId === sessionStorageIdNum) {
@@ -93,7 +95,7 @@ async function getUserWatchlists() {
         }
     }
     
-    // console.log(userWatchlistsArr)
+    console.log(userWatchlistsArr)
     return userWatchlistsArr
 }
 
@@ -129,7 +131,6 @@ async function postWatchlist(newWatchlistObj) {
 }
 
 async function putWatchlist(id, editedWatchlistObj) {
-console.log("hello put function")
     const res = await fetch(`${remoteURL}/watchlists/${id}`, {
         method: "PUT",
         headers: {
@@ -137,7 +138,7 @@ console.log("hello put function")
         },
         body: JSON.stringify(editedWatchlistObj)
     })
-console.log(res)
+// console.log(res)
     return res.json()
 }
 

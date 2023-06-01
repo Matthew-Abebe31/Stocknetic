@@ -165,8 +165,8 @@ async function renderMatchingStockQuote() {
     var matchingStockProfileData = await getMatchingStockProfileData(ticker)
     var matchingStockQuoteDataTwo = await getMatchingStockQuoteDataTwo(ticker)
     var matchingStockBasicFinancials = await getMatchingStockBasicFinancialData(ticker)
-    var watchlists = await getUserWatchlists();
     var matchingStockOverview = await getMatchingStockOverviewData(ticker)
+    var watchlists = await getUserWatchlists();
 
     // console.log(matchingStockQuoteDataTwo)
     // console.log(matchingStockBasicFinancials)
@@ -229,7 +229,7 @@ async function renderMatchingStockQuote() {
     seeMatchingStockDetailsLink.textContent = "Summary"
 
     addStockToWatchlistButton.addEventListener("click", async function () {
-        var watchlists = await getUserWatchlists()
+        var userWatchlists = await getUserWatchlists()
 
         var chooseWatchlistToAddContainer = document.createElement("div")
         chooseWatchlistToAddContainer.className = "choose-watchlist-to-add-container"
@@ -241,7 +241,7 @@ async function renderMatchingStockQuote() {
         var cancelChooseWatchlistLink = document.createElement("a")
         cancelChooseWatchlistLink.textContent = "Cancel"
 
-        console.log(watchlists)
+        console.log(userWatchlists)
 
         for (let i = 0; i < watchlists.length; i++) {
 
@@ -290,11 +290,17 @@ async function renderMatchingStockQuote() {
                 // var watId = watchlistNameElementsArr.indexOf(watchlistNameText)
                 // console.log(watId)
 
-                for (let i = 0; i < watchlistNameElementsArr.length; i++) {
-                    if (watchlistNameElements[i].textContent === watchlistName.textContent) {
-                        var elementIndex = watchlistNameElementsArr.indexOf(watchlistName)
-                        selectedWatchlistId = elementIndex + 1;
-                        console.log(selectedWatchlistId)
+                // for (let i = 0; i < watchlistNameElementsArr.length; i++) {
+                //     if (watchlistNameElements[i].textContent === watchlistName.textContent) {
+                //         var elementIndex = watchlistNameElementsArr.indexOf(watchlistName)
+                //         selectedWatchlistId = elementIndex + 1;
+                //         console.log(selectedWatchlistId)
+                //     }
+                // }
+
+                for (let i = 0; i < watchlists.length; i++) {
+                    if(watchlists[i].name === watchlistName.textContent) {
+                        selectedWatchlistId = watchlists[i].id
                     }
                 }
 
@@ -316,7 +322,7 @@ async function renderMatchingStockQuote() {
                 console.log(watchlists)
                 for (let j = 0; j < watchlists.length; j++) {
 
-                    if ((j + 1 ) === selectedWatchlistId) {
+                    if (watchlists[j].id === selectedWatchlistId) {
                         console.log(watchlists[j].id)
                         watchlists[j].stocks.push([matchingStockOverview.Name, ticker])
                         console.log(watchlists[j].stocks)
@@ -723,7 +729,6 @@ async function renderWatchListsPage() {
 
    watchlistsHeaderContainer.appendChild(watchlistsHeader)
 
-   var userWatchlistsArr = [];
    var watchlists = await getUserWatchlists()
    console.log(watchlists)
 
@@ -776,20 +781,21 @@ async function renderWatchListsPage() {
             var currentTarget = event.currentTarget
             var parentElement = currentTarget.parentNode
             var parentToParentElement = parentElement.parentNode
-            var childElement = parentToParentElement.firstChild
-            console.log(childElement)
-            var watchlistIdElement = childElement.firstChild
-            var watchlistIdStr = watchlistIdElement.textContent
-            var watchlistId = parseInt(watchlistIdStr)
+            var watchlistNameContainer = parentToParentElement.firstChild
+            var watchlistNameElement = watchlistNameContainer.firstChild
+            var watchlistText = watchlistNameElement.textContent
+            var watchlistNameText = watchlistText.slice(2)
+            // var watchlistId = parseInt(watchlistIdStr)
+
+            console.log(watchlistNameText)
 
             var watchlists = await getUserWatchlists()
-    
+
             for (let i = 0; i < watchlists.length; i++) {
-                console.log(watchlists[i])
-                console.log(watchlistId)
-                if (watchlists[i].id === watchlistId) {
-    
-                    var confirm = window.confirm(`Are you sure you want to delete ${watchlists[i].name}`)
+                if (watchlists[i].name === watchlistNameText) {
+                    var watchlistId = watchlists[i].id
+                    console.log(watchlistId)
+                    var confirm = window.confirm(`Are you sure you want to delete ${watchlistNameText}`)
                     if (confirm === true) {
                         deleteWatchlist(watchlistId)
                     } else {
