@@ -229,7 +229,12 @@ async function renderMatchingStockQuote() {
     seeMatchingStockDetailsLink.textContent = "Summary"
 
     addStockToWatchlistButton.addEventListener("click", async function () {
-        var userWatchlists = await getUserWatchlists()
+        // var watchlists = await getUserWatchlists()
+
+        if (watchlists.length === 0) {
+            alert("No watchlists found!")
+            return
+        }
 
         var chooseWatchlistToAddContainer = document.createElement("div")
         chooseWatchlistToAddContainer.className = "choose-watchlist-to-add-container"
@@ -241,17 +246,12 @@ async function renderMatchingStockQuote() {
         var cancelChooseWatchlistLink = document.createElement("a")
         cancelChooseWatchlistLink.textContent = "Cancel"
 
-        console.log(userWatchlists)
+        console.log(watchlists)
 
         for (let i = 0; i < watchlists.length; i++) {
 
-            console.log(watchlists[i])
+            console.log(watchlists.length)
             
-            if (watchlists.length === 0) {
-                alert("No watchlists found!")
-                return
-            }
-
             var addToWatchlistContainer = document.createElement("div")
             addToWatchlistContainer.className = "add-to-watchlist-container"
             var watchlistId = document.createElement("p")

@@ -28,6 +28,10 @@
         [
           "Visa Inc. Class A",
           "V"
+        ],
+        [
+          "Microsoft Corporation",
+          "MSFT"
         ]
       ],
       "id": 1
@@ -36,12 +40,7 @@
       "userId": 2,
       "name": "Losing stocks",
       "description": "",
-      "stocks": [
-        [
-          null,
-          "SNY"
-        ]
-      ],
+      "stocks": [],
       "id": 2
     }
   ]

@@ -268,9 +268,15 @@ ul {
 }
 
 @media screen and (max-width: 750px) {
+    .watchlist-stock-summary-button {
+        margin-right: 0px;
+    }
+    
     .watchlist-stock-delete-button {
         margin-top: 5px;
+        margin-left: 0px;
     }
+
 }
 
 /* .watchlist-stocks-list-container {
