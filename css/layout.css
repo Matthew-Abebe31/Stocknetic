@@ -119,6 +119,13 @@ ul {
     transform: translate(-50%, -50%);
 }
 
+#registration-form {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+}
+
 .sign-in-container {
     position: fixed;
     display: flex;

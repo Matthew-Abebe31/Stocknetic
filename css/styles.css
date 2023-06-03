@@ -124,12 +124,13 @@ a#news-link,
 a#profile-link {
     font-size: larger;
     color: white;
+    cursor: pointer;
 }
 
-a#watchlists-link:hover,
-a#financials-link:hover,
-a#news-link:hover,
-a#profile-link:hover {
+a#watchlists-link:active,
+a#financials-link:active,
+a#news-link:active,
+a#profile-link:active {
     color: cyan;
 }
 

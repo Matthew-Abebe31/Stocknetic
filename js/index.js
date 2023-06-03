@@ -49,7 +49,6 @@ function displayNavItems(){
 
     
     hamburgerMenu.addEventListener("click", function () {
-        console.log(navListItemsTwoHeight)
         navListItemsTwo.classList.toggle("hidden")
 
         navListItemsTwo.style.top = `${navContainerHeightStr}px`
@@ -158,8 +157,6 @@ async function renderMatchingStockQuote() {
     var ticker = pathArr[5]
     var sessionStorageId = sessionStorage.getItem("id")
     var sessionStorageIdNum = parseInt(sessionStorageId)
-    // console.log(pathArr)
-    // console.log(ticker)
     
     var matchingStockTickerData = await getMatchingStockTickerData(ticker)
     var matchingStockProfileData = await getMatchingStockProfileData(ticker)
@@ -167,12 +164,6 @@ async function renderMatchingStockQuote() {
     var matchingStockBasicFinancials = await getMatchingStockBasicFinancialData(ticker)
     var matchingStockOverview = await getMatchingStockOverviewData(ticker)
     var watchlists = await getUserWatchlists();
-
-    // console.log(matchingStockQuoteDataTwo)
-    // console.log(matchingStockBasicFinancials)
-    // console.log(matchingStockProfileData)
-    // console.log(matchingStockTickerData)
-    console.log(watchlists)
     
     var matchingStockContainer = document.createElement("div")
     matchingStockContainer.className = "matching-stock-container"
@@ -229,7 +220,7 @@ async function renderMatchingStockQuote() {
     seeMatchingStockDetailsLink.textContent = "Summary"
 
     addStockToWatchlistButton.addEventListener("click", async function () {
-        // var watchlists = await getUserWatchlists()
+        console.log(watchlists)
 
         if (watchlists.length === 0) {
             alert("No watchlists found!")
@@ -246,17 +237,12 @@ async function renderMatchingStockQuote() {
         var cancelChooseWatchlistLink = document.createElement("a")
         cancelChooseWatchlistLink.textContent = "Cancel"
 
-        console.log(watchlists)
-
         for (let i = 0; i < watchlists.length; i++) {
-
-            console.log(watchlists.length)
             
             var addToWatchlistContainer = document.createElement("div")
             addToWatchlistContainer.className = "add-to-watchlist-container"
             var watchlistId = document.createElement("p")
             watchlistId.setAttribute("id", "addWatchlistId")
-            // watchlistId.textContent = `${watchlists[i].id}.`
             watchlistId.style.fontWeight = "bold"
             var watchlistName = document.createElement("p")
             watchlistName.className = "watchlist-name"
@@ -272,7 +258,6 @@ async function renderMatchingStockQuote() {
             })
 
             addStockToWatchlistBttn.addEventListener("click", function (event) {
-                console.log("added stock to watchlist")
                 var currentElement = event.currentTarget
                 var watchlistNameElements = document.querySelectorAll(".watchlist-name")
                 var watchlistNameElementsArr = Array.from(watchlistNameElements)
@@ -281,22 +266,8 @@ async function renderMatchingStockQuote() {
                 var watchlistNameText = watchlistName.textContent
                 var selectedWatchlistIdElement = window.getComputedStyle(watchlistName, ':before')
                 let selectedWatchlistId;
-                // var selectedWatchlistIdStr = selectedWatchlistIdElement.getPropertyValue(counter())
-
-
+   
                 console.log(watchlistNameElementsArr)
-                // selectedWatchlistIdNum = selectedWatchlistIdStr.substring(0, selectedWatchlistIdStr.length-1);
-                // var selectedWatchlistIdNum = parseInt(selectedWatchlistIdStr)
-                // var watId = watchlistNameElementsArr.indexOf(watchlistNameText)
-                // console.log(watId)
-
-                // for (let i = 0; i < watchlistNameElementsArr.length; i++) {
-                //     if (watchlistNameElements[i].textContent === watchlistName.textContent) {
-                //         var elementIndex = watchlistNameElementsArr.indexOf(watchlistName)
-                //         selectedWatchlistId = elementIndex + 1;
-                //         console.log(selectedWatchlistId)
-                //     }
-                // }
 
                 for (let i = 0; i < watchlists.length; i++) {
                     if(watchlists[i].name === watchlistName.textContent) {
@@ -412,34 +383,50 @@ function renderRegistrationForm() {
     var registrationFirstNameLabel = document.createElement("label")
     registrationFirstNameLabel.textContent = "First Name"
     var registrationFirstNameInput = document.createElement("input")
+    registrationFirstNameInput.className = "registration-first-name-input"
+    registrationFirstNameInput.setAttribute("type", "text")
     registrationFirstNameInput.setAttribute("placeholder", "First Name")
     var registrationLastNameLabel = document.createElement("label")
     registrationLastNameLabel.textContent = "Last Name"
     var registrationLastNameInput = document.createElement("input")
+    registrationLastNameInput.className = "registration-last-name-input"
+    registrationLastNameInput.setAttribute("type", "text")
     registrationLastNameInput.setAttribute("placeholder", "Last Name")
     var registrationAddressOneLabel = document.createElement("label")
     registrationAddressOneLabel.textContent = "Address 1"
     var registrationAddressOneInput = document.createElement("input")
+    registrationAddressOneInput.className = "registration-address-one-input"
+    registrationAddressOneInput.setAttribute("type", "text")
     registrationAddressOneInput.setAttribute("placeholder", "Street Address")
     var registrationAddressTwoLabel = document.createElement("label")
     registrationAddressTwoLabel.textContent = "Address 2"
     var registrationAddressTwoInput = document.createElement("input")
+    registrationAddressTwoInput.className = "registration-address-two-input"
+    registrationAddressTwoInput.setAttribute("type", "text")
     registrationAddressTwoInput.setAttribute("placeholder", "City, State, ZIP")
     var registrationPhoneNumberLabel = document.createElement("label")
     registrationPhoneNumberLabel.textContent = "Phone Number"
     var registrationPhoneNumberInput = document.createElement("input")
+    registrationPhoneNumberInput.className = "registration-phone-number-input"
+    registrationPhoneNumberInput.setAttribute("type", "text")
     registrationPhoneNumberInput.setAttribute("placeholder", "10 Digit Phone Number")
     var registrationEmailAddressLabel = document.createElement("label")
     registrationEmailAddressLabel.textContent = "Email Address"
     var registrationEmailAddressInput = document.createElement("input")
+    registrationEmailAddressInput.className = "registration-email-address-input"
+    registrationEmailAddressInput.setAttribute("type", "text")
     registrationEmailAddressInput.setAttribute("placeholder", "Email Address")
     var registrationPasswordLabel = document.createElement("label")
     registrationPasswordLabel.textContent = "Password"
     var registrationPasswordInput = document.createElement("input")
+    registrationPasswordInput.className = "registration-password-input"
+    registrationPasswordInput.setAttribute("type", "text")
     registrationPasswordInput.setAttribute("placeholder", "Password")
     var registrationConfirmPasswordLabel = document.createElement("label")
     registrationConfirmPasswordLabel.textContent = "Confirm Password"
     var registrationConfirmPasswordInput = document.createElement("input")
+    registrationConfirmPasswordInput.className = "registration-confirm-password-input"
+    registrationConfirmPasswordInput.setAttribute("type", "text")
     registrationConfirmPasswordInput.setAttribute("placeholder", "Confirm Password")
     var authbuttonsContainerTwo = document.createElement("div")
     authbuttonsContainerTwo.className = "auth-buttons-container-two"
@@ -456,17 +443,73 @@ function renderRegistrationForm() {
     var registerNewCustomerButton = document.createElement("button")
     registerNewCustomerButton.className = "register-new-user-button"
 
-    registerNewCustomerButton.addEventListener("click", async function(event) {
+    registerNewCustomerButton.addEventListener("click", async function (event) {
     event.preventDefault()
 
         var users = await getAllUsers()
-        var firstNameRegistrationInput = registrationFirstNameInput.value;
-        var lastNameRegistrationInput = registrationLastNameInput.value;
-        var addressRegistrationInput = registrationAddressOneInput.value + ' ' + registrationAddressTwoInput.value;
-        var phoneNumberRegistrationInput = registrationPhoneNumberInput.value;
-        var emailAddressRegistrationInput = registrationEmailAddressInput.value;
-        var passwordRegistrationInput = registrationPasswordInput.value;
-        var passwordConfirmRegistrationInput = registrationConfirmPasswordInput.value;
+
+        var firstNameInput = document.querySelector(".registration-first-name-input")
+        var lastNameInput = document.querySelector(".registration-last-name-input")
+        var addressOneInput = document.querySelector(".registration-address-one-input")
+        var addressTwoInput = document.querySelector(".registration-address-two-input")
+        var phoneNumberInput = document.querySelector(".registration-phone-number-input")
+        var emailAddressInput = document.querySelector(".registration-email-address-input")
+        var passwordInput = document.querySelector(".registration-password-input")
+        var confirmPasswordInput = document.querySelector(".registration-confirm-password-input")
+
+        if (firstNameInput.value === "") {
+            alert("Please enter your first name.")
+            return
+        } else if (firstNameInput.value !== "") {
+            var firstNameRegistrationInput = registrationFirstNameInput.value;
+        }
+
+        if (lastNameInput.value === "") {
+            alert("Please enter your last name.")
+            return
+        } else if (lastNameInput.value !== "") {
+            var lastNameRegistrationInput = registrationLastNameInput.value;
+        }
+
+        console.log(addressOneInput)
+        console.log(addressTwoInput)
+
+        if (addressOneInput.value === "" || addressTwoInput.value === "") {
+            alert("Please enter your address.")
+            return
+        } else if (addressOneInput.value !== "" && addressTwoInput.value === "") {
+            var addressRegistrationInput = registrationAddressOneInput.value + ' ' + registrationAddressTwoInput.value;
+        }
+
+        console.log(registrationPhoneNumberInput)
+
+        if (phoneNumberInput.value === "") {
+            alert("Please enter your phone number.")
+            return
+        } else if (phoneNumberInput.value !== "") {
+            var phoneNumberRegistrationInput = registrationPhoneNumberInput.value;
+        }
+
+        if (emailAddressInput.value === "") {
+            alert("Please enter your email address.")
+            return
+        } else if (emailAddressInput.value !== "") {
+            var emailAddressRegistrationInput = registrationEmailAddressInput.value;
+        }
+
+        if (passwordInput.value === "") {
+            alert("Please enter your password.")
+            return
+        } else if (passwordInput.value !== "") {
+            var passwordRegistrationInput = registrationPasswordInput.value;
+        }
+
+        if (confirmPasswordInput.value === "") {
+            alert("Please confirm your password.")
+            return
+        } else if (confirmPasswordInput.value !== "") {
+            var passwordConfirmRegistrationInput = registrationConfirmPasswordInput.value;
+        }
 
         if (passwordRegistrationInput === passwordConfirmRegistrationInput) {
             var userPassword = passwordRegistrationInput;
@@ -485,59 +528,62 @@ function renderRegistrationForm() {
             password: userPassword
         }
 
-        alert("register new user")
-        console.log(newUserObj)
-
-        var existingUser = false
+        var existingUserEmail = false;
+        var existingUserPhoneNumber = false;
         var duplicateUser;
     
     for (let i = 0; i < users.length; i++) {
 
-        if(users[i].emailAddress === emailAddressRegistrationInput) {
-            existingUser = true;
+        if (users[i].emailAddress === emailAddressRegistrationInput) {
+            existingUserEmail = true;
+            duplicateUser = users[i]
+        } else if (users[i].phoneNumber === phoneNumberRegistrationInput) {
+            existingUserPhoneNumber = true;
             duplicateUser = users[i]
         }
     }
     
-    if (existingUser === false) {
+    if (existingUserEmail === false && existingUserPhoneNumber === false) {
         postNewUser(newUserObj)
         alert(`You have successfully registered, ${newUserObj.firstName}. Welcome to Stocknetic!`); 
-    } else if (existingUser === true) {
-            alert(`${duplicateUser.emailAddress} is already associated with another account. Please use a different email address.`)
+    } else if (existingUserEmail === true) {
+            alert(`${duplicateUser.emailAddress} is already associated with another account. Please use a different email address.`)     
+            registrationForm.reset();
+            return
+    } else if (existingUserPhoneNumber === true) {
+            alert(`${duplicateUser.phoneNumber} is already associated with another account. Please use a different phone number.`)
+            registrationForm.reset();
             return
     }
 
-    registrationForm.reset();
-
-    window.location.hash = "/"
-        
+    window.location.hash = "/"       
     })
 
     registrationContainer.appendChild(registrationHeader)
 
-    registrationContainer.appendChild(registrationFirstNameLabel)
-    registrationContainer.appendChild(registrationFirstNameInput)
+    registrationForm.appendChild(registrationFirstNameLabel)
+    registrationForm.appendChild(registrationFirstNameInput)
 
-    registrationContainer.appendChild(registrationLastNameLabel)
-    registrationContainer.appendChild(registrationLastNameInput)
+    registrationForm.appendChild(registrationLastNameLabel)
+    registrationForm.appendChild(registrationLastNameInput)
 
-    registrationContainer.appendChild(registrationAddressOneLabel)
-    registrationContainer.appendChild(registrationAddressOneInput)
+    registrationForm.appendChild(registrationAddressOneLabel)
+    registrationForm.appendChild(registrationAddressOneInput)
 
-    registrationContainer.appendChild(registrationAddressTwoLabel)
-    registrationContainer.appendChild(registrationAddressTwoInput)
+    registrationForm.appendChild(registrationAddressTwoLabel)
+    registrationForm.appendChild(registrationAddressTwoInput)
 
-    registrationContainer.appendChild(registrationPhoneNumberLabel)
-    registrationContainer.appendChild(registrationPhoneNumberInput)
+    registrationForm.appendChild(registrationPhoneNumberLabel)
+    registrationForm.appendChild(registrationPhoneNumberInput)
 
-    registrationContainer.appendChild(registrationEmailAddressLabel)
-    registrationContainer.appendChild(registrationEmailAddressInput)
+    registrationForm.appendChild(registrationEmailAddressLabel)
+    registrationForm.appendChild(registrationEmailAddressInput)
 
-    registrationContainer.appendChild(registrationPasswordLabel)
-    registrationContainer.appendChild(registrationPasswordInput)
+    registrationForm.appendChild(registrationPasswordLabel)
+    registrationForm.appendChild(registrationPasswordInput)
 
-    registrationContainer.appendChild(registrationConfirmPasswordLabel)
-    registrationContainer.appendChild(registrationConfirmPasswordInput)
+    registrationForm.appendChild(registrationConfirmPasswordLabel)
+    registrationForm.appendChild(registrationConfirmPasswordInput)
 
     previousPageFromRegistrationButton.appendChild(linkToPreviousPageFromRegistration)
     registerNewCustomerButton.appendChild(linkToHomePageFromRegistrationForm)
@@ -545,10 +591,10 @@ function renderRegistrationForm() {
     authbuttonsContainerTwo.appendChild(previousPageFromRegistrationButton)
     authbuttonsContainerTwo.appendChild(registerNewCustomerButton)
 
+    registrationContainer.appendChild(registrationForm)
     registrationContainer.appendChild(authbuttonsContainerTwo)
 
-    registrationForm.appendChild(registrationContainer)
-    registrationViewEl.appendChild(registrationForm)
+    registrationViewEl.appendChild(registrationContainer)
 
     console.log("see registration page")
 }
@@ -576,7 +622,6 @@ function showRegistrationPage() {
 }
 
 function renderSignInForm() {
-    console.log("Show sign in page.")
 
     var signInForm = document.createElement("form")
     signInForm.setAttribute("id", "sign-in-form")
@@ -635,6 +680,13 @@ var signInButton = document.querySelector("#sign-in-button")
 signInButton.addEventListener("click", showSignInPage)
 
 function showSignInPage() {
+    var sessionStorageId = sessionStorage.getItem("id")
+
+    if (sessionStorageId !== null) {
+        alert("Please sign out before signing in.")
+
+        return
+    }
     
     var registrationButton = document.querySelector("#register-button")
     registrationButton.classList.add("hidden")
@@ -672,15 +724,15 @@ async function handleClickSignInUser(event) {
         }
     }
 
-    var userId = sessionStorage.getItem("id")
+    // var userId = sessionStorage.getItem("id")
 
-        if (existingUser === true && userId !== null) {
-            alert("Already signed in!")
-            return
-        } else if(userId !== null) {
-            alert("Please sign out before signing in!")
-            return
-        }
+        // if (existingUser === true && userId !== null) {
+        //     alert("Already signed in!")
+        //     return
+        // } else if(userId !== null) {
+        //     alert("Please sign out before signing in!")
+        //     return
+        // }
 
         if(existingUser === true && user.password === signInPasswordInput) {
             getUser(user.id)
@@ -690,6 +742,7 @@ async function handleClickSignInUser(event) {
         } 
         else if (existingUser === false || user.password !== signInPasswordInput) {
             alert("Invalid email or password. Please try again.") 
+            signInForm.reset()
         }
 }
 
@@ -785,9 +838,6 @@ async function renderWatchListsPage() {
             var watchlistNameElement = watchlistNameContainer.firstChild
             var watchlistText = watchlistNameElement.textContent
             var watchlistNameText = watchlistText.slice(2)
-            // var watchlistId = parseInt(watchlistIdStr)
-
-            console.log(watchlistNameText)
 
             var watchlists = await getUserWatchlists()
 
@@ -1070,8 +1120,6 @@ function showCreateWatchlistsPage() {
     searchStocksViewEl.classList.add("hidden")
     createWatchlistsViewEl.classList.remove("hidden")
     createWatchlistsViewEl.classList.add("view")
-
-    // window.location.hash = "#/createWatchlists"
 }
 
 function createWatchlist() {
@@ -1124,8 +1172,20 @@ function createWatchlist() {
     }
 
     console.log(createWatchlistButton)
-        createWatchlistButton.addEventListener("click", function (event) {
+        createWatchlistButton.addEventListener("click", async function (event) {
             event.preventDefault()
+
+            var watchlists = await getUserWatchlists()
+
+            for (let i = 0; i < watchlists.length; i++) {
+                if (createWatchlistNameInput.value === watchlists[i].name) {
+                    alert(`Watchlist ${createWatchlistNameInput.value} already exists.`)
+                    createWatchlistFormElement.reset()
+
+                    return
+                }
+
+            }
 
             var userId = parseInt(sessionStorage.getItem("id"))
     
@@ -1140,7 +1200,6 @@ function createWatchlist() {
             postWatchlist(newWatchlistObj)
     
             window.location.hash = "/watchlists"
-    
         })
     }
 
@@ -1220,7 +1279,6 @@ function renderSearchStocksPage() {
             window.location.hash = "/searchStocks"
         }
     })
-
 }
 
 function showSearchStocksPage() {
@@ -1322,6 +1380,7 @@ async function renderMatchingStockOverview() {
     matchingStockDailyPriceRangeEl.textContent = `${matchingStockDailyPriceRangeLowValue} - ${matchingStockDailyPriceRangeHighValue}`
     matchingStockDailyPriceRangeEl.style.fontWeight = "normal"
 
+    console.log(matchingStockBasicFinancials)
     var matchingStockWeeklyPriceRangeContainer = document.createElement("div")
     matchingStockWeeklyPriceRangeContainer.className = "matching-stock-weekly-price-range-container"
     var matchingStockWeeklyPriceRangeLabel = document.createElement("p")
@@ -1431,9 +1490,9 @@ async function renderMatchingStockOverview() {
     goToPreviousPageFromSummaryButton.addEventListener("click", function () {
         history.back()
     })
+
     var goToPreviousPageFromSummaryLink = document.createElement("a")
     goToPreviousPageFromSummaryLink.setAttribute("id", "goToPreviousPageFromSummaryLink")
-    // goToPreviousPageFromSummaryLink.setAttribute("href", `#/quote/${ticker}`)
     goToPreviousPageFromSummaryLink.textContent = "Previous"
     var seeMatchingStockChartsButton = document.createElement("button")
     seeMatchingStockChartsButton.className = "see-matching-stock-charts-button"
@@ -1442,7 +1501,6 @@ async function renderMatchingStockOverview() {
     seeMatchingStockChartsLink.setAttribute("href", `#/${ticker}/charts`)
     seeMatchingStockChartsLink.textContent = "Charts"
     
-    // matchingStockOverviewHeaderContainer.appendChild(matchingStockOverviewHeader)
     matchingStockOverviewContainer.appendChild(matchingStockOverviewHeader)
 
     var matchingStockDataContainerArrOne = [matchingStockPreviousCloseContainer, matchingStockOpenPriceContainer, matchingStockCurrentPriceContainer, matchingStockDailyPriceRangeContainer, matchingStockWeeklyPriceRangeContainer, matchingStockVolumeContainer, matchingStockAverageVolumeContainer]
@@ -1503,8 +1561,6 @@ async function renderMatchingStockOverview() {
     seeMatchingStockChartsButton.appendChild(seeMatchingStockChartsLink)
     seeMatchingStockChartsButtonContainer.appendChild(seeMatchingStockChartsButton)
     
-    // matchingStockOverviewContainer.appendChild(matchingStockOverviewHeaderContainer)
-    // matchingStockOverviewContainer.appendChild(seeMatchingStockChartsButtonContainer)
     matchingStockOverviewContainer.appendChild(matchingStockOverviewDataRow)
 
     matchingStockOverviewViewEl.appendChild(matchingStockOverviewHeaderContainer)
