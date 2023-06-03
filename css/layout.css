@@ -143,6 +143,13 @@ ul {
     transform: translate(-50%, -50%);
 }
 
+#sign-in-form {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+}
+
 .watchlists-header-container {
     position: fixed;
     top: 15%;

@@ -23,7 +23,7 @@
 }
 
 
-@media screen and (max-width: 754px) {
+@media screen and (max-width: 750px) {
     .nav-list-items {
         display: none;
     }
@@ -37,7 +37,8 @@
         background-color: olivedrab;
         border: 2px solid black;
         width: 150px;
-        left: 82%;
+        left: 100%;
+        margin-left: -75px;
         transform: translate(-50%, -50%);
         padding-top: 10px;
         z-index: 10;

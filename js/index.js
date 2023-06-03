@@ -119,9 +119,12 @@ function displayNavItems(){
         }
         
         if (navListItemsTwo.classList.contains("hidden") !== true && chooseWatchlistToAddContainer !== null) {
-            navListItemsTwo.style.pointerEvents = "none"
-        } else if (navListItemsTwo.classList.contains("hidden") === true && chooseWatchlistToAddContainer == null || chooseWatchlistToAddContainer === undefined) {
             navListItemsTwo.style.pointerEvents = "auto"
+            chooseWatchlistToAddContainer.style.zIndex = "-1"
+        } else if (navListItems.classList.contains("hidden") === true & chooseWatchlistToAddContainer !== null) {
+            chooseWatchlistToAddContainer.style.zIndex = "1"
+        } else if (navListItemsTwo.classList.contains("hidden") === true && chooseWatchlistToAddContainer) {
+            chooseWatchlistToAddContainer.style.zIndex = "1"
         }
     })
 
@@ -269,16 +272,19 @@ async function renderMatchingStockQuote() {
    
                 console.log(watchlistNameElementsArr)
 
+                console.log(watchlists)
                 for (let i = 0; i < watchlists.length; i++) {
-                    if(watchlists[i].name === watchlistName.textContent) {
-                        selectedWatchlistId = watchlists[i].id
-                    }
-                }
+                    console.log(watchlists[i].name)
+                    // console.log(watchlistName.textContent)
 
-                for (let i = 0; i < watchlists.length; i++) {
+                    if (watchlists[i].name === watchlistNameText) {
+                    console.log(watchlists[i].name)
+                    console.log(watchlistNameText)
+                    selectedWatchlistId = watchlists[i].id
                     var stocksArr = watchlists[i].stocks
                     console.log(stocksArr)
-
+                    }
+                }
                     for (let m = 0; m < stocksArr.length; m++) {
                         if (stocksArr[m][1] === ticker) {
                             alert("This stock is already added to the watchlist.")
@@ -286,7 +292,7 @@ async function renderMatchingStockQuote() {
                             return
                         }
                     }
-                }
+
                 console.log(matchingStockOverview)
                 var stockName = matchingStockOverview.Name
                 console.log(watchlists)
@@ -653,13 +659,13 @@ function renderSignInForm() {
     linkToWatchlistsFromSignIn.setAttribute("id", "watchlists-page-from-sign-in-link")
     linkToWatchlistsFromSignIn.textContent = "Continue"
 
-    signInContainer.appendChild(signInHeader)
+    signInForm.appendChild(signInHeader)
 
-    signInContainer.appendChild(signInEmailInputLabel)
-    signInContainer.appendChild(signInEmailInput)
+    signInForm.appendChild(signInEmailInputLabel)
+    signInForm.appendChild(signInEmailInput)
 
-    signInContainer.appendChild(signInPasswordInputLabel)
-    signInContainer.appendChild(signInPasswordInput)
+    signInForm.appendChild(signInPasswordInputLabel)
+    signInForm.appendChild(signInPasswordInput)
 
     previousPageFromSignInButton.appendChild(linkToPreviousPageFromSignIn)
     watchlistsPageFromSignInButton.appendChild(linkToWatchlistsFromSignIn)
@@ -667,10 +673,10 @@ function renderSignInForm() {
     authButtonsContainerThree.appendChild(previousPageFromSignInButton)
     authButtonsContainerThree.appendChild(watchlistsPageFromSignInButton)
 
-    signInContainer.appendChild(authButtonsContainerThree)
+    signInForm.appendChild(authButtonsContainerThree)
 
-    signInForm.appendChild(signInContainer)
-    signInViewEl.appendChild(signInForm)
+    signInContainer.appendChild(signInForm)
+    signInViewEl.appendChild(signInContainer)
 
     linkToWatchlistsFromSignIn.addEventListener("click", handleClickSignInUser)
 

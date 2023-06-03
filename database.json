@@ -64,7 +64,16 @@
       "userId": 2,
       "name": "Large cap stocks",
       "description": "For long term strategy",
-      "stocks": [],
+      "stocks": [
+        [
+          "Apple Inc",
+          "AAPL"
+        ],
+        [
+          "The Boeing Company",
+          "BA"
+        ]
+      ],
       "id": 3
     }
   ]

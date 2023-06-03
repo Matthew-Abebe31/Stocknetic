@@ -3,17 +3,6 @@ const remoteURL = "http://localhost:3000"
 var sessionStorageId = sessionStorage.getItem("id")
 var sessionStorageIdNum = parseInt(sessionStorageId)
 
-const date = new Date();
-
-let day = date.getDate();
-let month = date.getMonth() + 1;
-let year = date.getFullYear();
-
-// This arrangement can be altered based on how we want the date's format to appear.
-let currentDate = `${year}-${month}-${day}`;
-console.log(currentDate); // "17-6-2022"
-
-
 async function getAllUsers() {
     const res = await fetch(`${remoteURL}/users`)
     return await res.json()
@@ -49,12 +38,7 @@ async function getMatchingStockQuoteDataTwo(ticker) {
 }   
 
 async function getMatchingStockDailyPriceData(ticker) {
-    const res = await fetch(`https://api.polygon.io/v1/open-close/${ticker}/?adjusted=true&apiKey=BOfLlBXGLnTWqzN5rrpthhw5UwD7KJQ_`)
-    return await res.json()
-}
-
-async function getMatchingStockDailyPrice(ticker) {
-    const res = await fetch(`https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/2023-01-09/2023-01-25?adjusted=true&sort=asc&limit=120&apiKey=BOfLlBXGLnTWqzN5rrpthhw5UwD7KJQ_`)
+    const res = await fetch(`https://api.polygon.io/v1/open-close/${ticker}/2023-01-09?adjusted=true&apiKey=BOfLlBXGLnTWqzN5rrpthhw5UwD7KJQ_`)
     return await res.json()
 }
 
