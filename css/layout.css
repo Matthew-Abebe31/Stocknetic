@@ -536,8 +536,9 @@ div.choose-watchlist-to-add-container div.add-to-watchlist-container >  p.watchl
     transform: translate(-50%, -50%);
 }
 
+.one-day-chart-button,
 .daily-chart-button,
-.weekly-chart-button,
+.one-month-chart-button,
 .monthly-chart-button {
     width: 75px;
 }

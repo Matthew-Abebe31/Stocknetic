@@ -35,10 +35,6 @@
       "description": "For trend strategy.",
       "stocks": [
         [
-          "Visa Inc. Class A",
-          "V"
-        ],
-        [
           "Microsoft Corporation",
           "MSFT"
         ],
@@ -57,7 +53,12 @@
       "userId": 2,
       "name": "Losing stocks",
       "description": "",
-      "stocks": [],
+      "stocks": [
+        [
+          "Advance Auto Parts Inc",
+          "AAP"
+        ]
+      ],
       "id": 2
     },
     {

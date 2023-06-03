@@ -1,5 +1,25 @@
 const remoteURL = "http://localhost:3000"
 
+var currentTimeStamp = Date.now()
+var currentTimeStampStr = currentTimeStamp.toString()
+console.log(currentTimeStampStr)
+let currentDate = new Date();
+var dd = currentDate.getDate();
+
+var mm = currentDate.getMonth()+1; 
+var yyyy = currentDate.getFullYear();
+if(dd<10) 
+{
+    dd='0'+dd;
+} 
+
+if(mm<10) 
+{
+    mm='0'+mm;
+} 
+currentDate = yyyy+'-'+mm+'-'+dd
+console.log(currentDate);
+
 var sessionStorageId = sessionStorage.getItem("id")
 var sessionStorageIdNum = parseInt(sessionStorageId)
 
@@ -37,18 +57,23 @@ async function getMatchingStockQuoteDataTwo(ticker) {
     return await res.json()
 }   
 
-async function getMatchingStockDailyPriceData(ticker) {
-    const res = await fetch(`https://api.polygon.io/v1/open-close/${ticker}/2023-01-09?adjusted=true&apiKey=BOfLlBXGLnTWqzN5rrpthhw5UwD7KJQ_`)
-    return await res.json()
-}
+// async function getMatchingStockDailyPriceData(ticker) {
+//     const res = await fetch(`https://api.polygon.io/v1/open-close/${ticker}/${currentDate}?adjusted=true&apiKey=BOfLlBXGLnTWqzN5rrpthhw5UwD7KJQ_`)
+//     return await res.json()
+// }
 
 async function getMatchingStockPricingData(ticker) {
     const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}&apikey=dMVPYPPFWDTRLQU0S`)
     return await res.json()
 } 
 
-async function getMatchingStockPriceCandles(ticker, latestUnixTimestamp, oneYearUnixTimestamp ) {
-    const res = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${ticker}&resolution=W&from=${oneYearUnixTimestamp}to=${latestUnixTimestamp}&token=cgq5i1pr01qmkidmgf40cgq5i1pr01qmkidmgf4g`)
+async function getMatchingStockOneMonthPriceData(ticker) {
+    const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=${ticker}&apikey=dMVPYPPFWDTRLQU0S`)
+    return await res.json()
+}
+
+async function getMatchingStockPriceCandles(ticker, currentTimeStampStr) {
+    const res = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${ticker}&resolution=W&from=${currentTimeStampStr}to=${currentTimeStampStr}&token=cgq5i1pr01qmkidmgf40cgq5i1pr01qmkidmgf4g`)
     return await res.json()
 }
 
@@ -157,4 +182,4 @@ async function deleteWatchlist(id) {
 }
 
 
-export { getAllUsers, getUser, getMatchingStockTickerData, getMatchingStockOverviewData, getMatchingStockQuoteData, getMatchingStockEarningsData, getMatchingStockDailyPriceData, getMatchingStockPricingData, getMatchingStockPriceCandles, getMatchingStockBasicFinancialData, getMatchingStockQuoteDataTwo, getMatchingStockProfileData, getMatchingStockEPSCalendarData, getMatchingStockCurrentVolume, getWatchlists, getWatchlist, getUserWatchlists, postNewUser, postWatchlist, putWatchlist, patchWatchlist, deleteWatchlist }
+export { getAllUsers, getUser, getMatchingStockTickerData, getMatchingStockOverviewData, getMatchingStockQuoteData, getMatchingStockEarningsData, getMatchingStockPricingData, getMatchingStockOneMonthPriceData, getMatchingStockPriceCandles, getMatchingStockBasicFinancialData, getMatchingStockQuoteDataTwo, getMatchingStockProfileData, getMatchingStockEPSCalendarData, getMatchingStockCurrentVolume, getWatchlists, getWatchlist, getUserWatchlists, postNewUser, postWatchlist, putWatchlist, patchWatchlist, deleteWatchlist }

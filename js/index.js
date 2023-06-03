@@ -1,4 +1,4 @@
-import { getAllUsers, getUser, getMatchingStockTickerData, getMatchingStockOverviewData, getMatchingStockQuoteData, getMatchingStockEarningsData, getMatchingStockDailyPriceData, getMatchingStockPricingData, getMatchingStockPriceCandles, getMatchingStockBasicFinancialData, getMatchingStockQuoteDataTwo, getMatchingStockProfileData, getMatchingStockEPSCalendarData, getMatchingStockCurrentVolume, getWatchlists, getUserWatchlists, getWatchlist, postWatchlist, putWatchlist, patchWatchlist, deleteWatchlist, postNewUser} from "../js/data.js"
+import { getAllUsers, getUser, getMatchingStockTickerData, getMatchingStockOverviewData, getMatchingStockQuoteData, getMatchingStockPricingData, getMatchingStockOneMonthPriceData, getMatchingStockPriceCandles, getMatchingStockBasicFinancialData, getMatchingStockQuoteDataTwo, getMatchingStockProfileData, getMatchingStockEPSCalendarData, getMatchingStockCurrentVolume, getWatchlists, getUserWatchlists, getWatchlist, postWatchlist, putWatchlist, patchWatchlist, deleteWatchlist, postNewUser} from "../js/data.js"
 
 var root = window.location.protocol + '//' + window.location.host + '/';
 var currentURL = window.location.href
@@ -1305,8 +1305,8 @@ async function renderMatchingStockOverview() {
     var pathArr = window.location.href.split('/')
     var ticker = pathArr[4]
     
-    var matchingStockDailyPriceData = await getMatchingStockDailyPriceData(ticker)
-    var matchingStockCurrentVolume = await getMatchingStockCurrentVolume(ticker)
+    var matchingStockCurrentVolumeData = await getMatchingStockCurrentVolume(ticker)
+    var matchingStockCurrentVolume = matchingStockCurrentVolumeData.results[0].v
     var matchingStockProfileData = await getMatchingStockProfileData(ticker)
     var matchingStockQuoteDataTwo = await getMatchingStockQuoteDataTwo(ticker)
     var matchingStockBasicFinancials = await getMatchingStockBasicFinancialData(ticker)
@@ -1400,6 +1400,7 @@ async function renderMatchingStockOverview() {
     console.log(matchingStockWeeklyPriceRangeLowValue)
     matchingStockWeeklyPriceRangeEl.textContent = `${matchingStockWeeklyPriceRangeLowValue} - ${matchingStockWeeklyPriceRangeHighValue}`
 
+    console.log(matchingStockCurrentVolume)
     var matchingStockVolumeContainer = document.createElement("div")
     matchingStockVolumeContainer.className = "matching-stock-volume-container"
     var matchingStockVolumeLabel = document.createElement("p")
@@ -1408,7 +1409,7 @@ async function renderMatchingStockOverview() {
     matchingStockVolumeLabel.style.fontWeight = "bold"
     var matchingStockVolumeEl = document.createElement("p")
     matchingStockVolumeEl.className = "matching-stock-volume-element"
-    matchingStockVolumeEl.textContent = matchingStockDailyPriceData.volume
+    matchingStockVolumeEl.textContent = matchingStockCurrentVolume
 
     var matchingStockAverageVolumeContainer = document.createElement("div")
     matchingStockAverageVolumeContainer.className = "matching-stock-average-volume-container"
@@ -1448,6 +1449,17 @@ async function renderMatchingStockOverview() {
     var matchingStockEPSEl = document.createElement("p")
     matchingStockEPSEl.textContent = matchingStockBasicFinancials.metric.epsTTM.toFixed(2)
 
+    console.log(matchingStockBasicFinancials)
+
+    let matchingStockCurrentDividendYield;
+
+    if (matchingStockBasicFinancials.metric.currentDividendYieldTTM !== null) {
+        matchingStockCurrentDividendYield = `${matchingStockBasicFinancials.metric.currentDividendYieldTTM.toFixed(2)}%`
+        matchingStockCurrentDividendYield = matchingStockCurrentDividendYield
+    } else if (matchingStockBasicFinancials.metric.currentDividendYieldTTM === null) {
+        matchingStockCurrentDividendYield = "N/A"
+    }
+
     var matchingStockDividendYieldContainer = document.createElement("div")
     matchingStockDividendYieldContainer.className = "matching-stock-dividend-yield-container"
     var matchingStockDividendYieldLabel = document.createElement("p")
@@ -1455,7 +1467,15 @@ async function renderMatchingStockOverview() {
     matchingStockDividendYieldLabel.textContent = "Dividend Yield:"
     matchingStockDividendYieldLabel.style.fontWeight = "bold"
     var matchingStockDividendYieldEl = document.createElement("p")
-    matchingStockDividendYieldEl.textContent = matchingStockBasicFinancials.metric.currentDividendYieldTTM
+    matchingStockDividendYieldEl.textContent = matchingStockCurrentDividendYield
+
+    let matchingStockDividendPerShare;
+
+    if (matchingStockBasicFinancials.metric.dividendsPerShareTTM !== null) {
+        matchingStockDividendPerShare = `${matchingStockBasicFinancials.metric.dividendsPerShareTTM.toFixed(2)}%`
+    } else if (matchingStockBasicFinancials.metric.dividendsPerShareTTM === null) {
+        matchingStockDividendPerShare = "N/A"
+    }
 
     var matchingStockDividendPerShareContainer = document.createElement("div")
     matchingStockDividendPerShareContainer.className = "matching-stock-dividend-per-share-container"
@@ -1464,7 +1484,7 @@ async function renderMatchingStockOverview() {
     matchingStockDividendPerShareLabel.textContent = "Dividend Per Share:"
     matchingStockDividendPerShareLabel.style.fontWeight = "bold"
     var matchingStockDividendPerShareEl = document.createElement("p")
-    matchingStockDividendPerShareEl.textContent = matchingStockBasicFinancials.metric.dividendsPerShareTTM
+    matchingStockDividendPerShareEl.textContent = matchingStockDividendPerShare
 
     var matchingStockReturnOnAssetsContainer = document.createElement("div")
     matchingStockReturnOnAssetsContainer.className = "matching-stock-return-on-assets-container"
@@ -1597,15 +1617,18 @@ async function renderMatchingStockCharts() {
     var renderMatchingStockChartsPageContainer = document.querySelector(".matching-stock-charts-page-container")
     var changeChartsButtonContainer = document.createElement("div")
     changeChartsButtonContainer.className = "change-charts-button-container"
+    var oneDayChartButton = document.createElement("button")
+    oneDayChartButton.className = "one-day-chart-button"
+    oneDayChartButton.textContent = "1 Day"
     var dailyChartButton = document.createElement("button")
     dailyChartButton.className = "daily-chart-button"
-    dailyChartButton.textContent = "Daily"
-    var weeklyChartButton = document.createElement("button")
-    weeklyChartButton.className = "weekly-chart-button"
-    weeklyChartButton.textContent = "Weekly"
+    dailyChartButton.textContent = "5 Day"
+    var oneMonthChartButton = document.createElement("button")
+    oneMonthChartButton.className = "one-month-chart-button"
+    oneMonthChartButton.textContent = "1 Month"
     var monthlyChartButton = document.createElement("button")
     monthlyChartButton.className = "monthly-chart-button"
-    monthlyChartButton.textContent = "Monthly"
+    monthlyChartButton.textContent = "3 Month"
     var previousFromChartsButton = document.createElement("button")
     previousFromChartsButton.className = "previous-from-charts-button"
     previousFromChartsButton.textContent = "Previous"
@@ -1617,32 +1640,78 @@ async function renderMatchingStockCharts() {
         var matchingStockPricingDataResult = await getMatchingStockPricingData(ticker)
         var matchingStockDailyPriceData = matchingStockPricingDataResult["Time Series (Daily)"]
         var matchingStockProfileDataResult = await getMatchingStockProfileData(ticker)
+        var matchingStockOneMonthPriceDataResult = await getMatchingStockOneMonthPriceData(ticker)
+        var matchingStockOneMonthPriceData = matchingStockOneMonthPriceDataResult["Weekly Adjusted Time Series"]
     
         console.log(matchingStockPricingDataResult)
-        console.log(matchingStockProfileDataResult)
+        console.log(matchingStockOneMonthPriceData)
+
+        function createOneDayChart() {
+            console.log("show one day chart.")
+
+        //     var closePrices = []
+        //     var closeDates = []
+
+        //     for (var key in matchingStockDailyPriceData) {
+        //         closePrices.push(parseFloat(matchingStockDailyPriceData[key]["4. close"]));
+        //         closeDates.push(key);
+        //       }
+            
+        //       let stockData = closeDates.map((date, index) => {
+        //         return [date, closePrices[index]];
+        //       });
     
-        var closePrices = []
-        var closeDates = []
-        var mergedChartArr = []
-        var finalChartArr = []
-        
-        for (var key in matchingStockDailyPriceData) {
-            closePrices.push(parseFloat(matchingStockDailyPriceData[key]['4. close']));
-            closeDates.push(key);
-          }
-        
-          let stockData = closeDates.map((date, index) => {
-            return [date, closePrices[index]];
-          });
+        //       stockData.length = 7
+        //        console.log(stockData)
 
-           console.log(stockData)
+        //     var data = new google.visualization.DataTable();
+        //     data.addColumn('string', 'X');
+        //     data.addColumn('number', 'Stock Price');
+      
+        //     data.addRows(stockData);
+      
+        //     var options = {
+        //     'title': `${matchingStockProfileDataResult.name} (${ticker}) Price`
+        //     };
+         
+        //     var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      
+        //     chart.draw(data, options);
 
+            
+        // var chartDiv = document.getElementById("chart_div")
+        // console.log(chartDiv)
+        // var chartDivFirstChildEl = chartDiv.childNodes[0]
+        // var firstChildElOfChartDivFirstChildEl = chartDivFirstChildEl.childNodes[0]
+        // var nextFirstChild = firstChildElOfChartDivFirstChildEl.childNodes[0]
+        // var svg = nextFirstChild.childNodes[0]
+        // var svgThirdIndexChild = svg.childNodes[4]
+        // var chartElement =svgThirdIndexChild.childNodes[3]
+        // var chartLabelElements = chartElement.childNodes
+
+        }
+    
         function createChart() {
+
+            var closePrices = []
+            var closeDates = []
+
+            for (var key in matchingStockDailyPriceData) {
+                closePrices.push(parseFloat(matchingStockDailyPriceData[key]["4. close"]));
+                closeDates.push(key);
+              }
+            
+              let stockData = closeDates.map((date, index) => {
+                return [date, closePrices[index]];
+              });
+    
+              stockData.length = 7
+               console.log(stockData)
+
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'X');
             data.addColumn('number', 'Stock Price');
       
-
             data.addRows(stockData);
       
             var options = {
@@ -1666,15 +1735,65 @@ async function renderMatchingStockCharts() {
 
         }
 
+        function createOneMonthChart() {
+            console.log("show weekly chart.")
+            console.log(matchingStockOneMonthPriceData)
+
+            var oneMonthClosePricesArr = []
+            var oneMonthCloseDatesArr = []
+
+            for (var key in matchingStockOneMonthPriceData) {
+                oneMonthClosePricesArr.push(parseFloat(matchingStockOneMonthPriceData[key]["4. close"]));
+                oneMonthCloseDatesArr.push(key);
+              }
+            
+              let oneMonthStockData = oneMonthCloseDatesArr.map((date, index) => {
+                return [date, oneMonthClosePricesArr[index]];
+              });
+    
+            //    console.log(oneMonthStockData)
+
+            oneMonthStockData.length = 4
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'X');
+            data.addColumn('number', 'Stock Price');
+      
+            data.addRows(oneMonthStockData);
+      
+            var options = {
+            'title': `${matchingStockProfileDataResult.name} (${ticker}) Price`
+            };
+         
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      
+            chart.draw(data, options);
+
+            var chartDiv = document.getElementById("chart_div")
+            console.log(chartDiv)
+            var chartDivFirstChildEl = chartDiv.childNodes[0]
+            var firstChildElOfChartDivFirstChildEl = chartDivFirstChildEl.childNodes[0]
+            var nextFirstChild = firstChildElOfChartDivFirstChildEl.childNodes[0]
+            var svg = nextFirstChild.childNodes[0]
+            var svgThirdIndexChild = svg.childNodes[4]
+            var chartElement =svgThirdIndexChild.childNodes[3]
+            var chartLabelElements = chartElement.childNodes
+
+        }
+
         createChart()
+
+        oneDayChartButton.addEventListener("click", createOneDayChart)
+        dailyChartButton.addEventListener("click", createChart)
+        oneMonthChartButton.addEventListener("click", createOneMonthChart)
 
         previousFromChartsButton.addEventListener("click", function () {
             history.back()
         })
     }
 
+    changeChartsButtonContainer.appendChild(oneDayChartButton)
     changeChartsButtonContainer.appendChild(dailyChartButton)
-    changeChartsButtonContainer.appendChild(weeklyChartButton)
+    changeChartsButtonContainer.appendChild(oneMonthChartButton)
     changeChartsButtonContainer.appendChild(monthlyChartButton)
     renderMatchingStockChartsPageContainer.appendChild(changeChartsButtonContainer)
     renderMatchingStockChartsPageContainer.appendChild(previousFromChartsButton)
