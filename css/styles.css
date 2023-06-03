@@ -171,8 +171,9 @@ h2.title {
     margin-left: 20px;
 }
 
-h2#matchingStockOverviewHeader {
-    margin-bottom: 25px;
+h3#matchingStockOverviewHeader {
+    height: 20px;
+    /* margin-bottom: 25px; */
 }
 
 li.nav-list-item {
