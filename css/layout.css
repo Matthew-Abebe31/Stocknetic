@@ -539,13 +539,17 @@ div.choose-watchlist-to-add-container div.add-to-watchlist-container >  p.watchl
 .one-day-chart-button,
 .daily-chart-button,
 .one-month-chart-button,
-.monthly-chart-button {
-    width: 75px;
+.monthly-chart-button,
+.six-month-chart-button,
+.one-year-chart-button {
+    width: 50px;
 }
 
-.previous-from-charts-button {
+.change-page-from-charts-button-container {
     position: fixed;
-    width: 75px;
+    display: flex;
+    justify-content: center;
+    width: 350px;
     top: 85%;
     left: 50%;
     transform: translate(-50%, -50%);

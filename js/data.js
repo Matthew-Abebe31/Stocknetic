@@ -62,6 +62,11 @@ async function getMatchingStockQuoteDataTwo(ticker) {
 //     return await res.json()
 // }
 
+async function getMatchingStockIntradayPricingData(ticker) {
+    const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${ticker}&interval=30min&apikey=dMVPYPPFWDTRLQU0S`)
+    return await res.json()
+}
+
 async function getMatchingStockPricingData(ticker) {
     const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}&apikey=dMVPYPPFWDTRLQU0S`)
     return await res.json()
@@ -87,8 +92,14 @@ async function getMatchingStockEPSCalendarData(ticker) {
     return await res.json()
 }
 
-async function getMatchingStockCurrentVolume(ticker) {
+async function getMatchingStockCurrentVolume(ticker, error) {
     const res = await fetch(`https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/2023-01-09/2023-01-09?adjusted=true&sort=asc&limit=120&apiKey=BOfLlBXGLnTWqzN5rrpthhw5UwD7KJQ_`)
+    console.log(res.status)
+
+    if (res.status === 429) {
+        alert("This application uses free data and is susceptible to call limits. Please wait a moment before continuing.")
+        window.location.hash = "/"
+    }
     return await res.json()
 }
 
@@ -182,4 +193,4 @@ async function deleteWatchlist(id) {
 }
 
 
-export { getAllUsers, getUser, getMatchingStockTickerData, getMatchingStockOverviewData, getMatchingStockQuoteData, getMatchingStockEarningsData, getMatchingStockPricingData, getMatchingStockOneMonthPriceData, getMatchingStockPriceCandles, getMatchingStockBasicFinancialData, getMatchingStockQuoteDataTwo, getMatchingStockProfileData, getMatchingStockEPSCalendarData, getMatchingStockCurrentVolume, getWatchlists, getWatchlist, getUserWatchlists, postNewUser, postWatchlist, putWatchlist, patchWatchlist, deleteWatchlist }
+export { getAllUsers, getUser, getMatchingStockTickerData, getMatchingStockOverviewData, getMatchingStockQuoteData, getMatchingStockEarningsData, getMatchingStockIntradayPricingData, getMatchingStockPricingData, getMatchingStockOneMonthPriceData, getMatchingStockPriceCandles, getMatchingStockBasicFinancialData, getMatchingStockQuoteDataTwo, getMatchingStockProfileData, getMatchingStockEPSCalendarData, getMatchingStockCurrentVolume, getWatchlists, getWatchlist, getUserWatchlists, postNewUser, postWatchlist, putWatchlist, patchWatchlist, deleteWatchlist }

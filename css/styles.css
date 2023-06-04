@@ -305,6 +305,7 @@ h4#matchingStockPriceChangePercent {
     background-color: cyan;
     border: 2px solid black;
     border-radius: 10px;
+    margin-top: 10px;
     top: 50%;
     left: 50%;
     padding: 5px;
@@ -320,6 +321,10 @@ h4#matchingStockPriceChangePercent {
 #chart_div > div > div > div > svg > :nth-child(4) {
    display: none;
 }
+
+/* g > text {
+    transform: rotate(45deg)
+} */
 
 /* @media screen and (max-width: 750px) {
     .small {
