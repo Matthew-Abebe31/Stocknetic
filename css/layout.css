@@ -385,11 +385,12 @@ div.choose-watchlist-to-add-container div.add-to-watchlist-container >  p.watchl
     }
 }
 
+.watchlists-from-charts-button,
 .view-watchlist-details-button {
     margin-right: 2.5px;
 }
 
-
+.previous-from-charts-button,
 .delete-watchlist-button {
     margin-left: 2.5px;
 }
@@ -531,7 +532,7 @@ div.choose-watchlist-to-add-container div.add-to-watchlist-container >  p.watchl
     justify-content: space-between;
     align-items: center;
     width: 350px;
-    top: 20%;
+    bottom: 16%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -545,12 +546,19 @@ div.choose-watchlist-to-add-container div.add-to-watchlist-container >  p.watchl
     width: 50px;
 }
 
+.charts-header-container {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .change-page-from-charts-button-container {
     position: fixed;
     display: flex;
     justify-content: center;
     width: 350px;
-    top: 85%;
+    bottom: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
 }

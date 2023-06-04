@@ -64,6 +64,7 @@ function displayNavItems(){
         var matchingStockContainer = document.querySelector(".matching-stock-container")
         var matchingStockOverviewContainer = document.querySelector(".matching-stock-overview-container")
         var chooseWatchlistToAddContainer = document.querySelector(".choose-watchlist-to-add-container")
+        var changeChartsButtonContainer = document.querySelector(".change-charts-button-container")
         var chartDiv = document.getElementById("chart_div")
 
         if (navListItemsTwo.classList.contains("hidden") !== true) {
@@ -112,12 +113,6 @@ function displayNavItems(){
             matchingStockOverviewContainer.style.zIndex = "1"
         }
 
-        if (navListItemsTwo.classList.contains("hidden") !== true && chartDiv !== null) {
-            chartDiv.style.zIndex = "-1"
-        } else if (navListItemsTwo.classList.contains("hidden") === true && chartDiv !== null) {
-            chartDiv.style.zIndex = "1"
-        }
-        
         if (navListItemsTwo.classList.contains("hidden") !== true && chooseWatchlistToAddContainer !== null) {
             navListItemsTwo.style.pointerEvents = "auto"
             chooseWatchlistToAddContainer.style.zIndex = "-1"
@@ -126,6 +121,19 @@ function displayNavItems(){
         } else if (navListItemsTwo.classList.contains("hidden") === true && chooseWatchlistToAddContainer) {
             chooseWatchlistToAddContainer.style.zIndex = "1"
         }
+
+        if (navListItemsTwo.classList.contains("hidden") !== true && chartDiv !== null) {
+            chartDiv.style.zIndex = "-1"
+        } else if (navListItemsTwo.classList.contains("hidden") === true && chartDiv !== null) {
+            chartDiv.style.zIndex = "1"
+        }
+
+        if (navListItemsTwo.classList.contains("hidden") !== true && changeChartsButtonContainer !== null) {
+            changeChartsButtonContainer.style.zIndex = "-1"
+        } else if (navListItemsTwo.classList.contains("hidden") === true && changeChartsButtonContainer !== null) {
+            changeChartsButtonContainer.style.zIndex = "1"
+        }
+        
     })
 
         var screenWidth;
@@ -1617,6 +1625,11 @@ async function renderMatchingStockCharts() {
     var renderMatchingStockChartsPageContainer = document.querySelector(".matching-stock-charts-page-container")
     var changeChartsButtonContainer = document.createElement("div")
     changeChartsButtonContainer.className = "change-charts-button-container"
+    var chartsHeaderContainer = document.createElement("div")
+    chartsHeaderContainer.className = "charts-header-container"
+    var chartsHeader = document.createElement("h2")
+    chartsHeader.setAttribute("id", "chartsHeader")
+    chartsHeader.textContent = "Charts"
     var oneDayChartButton = document.createElement("button")
     oneDayChartButton.className = "one-day-chart-button"
     oneDayChartButton.textContent = "1 Day"
@@ -1819,6 +1832,8 @@ async function renderMatchingStockCharts() {
         })
     }
 
+    chartsHeaderContainer.appendChild(chartsHeader)
+    renderMatchingStockChartsPageContainer.appendChild(chartsHeaderContainer)
     changeChartsButtonContainer.appendChild(oneDayChartButton)
     changeChartsButtonContainer.appendChild(dailyChartButton)
     changeChartsButtonContainer.appendChild(oneMonthChartButton)
