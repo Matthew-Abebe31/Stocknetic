@@ -1633,15 +1633,15 @@ async function renderMatchingStockCharts() {
     var oneDayChartButton = document.createElement("button")
     oneDayChartButton.className = "one-day-chart-button"
     oneDayChartButton.textContent = "1 Day"
-    var dailyChartButton = document.createElement("button")
-    dailyChartButton.className = "daily-chart-button"
-    dailyChartButton.textContent = "5 Day"
+    var fiveDayChartButton = document.createElement("button")
+    fiveDayChartButton.className = "daily-chart-button"
+    fiveDayChartButton.textContent = "5 Day"
     var oneMonthChartButton = document.createElement("button")
     oneMonthChartButton.className = "one-month-chart-button"
     oneMonthChartButton.textContent = "1 Month"
-    var monthlyChartButton = document.createElement("button")
-    monthlyChartButton.className = "monthly-chart-button"
-    monthlyChartButton.textContent = "3 Month"
+    var threeMonthChartButton = document.createElement("button")
+    threeMonthChartButton.className = "monthly-chart-button"
+    threeMonthChartButton.textContent = "3 Month"
     var sixMonthChartButton = document.createElement("button")
     sixMonthChartButton.className = "six-month-chart-button"
     sixMonthChartButton.textContent = "6 Month"
@@ -1680,6 +1680,10 @@ async function renderMatchingStockCharts() {
 
         function createOneDayChart() {
             console.log("show one day chart.")
+
+            if (matchingStockOneMonthPriceData === undefined) {
+                alert("data limit reached")
+            }
 
             var closePrices = []
             var closeDates = []
@@ -1725,7 +1729,11 @@ async function renderMatchingStockCharts() {
 
         }
     
-        function createChart() {
+        function createFiveDayChart() {
+
+            if (matchingStockOneMonthPriceData === undefined) {
+                alert("data limit reached")
+            }
 
             var closePrices = []
             var closeDates = []
@@ -1739,7 +1747,7 @@ async function renderMatchingStockCharts() {
                 return [date, closePrices[index]];
               });
     
-              stockData.length = 7
+              stockData.length = 5
                console.log(stockData)
 
             var data = new google.visualization.DataTable();
@@ -1770,6 +1778,10 @@ async function renderMatchingStockCharts() {
 
         function createOneMonthChart() {
             console.log("show weekly chart.")
+
+            if (matchingStockOneMonthPriceData === undefined) {
+                alert("data limit reached")
+            }
             console.log(matchingStockOneMonthPriceData)
 
             var oneMonthClosePricesArr = []
@@ -1818,11 +1830,175 @@ async function renderMatchingStockCharts() {
             // }
         }
 
-        createChart()
+        function createThreeMonthChart() {
+            console.log("show weekly chart.")
+            console.log(matchingStockOneMonthPriceData)
 
+            if (matchingStockOneMonthPriceData === undefined) {
+                alert("data limit reached")
+            }
+
+            var oneMonthClosePricesArr = []
+            var oneMonthCloseDatesArr = []
+
+            for (var key in matchingStockOneMonthPriceData) {
+                oneMonthClosePricesArr.push(parseFloat(matchingStockOneMonthPriceData[key]["4. close"]));
+                oneMonthCloseDatesArr.push(key);
+              }
+            
+              let oneMonthStockData = oneMonthCloseDatesArr.map((date, index) => {
+                return [date, oneMonthClosePricesArr[index]];
+              });
+    
+            //    console.log(oneMonthStockData)
+
+            oneMonthStockData.length = 15
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'X');
+            data.addColumn('number', 'Stock Price');
+      
+            data.addRows(oneMonthStockData);
+      
+            var options = {
+            'title': `${matchingStockProfileDataResult.name} (${ticker}) Price`
+            };
+         
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      
+            chart.draw(data, options);
+
+            var chartDiv = document.getElementById("chart_div")
+            var chartDivFirstChildEl = chartDiv.childNodes[0]
+            var firstChildElOfChartDivFirstChildEl = chartDivFirstChildEl.childNodes[0]
+            var nextFirstChild = firstChildElOfChartDivFirstChildEl.childNodes[0]
+            var svg = nextFirstChild.childNodes[0]
+            var svgThirdIndexChild = svg.childNodes[4]
+            var chartElement =svgThirdIndexChild.childNodes[3]
+            var chartLabelElements = chartElement.childNodes
+            let chartLabelElementsArr = Array.from(chartLabelElements)
+            chartLabelElementsArr = chartLabelElementsArr.slice(0, 5)
+            console.log(chartLabelElementsArr)
+
+            // for (let i = 0; i < chartLabelElementsArr.length; i++) {
+            //     chartLabelElementsArr[i].style.transform = "rotate(45deg)"
+            // }
+        }
+
+        function createSixMonthChart() {
+            console.log("show weekly chart.")
+            console.log(matchingStockOneMonthPriceData)
+
+            if (matchingStockOneMonthPriceData === undefined) {
+                alert("data limit reached")
+            }
+
+            var oneMonthClosePricesArr = []
+            var oneMonthCloseDatesArr = []
+
+            for (var key in matchingStockOneMonthPriceData) {
+                oneMonthClosePricesArr.push(parseFloat(matchingStockOneMonthPriceData[key]["4. close"]));
+                oneMonthCloseDatesArr.push(key);
+              }
+            
+              let oneMonthStockData = oneMonthCloseDatesArr.map((date, index) => {
+                return [date, oneMonthClosePricesArr[index]];
+              });
+    
+            //    console.log(oneMonthStockData)
+
+            oneMonthStockData.length = 30
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'X');
+            data.addColumn('number', 'Stock Price');
+      
+            data.addRows(oneMonthStockData);
+      
+            var options = {
+            'title': `${matchingStockProfileDataResult.name} (${ticker}) Price`
+            };
+         
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      
+            chart.draw(data, options);
+
+            var chartDiv = document.getElementById("chart_div")
+            var chartDivFirstChildEl = chartDiv.childNodes[0]
+            var firstChildElOfChartDivFirstChildEl = chartDivFirstChildEl.childNodes[0]
+            var nextFirstChild = firstChildElOfChartDivFirstChildEl.childNodes[0]
+            var svg = nextFirstChild.childNodes[0]
+            var svgThirdIndexChild = svg.childNodes[4]
+            var chartElement =svgThirdIndexChild.childNodes[3]
+            var chartLabelElements = chartElement.childNodes
+            let chartLabelElementsArr = Array.from(chartLabelElements)
+            chartLabelElementsArr = chartLabelElementsArr.slice(0, 5)
+            console.log(chartLabelElementsArr)
+
+            // for (let i = 0; i < chartLabelElementsArr.length; i++) {
+            //     chartLabelElementsArr[i].style.transform = "rotate(45deg)"
+            // }
+        }
+
+        function createOneYearChart() {
+            console.log("show weekly chart.")
+            console.log(matchingStockOneMonthPriceData)
+
+            if (matchingStockOneMonthPriceData === undefined) {
+                alert("data limit reached")
+            }
+
+            var oneMonthClosePricesArr = []
+            var oneMonthCloseDatesArr = []
+
+            for (var key in matchingStockOneMonthPriceData) {
+                oneMonthClosePricesArr.push(parseFloat(matchingStockOneMonthPriceData[key]["4. close"]));
+                oneMonthCloseDatesArr.push(key);
+              }
+            
+              let oneMonthStockData = oneMonthCloseDatesArr.map((date, index) => {
+                return [date, oneMonthClosePricesArr[index]];
+              });
+    
+            //    console.log(oneMonthStockData)
+
+            oneMonthStockData.length = 60
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'X');
+            data.addColumn('number', 'Stock Price');
+      
+            data.addRows(oneMonthStockData);
+      
+            var options = {
+            'title': `${matchingStockProfileDataResult.name} (${ticker}) Price`
+            };
+         
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      
+            chart.draw(data, options);
+
+            var chartDiv = document.getElementById("chart_div")
+            var chartDivFirstChildEl = chartDiv.childNodes[0]
+            var firstChildElOfChartDivFirstChildEl = chartDivFirstChildEl.childNodes[0]
+            var nextFirstChild = firstChildElOfChartDivFirstChildEl.childNodes[0]
+            var svg = nextFirstChild.childNodes[0]
+            var svgThirdIndexChild = svg.childNodes[4]
+            var chartElement =svgThirdIndexChild.childNodes[3]
+            var chartLabelElements = chartElement.childNodes
+            let chartLabelElementsArr = Array.from(chartLabelElements)
+            chartLabelElementsArr = chartLabelElementsArr.slice(0, 5)
+            console.log(chartLabelElementsArr)
+
+            // for (let i = 0; i < chartLabelElementsArr.length; i++) {
+            //     chartLabelElementsArr[i].style.transform = "rotate(45deg)"
+            // }
+        }
+
+        createFiveDayChart()
         oneDayChartButton.addEventListener("click", createOneDayChart)
-        dailyChartButton.addEventListener("click", createChart)
+        fiveDayChartButton.addEventListener("click", createFiveDayChart)
         oneMonthChartButton.addEventListener("click", createOneMonthChart)
+        threeMonthChartButton.addEventListener("click", createThreeMonthChart)
+        sixMonthChartButton.addEventListener("click", createSixMonthChart)
+        oneYearChartButton.addEventListener("click", createOneYearChart)
 
         previousFromChartsButton.addEventListener("click", function () {
             window.history.back()
@@ -1835,9 +2011,9 @@ async function renderMatchingStockCharts() {
     chartsHeaderContainer.appendChild(chartsHeader)
     renderMatchingStockChartsPageContainer.appendChild(chartsHeaderContainer)
     changeChartsButtonContainer.appendChild(oneDayChartButton)
-    changeChartsButtonContainer.appendChild(dailyChartButton)
+    changeChartsButtonContainer.appendChild(fiveDayChartButton)
     changeChartsButtonContainer.appendChild(oneMonthChartButton)
-    changeChartsButtonContainer.appendChild(monthlyChartButton)
+    changeChartsButtonContainer.appendChild(threeMonthChartButton)
     changeChartsButtonContainer.appendChild(sixMonthChartButton)
     changeChartsButtonContainer.appendChild(oneYearChartButton)
     changePageFromChartsButtonContainer.appendChild(watchlistsFromChartsButton)

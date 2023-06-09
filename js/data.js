@@ -38,7 +38,7 @@ async function getMatchingStockTickerData(ticker) {
 }
 
 async function getMatchingStockProfileData(ticker) {
-    const res = await fetch(`https://finnhub.io/api/v1/stock/profile2?symbol=${ticker}&token=cgq5i1pr01qmkidmgf40cgq5i1pr01qmkidmgf4g`)
+    const res = await fetch(`https://finnhub.io/api/v1/stock/profile2?symbol=${ticker}&token=chvbvthr01qrqeng4g6gchvbvthr01qrqeng4g70`)
     return await res.json()
 }
 
@@ -53,7 +53,7 @@ async function getMatchingStockQuoteData(ticker) {
 }
 
 async function getMatchingStockQuoteDataTwo(ticker) {
-    const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=cgq5i1pr01qmkidmgf40cgq5i1pr01qmkidmgf4g`)
+    const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=chvbvthr01qrqeng4g6gchvbvthr01qrqeng4g70`)
     return await res.json()
 }   
 
@@ -77,8 +77,8 @@ async function getMatchingStockOneMonthPriceData(ticker) {
     return await res.json()
 }
 
-async function getMatchingStockPriceCandles(ticker, currentTimeStampStr) {
-    const res = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${ticker}&resolution=W&from=${currentTimeStampStr}to=${currentTimeStampStr}&token=cgq5i1pr01qmkidmgf40cgq5i1pr01qmkidmgf4g`)
+async function getMatchingStockPriceCandles(ticker, oneWeekTimeStampStr, currentTimeStampStr) {
+    const res = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${ticker}&resolution=W&from=${currentTimeStampStr}to=${currentTimeStampStr}&token=chvbvthr01qrqeng4g6gchvbvthr01qrqeng4g70`)
     return await res.json()
 }
 
@@ -88,7 +88,7 @@ async function getMatchingStockEarningsData(ticker) {
 }
 
 async function getMatchingStockEPSCalendarData(ticker) {
-    const res = await fetch(`https://finnhub.io/api/v1/calendar/earnings?from=2022-03-01&to=2023-03-09&symbol=${ticker}&token=cgq5i1pr01qmkidmgf40cgq5i1pr01qmkidmgf4g`)
+    const res = await fetch(`https://finnhub.io/api/v1/calendar/earnings?from=2022-03-01&to=2023-03-09&symbol=${ticker}&token=chvbvthr01qrqeng4g6gchvbvthr01qrqeng4g70`)
     return await res.json()
 }
 
@@ -104,7 +104,7 @@ async function getMatchingStockCurrentVolume(ticker, error) {
 }
 
 async function getMatchingStockBasicFinancialData(ticker) {
-    const res = await fetch(`https://finnhub.io/api/v1/stock/metric?symbol=${ticker}&metric=all&token=cgq5i1pr01qmkidmgf40cgq5i1pr01qmkidmgf4g`)
+    const res = await fetch(`https://finnhub.io/api/v1/stock/metric?symbol=${ticker}&metric=all&token=chvbvthr01qrqeng4g6gchvbvthr01qrqeng4g70`)
     return await res.json()
 }
 

@@ -75,6 +75,14 @@ body {
     }
 }
 
+@media screen and (max-width: 300px) {
+    .logo-container {
+        height: 350px;
+        width: 200px;
+        /* z-index: -10; */
+    }
+}
+
 .logo-text-container {
     display: flex;
     justify-content: center;
@@ -119,6 +127,18 @@ ul {
     transform: translate(-50%, -50%);
 }
 
+@media screen and (max-width: 300px) {
+    .registration-container {
+        width: 275px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .registration-container {
+        height: 450px;
+    }
+}
+
 #registration-form {
     display: flex;
     flex-flow: column wrap;
@@ -141,6 +161,12 @@ ul {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 350px) {
+    .sign-in-container {
+        width: 275px;
+    }
 }
 
 #sign-in-form {
@@ -213,6 +239,13 @@ ul {
         margin-top: 5px;
     }
     
+}
+
+@media screen and (max-width: 350px) {
+    .watchlists-list-container {
+        /* height: 400px; */
+        width: 250px;
+    }
 }
 
 .watchlist {
