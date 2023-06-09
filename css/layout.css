@@ -127,7 +127,7 @@ ul {
     transform: translate(-50%, -50%);
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 350px) {
     .registration-container {
         width: 275px;
     }
