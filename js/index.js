@@ -1406,7 +1406,7 @@ async function renderMatchingStockOverview() {
     var matchingStockWeeklyPriceRangeHighValue = parseFloat(matchingStockBasicFinancials.metric["52WeekHigh"])
     console.log(matchingStockWeeklyPriceRangeHighValue)
     console.log(matchingStockWeeklyPriceRangeLowValue)
-    matchingStockWeeklyPriceRangeEl.textContent = `${matchingStockWeeklyPriceRangeLowValue} - ${matchingStockWeeklyPriceRangeHighValue}`
+    matchingStockWeeklyPriceRangeEl.textContent = `${matchingStockWeeklyPriceRangeLowValue.toFixed(2)} - ${matchingStockWeeklyPriceRangeHighValue.toFixed(2)}`
 
     console.log(matchingStockCurrentVolume)
     var matchingStockVolumeContainer = document.createElement("div")
@@ -1430,6 +1430,22 @@ async function renderMatchingStockOverview() {
     var matchingStockAverageVolumeValue = parseFloat(matchingStockBasicFinancials.metric["3MonthAverageTradingVolume"]) * 1000000
     matchingStockAverageVolumeEl.textContent = matchingStockAverageVolumeValue
 
+    window.addEventListener("resize", function (event) {
+        event.preventDefault()
+
+        let width = document.body.clientWidth
+        
+        if (width <= 300) {
+            console.log(width)
+            console.log("short")
+            matchingStockAverageVolumeLabel.textContent = "3 Mo. Avg V:"
+        } else if (width > 300 ) {
+            console.log(width)
+            console.log("long")
+            matchingStockAverageVolumeLabel.textContent = "3 Mo. Avg Volume:"
+        }
+    })
+
     var matchingStockMarketCapContainer = document.createElement("div")
     matchingStockMarketCapContainer.className = "matching-stock-market-capitalization-container"
     var matchingStockMarketCapLabel = document.createElement("p")
@@ -1446,7 +1462,7 @@ async function renderMatchingStockOverview() {
     matchingStockBetaLabel.textContent = "Beta:"
     matchingStockBetaLabel.style.fontWeight = "bold"
     var matchingStockBetaEl = document.createElement("p")
-    matchingStockBetaEl.textContent = matchingStockBasicFinancials.metric.beta
+    matchingStockBetaEl.textContent = matchingStockBasicFinancials.metric.beta.toFixed(2)
 
     var matchingStockEPSContainer = document.createElement("div")
     matchingStockEPSContainer.className = "matching-stock-eps-container"
@@ -1670,8 +1686,9 @@ async function renderMatchingStockCharts() {
         var matchingStockOneMonthPriceData = matchingStockOneMonthPriceDataResult["Weekly Adjusted Time Series"]
 
         if (matchingStockIntradayPricingData === undefined|| matchingStockDailyPriceData === undefined || matchingStockOneMonthPriceData === undefined) {
-            alert("This application uses free data and is susceptible to call limits. Please wait a moment before continuing.")
-            // window.location.hash = "/"
+            alert("This application uses free data and is susceptible to call limits. Please try again later.")
+            window.location.hash = "/"
+            return
         }
 
         console.log(matchingStockPricingDataResult)
@@ -1682,7 +1699,8 @@ async function renderMatchingStockCharts() {
             console.log("show one day chart.")
 
             if (matchingStockOneMonthPriceData === undefined) {
-                alert("data limit reached")
+                alert("This application uses free data and is susceptible to call limits. Please try again later.")
+                return
             }
 
             var closePrices = []
@@ -1732,7 +1750,8 @@ async function renderMatchingStockCharts() {
         function createFiveDayChart() {
 
             if (matchingStockOneMonthPriceData === undefined) {
-                alert("data limit reached")
+                alert("This application uses free data and is susceptible to call limits. Please try again later.")
+                return
             }
 
             var closePrices = []
@@ -1780,7 +1799,8 @@ async function renderMatchingStockCharts() {
             console.log("show weekly chart.")
 
             if (matchingStockOneMonthPriceData === undefined) {
-                alert("data limit reached")
+                alert("This application uses free data and is susceptible to call limits. Please try again later.")
+                return
             }
             console.log(matchingStockOneMonthPriceData)
 
@@ -1835,7 +1855,8 @@ async function renderMatchingStockCharts() {
             console.log(matchingStockOneMonthPriceData)
 
             if (matchingStockOneMonthPriceData === undefined) {
-                alert("data limit reached")
+                alert("This application uses free data and is susceptible to call limits. Please try again later.")
+                return
             }
 
             var oneMonthClosePricesArr = []
@@ -1889,7 +1910,8 @@ async function renderMatchingStockCharts() {
             console.log(matchingStockOneMonthPriceData)
 
             if (matchingStockOneMonthPriceData === undefined) {
-                alert("data limit reached")
+                alert("This application uses free data and is susceptible to call limits. Please try again later.")
+                return
             }
 
             var oneMonthClosePricesArr = []
@@ -1943,7 +1965,8 @@ async function renderMatchingStockCharts() {
             console.log(matchingStockOneMonthPriceData)
 
             if (matchingStockOneMonthPriceData === undefined) {
-                alert("data limit reached")
+                alert("This application uses free data and is susceptible to call limits. Please try again later.")
+                return
             }
 
             var oneMonthClosePricesArr = []
